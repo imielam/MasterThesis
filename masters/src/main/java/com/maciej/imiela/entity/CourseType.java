@@ -13,9 +13,10 @@ public class CourseType {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private Integer maxParticipantNumber;
 
     @Column(nullable = true)

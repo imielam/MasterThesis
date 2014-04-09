@@ -19,16 +19,17 @@ public class Login {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String login;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String emil;
 
+    @Column(nullable = false)
     private String password;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToMany

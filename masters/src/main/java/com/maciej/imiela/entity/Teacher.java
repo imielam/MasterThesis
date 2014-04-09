@@ -19,18 +19,20 @@ public class Teacher {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @Column(nullable = false)
     private Date startDate;
 
     @Column(nullable = true)
     private Date endDate;
 
+    @Column(nullable = false)
     private Double salary;
 
     @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public List<Course> getCourses() {

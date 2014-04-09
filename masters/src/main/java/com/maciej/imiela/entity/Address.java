@@ -13,6 +13,7 @@ public class Address {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @Column(nullable = false)
     private String street;
 
     @Column(name = "street_hn", nullable = false)
@@ -21,9 +22,10 @@ public class Address {
     @Column(name = "street_an", nullable = true)
     private String streetAN;
 
+    @Column(nullable = false)
     private String city;
 
-    @Column(name = "postal_code")
+    @Column(name = "postal_code", nullable = false)
     private String postalCode;
 
     // @OneToMany(mappedBy = "permamentAddress")

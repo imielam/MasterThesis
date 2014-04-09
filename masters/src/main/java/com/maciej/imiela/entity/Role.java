@@ -17,7 +17,7 @@ public class Role {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "roles")

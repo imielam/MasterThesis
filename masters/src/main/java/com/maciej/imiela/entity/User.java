@@ -2,6 +2,7 @@ package com.maciej.imiela.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,14 +18,15 @@ public class User {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @Column(nullable = false)
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "address_per")
+    @JoinColumn(name = "address_per", nullable = false)
     private Address permamentAddress;
 
     @OneToOne(optional = true)
-    @JoinColumn(name = "address_res")
+    @JoinColumn(name = "address_res", nullable = true)
     private Address residenceAddress;
 
     @OneToMany(mappedBy = "user")
