@@ -1,18 +1,14 @@
 package com.maciej.imiela.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
-public class Role {
+public class CourseType {
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.AUTO)
     @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy", strategy = "hilo")
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
@@ -20,30 +16,40 @@ public class Role {
     @Column(unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private List<Login> users;
+    private Integer maxParticipantNumber;
+
+    @Column(nullable = true)
+    private String description;
+
+    public String getDescription() {
+        return this.description;
+    }
 
     public Integer getId() {
         return this.id;
+    }
+
+    public Integer getMaxParticipantNumber() {
+        return this.maxParticipantNumber;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public List<Login> getUsers() {
-        return this.users;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMaxParticipantNumber(Integer maxParticipantNumber) {
+        this.maxParticipantNumber = maxParticipantNumber;
     }
 
-    public void setUsers(List<Login> users) {
-        this.users = users;
+    public void setName(String name) {
+        this.name = name;
     }
 }

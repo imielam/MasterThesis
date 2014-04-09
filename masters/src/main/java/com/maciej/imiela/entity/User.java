@@ -6,8 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -19,24 +20,22 @@ public class User {
 
     private String name;
 
-    private String emil;
+    @ManyToOne
+    @JoinTable(name = "address_per")
+    private Address permamentAddress;
 
-    private String password;
+    @ManyToOne(optional = true)
+    @JoinTable(name = "address_res")
+    private Address residenceAddress;
 
     @OneToMany(mappedBy = "user")
-    private List<Blog> blogs;
+    private List<Teacher> teachers;
 
-    @ManyToMany
-    @JoinTable
-    private List<Role> roles;
+    @OneToMany(mappedBy = "user")
+    private List<Participant> participants;
 
-    public List<Blog> getBlogs() {
-        return this.blogs;
-    }
-
-    public String getEmil() {
-        return this.emil;
-    }
+    @OneToOne(mappedBy = "user")
+    private Login login;
 
     public Integer getId() {
         return this.id;
@@ -46,20 +45,20 @@ public class User {
         return this.name;
     }
 
-    public String getPassword() {
-        return this.password;
+    public List<Participant> getParticipants() {
+        return this.participants;
     }
 
-    public List<Role> getRoles() {
-        return this.roles;
+    public Address getPermamentAddress() {
+        return this.permamentAddress;
     }
 
-    public void setBlogs(List<Blog> blogs) {
-        this.blogs = blogs;
+    public Address getResidenceAddress() {
+        return this.residenceAddress;
     }
 
-    public void setEmil(String emil) {
-        this.emil = emil;
+    public List<Teacher> getTeachers() {
+        return this.teachers;
     }
 
     public void setId(Integer id) {
@@ -70,12 +69,20 @@ public class User {
         this.name = name;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setPermamentAddress(Address permamentAddress) {
+        this.permamentAddress = permamentAddress;
+    }
+
+    public void setResidenceAddress(Address residenceAddress) {
+        this.residenceAddress = residenceAddress;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
     }
 
 }
