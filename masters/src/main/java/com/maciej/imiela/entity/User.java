@@ -5,8 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -20,12 +19,12 @@ public class User {
 
     private String name;
 
-    @ManyToOne
-    @JoinTable(name = "address_per")
+    @OneToOne
+    @JoinColumn(name = "address_per")
     private Address permamentAddress;
 
-    @ManyToOne(optional = true)
-    @JoinTable(name = "address_res")
+    @OneToOne(optional = true)
+    @JoinColumn(name = "address_res")
     private Address residenceAddress;
 
     @OneToMany(mappedBy = "user")
@@ -34,8 +33,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Participant> participants;
 
-    @OneToOne(mappedBy = "user")
-    private Login login;
+    // @OneToOne(mappedBy = "user")
+    // private Login login;
 
     public Integer getId() {
         return this.id;

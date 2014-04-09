@@ -1,12 +1,9 @@
 package com.maciej.imiela.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -18,7 +15,7 @@ public class Address {
 
     private String street;
 
-    @Column(name = "street_hn")
+    @Column(name = "street_hn", nullable = false)
     private String streetHN;
 
     @Column(name = "street_an", nullable = true)
@@ -29,11 +26,11 @@ public class Address {
     @Column(name = "postal_code")
     private String postalCode;
 
-    @OneToMany(mappedBy = "permamentAddress")
-    private List<User> userPermAddress;
-
-    @OneToMany(mappedBy = "residenceAddress")
-    private List<User> userResAddress;
+    // @OneToMany(mappedBy = "permamentAddress")
+    // private List<User> userPermAddress;
+    //
+    // @OneToMany(mappedBy = "residenceAddress")
+    // private List<User> userResAddress;
 
     public String getCity() {
         return this.city;
@@ -59,13 +56,13 @@ public class Address {
         return this.streetHN;
     }
 
-    public List<User> getUserPermAddress() {
-        return this.userPermAddress;
-    }
-
-    public List<User> getUserResAddress() {
-        return this.userResAddress;
-    }
+    // public List<User> getUserPermAddress() {
+    // return this.userPermAddress;
+    // }
+    //
+    // public List<User> getUserResAddress() {
+    // return this.userResAddress;
+    // }
 
     public void setCity(String city) {
         this.city = city;
@@ -91,12 +88,12 @@ public class Address {
         this.streetHN = streetHN;
     }
 
-    public void setUserPermAddress(List<User> userPermAddress) {
-        this.userPermAddress = userPermAddress;
-    }
-
-    public void setUserResAddress(List<User> userResAddress) {
-        this.userResAddress = userResAddress;
-    }
+    // public void setUserPermAddress(List<User> userPermAddress) {
+    // this.userPermAddress = userPermAddress;
+    // }
+    //
+    // public void setUserResAddress(List<User> userResAddress) {
+    // this.userResAddress = userResAddress;
+    // }
 
 }

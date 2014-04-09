@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -21,6 +21,7 @@ public class Course {
     private Integer id;
 
     @OneToOne
+    @JoinColumn(name = "type_id")
     private CourseType type;
 
     @Column(name = "start_date")
@@ -33,7 +34,7 @@ public class Course {
     private List<Participant> participants;
 
     @ManyToOne
-    @JoinTable(name = "teacher_id")
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     public Date getEndDate() {
