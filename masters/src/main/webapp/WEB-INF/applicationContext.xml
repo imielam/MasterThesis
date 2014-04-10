@@ -17,10 +17,10 @@
 
 	<jdbc:embedded-database type="HSQL" id="dataSource" />
 
-<!-- 	<bean id="dataSource" -->
-<!-- 		class="org.apache.commons.dbcp.BasicDataSource" -->
-<!-- 		p:driverClassName="org.postgresql.Driver" p:url="jdbc:postgresql://192.168.0.21:5432/Test" -->
-<!-- 		p:username="admin" p:password="password123" /> -->
+	<!-- <bean id="dataSource" -->
+	<!-- class="org.apache.commons.dbcp.BasicDataSource" -->
+	<!-- p:driverClassName="org.postgresql.Driver" p:url="jdbc:postgresql://192.168.0.21:5432/Test" -->
+	<!-- p:username="admin" p:password="password123" /> -->
 
 	<bean
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
@@ -46,6 +46,31 @@
 	</bean>
 
 	<jpa:repositories base-package="com.maciej.imiela.repository" />
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host">
+			<value>smtp.gmail.com</value>
+		</property>
+		<property name="port">
+			<value>587</value>
+		</property>
+		<property name="protocol">
+			<value>smtp</value>
+		</property>
+		<property name="username">
+			<value>master.thesis.mimiela@gmail.com</value>
+		</property>
+		<property name="password">
+			<value>zaq12WSX</value>
+		</property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.quitwait">false</prop>
+			</props>
+		</property>
+	</bean>
 
 	<!-- <beans> -->
 	<!-- <bean id="myEmf" -->

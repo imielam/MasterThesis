@@ -10,11 +10,16 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.maciej.imiela.domain.ContactMessage;
 import com.maciej.imiela.entity.Course;
 import com.maciej.imiela.entity.User;
 import com.maciej.imiela.service.CourseService;
@@ -36,7 +41,8 @@ public class GuestController {
     private CourseService courseService;
 
     // private MyService service;
-    // private MailSender mailSender;
+    @Autowired
+    private MailSender mailSender;
 
     private static final Logger logger = LoggerFactory
             .getLogger(GuestController.class);
@@ -53,7 +59,7 @@ public class GuestController {
 
     @RequestMapping(value = { "/contact" }, method = RequestMethod.GET)
     public String createContactMessage(Model model) {
-        // model.addAttribute("contactMessage", new ContactMessage());
+        model.addAttribute("contactMessage", new ContactMessage());
         return "contact";
     }
 
@@ -91,28 +97,28 @@ public class GuestController {
         return "error";
     }
 
-    // @RequestMapping(value = { "/contact" }, method = RequestMethod.POST)
-    // public String saveNewUser(@Valid ContactMessage contactMessage,
-    // BindingResult bResult) {
-    // if (bResult.hasErrors()) {
-    // return "contact";
-    // }
-    //
-    // SimpleMailMessage msg = new SimpleMailMessage();
-    // msg.setTo("maciej.imiela@gmail.com");
-    // msg.setText(contactMessage.getMessage());
-    // msg.setSubject("Please contact me, as soon as you can: "
-    // + contactMessage.getEmail());
-    // try {
-    // this.mailSender.send(msg);
-    // } catch (MailException ex) {
-    // // log it and go on
-    // logger.error(ex.getMessage());
-    // return "redirect:/home?message=" + FAIL_MESSAGE;
-    // }
-    // return "redirect:/home?message=" + SUCCES_MESSAGE;
-    // }
-    //
+    @RequestMapping(value = { "/contact" }, method = RequestMethod.POST)
+    public String saveNewUser(/* @Valid */ContactMessage contactMessage,
+            BindingResult bResult) {
+        if (bResult.hasErrors()) {
+            return "contact";
+        }
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo("maciej.imiela@gmail.com");
+        msg.setText(contactMessage.getMessage());
+        msg.setSubject("Please contact me, as soon as you can: "
+                + contactMessage.getEmail());
+        try {
+            this.mailSender.send(msg);
+        } catch (MailException ex) {
+            // log it and go on
+            logger.error(ex.getMessage());
+            return "redirect:/home.html?message=" + FAIL_MESSAGE;
+        }
+        return "redirect:/home.html?message=" + SUCCES_MESSAGE;
+    }
+
     // @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
     // public String saveNewUser(@Valid User user, BindingResult bResult) {
     // if (bResult.hasErrors()) {

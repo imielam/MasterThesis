@@ -7,22 +7,22 @@
 
 <div>
 	<h2>Please write your message bellow:</h2>
-	<form:form method="POST" modelAttribute="contactMessage">
+	<form:form method="POST" modelAttribute="contactMessage"
+		class="form-group">
 		<fieldset>
-			<div class="input-group">
-				<form:input path="message" size="250" maxlength="500" />
+			<div class="form-group row-lg-1">
+				<form:textarea path="message" rows="10" class="form-control" />
 			</div>
 			<br />
-			<div class="input-group">
-				<form:errors path="message" cssClass="error" />
-			</div>
+
+			<form:errors path="message" cssClass="error" />
 			<br /> Please give email address, on which I should answer to:<br />
-			<div class="input-group">
-				<form:input path="email" size="20" maxlength="40" />
+			<div class="form-group row-lg-1">
+				<form:input path="email" maxlength="40" class="form-control" />
 			</div>
 			<br />
 			<form:errors path="email" cssClass="error" />
-			<br /> <input name="send" type="submit" value="Send" />
+			<br /> <input name="send" type="submit" value="Send" class="btn btn-default" />
 		</fieldset>
 	</form:form>
 </div>
