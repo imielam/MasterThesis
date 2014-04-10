@@ -10,19 +10,38 @@
 
 	<definition name="index" extends="common">
 		<put-attribute name="title" value="Master Thesis" />
-		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/default/index.jsp" />
 		<put-attribute name="current" value="index" />
 	</definition>
-	
-    <definition name="users" extends="common">
-        <put-attribute name="title" value="Users" />
-        <put-attribute name="body" value="/WEB-INF/jsp/users.jsp" />
-        <put-attribute name="current" value="users" />
-    </definition>
-    
-    <definition name="user-detail" extends="common">
-        <put-attribute name="title" value="User Detail" />
-        <put-attribute name="body" value="/WEB-INF/jsp/user-detail.jsp" />
-        <put-attribute name="current" value="users" />
-    </definition>
+
+	<definition name="users" extends="common">
+		<put-attribute name="title" value="Users" />
+		<put-attribute name="body" value="/WEB-INF/jsp/users.jsp" />
+		<put-attribute name="current" value="users" />
+	</definition>
+
+	<definition name="user-detail" extends="common">
+		<put-attribute name="title" value="User Detail" />
+		<put-attribute name="body" value="/WEB-INF/jsp/user-detail.jsp" />
+		<put-attribute name="current" value="user" />
+	</definition>
+
+	<definition name="contact" extends="common">
+		<put-attribute name="title" value="Contact" type="string" />
+		<put-attribute name="body" value="/WEB-INF/jsp/default/contact.jsp" />
+		<put-attribute name="current" value="contact" />
+	</definition>
+
+	<definition name="about" extends="common">
+		<put-attribute name="title" value="About" type="string" />
+		<put-attribute name="body" value="/WEB-INF/jsp/default/about.jsp" />
+		<put-attribute name="current" value="about" />
+	</definition>
+
+	<definition name="error" extends="common">
+		<put-attribute name="title" value="Page under development"
+			type="string" />
+		<put-attribute name="body" value="/WEB-INF/jsp/error/in_progress.jsp" />
+		<put-attribute name="current" value="error" />
+	</definition>
 </tiles-definitions>

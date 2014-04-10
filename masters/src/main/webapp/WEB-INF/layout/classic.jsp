@@ -22,8 +22,9 @@
 </head>
 <body>
 
-<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
-<tilesx:useAttribute name="current"/>
+	<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras"
+		prefix="tilesx"%>
+	<tilesx:useAttribute name="current" />
 
 	<div class="container">
 
@@ -41,9 +42,14 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="${current == 'index' ? 'active' : '' }"><a href='<spring:url value="/" />'>Home</a></li>
-						<li class="${current == 'users' ? 'active' : '' }"><a href='<spring:url value="/users.html" />'>Users</a></li>
-						<li><a href="#">Link</a></li>
+						<li class="${current == 'index' ? 'active' : '' }"><a
+							href='<spring:url value="/" />'>Home</a></li>
+						<li class="${current == 'users' ? 'active' : '' }"><a
+							href='<spring:url value="/users.html" />'>Users</a></li>
+						<li class="${current == 'about' ? 'active' : '' }"><a
+							href='<spring:url value="/about.html" />'>About</a></li>
+						<li class="${current == 'contact' ? 'active' : '' }"><a
+							href='<spring:url value="/contact.html" />'>Contact</a></li>
 						<!-- 						may be useful later -->
 						<!-- 						<li class="dropdown"><a href="#" class="dropdown-toggle" -->
 						<!-- 							data-toggle="dropdown">Dropdown <b class="caret"></b></a> -->
