@@ -40,22 +40,11 @@ public class GuestController {
     @Autowired
     private CourseService courseService;
 
-    // private MyService service;
     @Autowired
     private MailSender mailSender;
 
     private static final Logger logger = LoggerFactory
             .getLogger(GuestController.class);
-
-    /*
-     * public GuestController(MyService service, MailSender mailSender) {
-     * this.service = service; this.mailSender = mailSender; }
-     */
-
-    // public GuestController(MailSender mailSender) {
-    // super();
-    // this.mailSender = mailSender;
-    // }
 
     @RequestMapping(value = { "/contact" }, method = RequestMethod.GET)
     public String createContactMessage(Model model) {
@@ -63,6 +52,7 @@ public class GuestController {
         return "contact";
     }
 
+    // TODO:
     @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
     public String createNewUser(Model model) {
         model.addAttribute("user", new User());
@@ -74,6 +64,7 @@ public class GuestController {
         return "about";
     }
 
+    // TODO:
     @RequestMapping(value = { "/course/list" })
     public String displayCoursesList(Model model) {
         final List<Course> allCourses = this.courseService.findAll();
@@ -82,6 +73,7 @@ public class GuestController {
         return "course/list";
     }
 
+    // TODO:
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public String displayLogInForm(Model model) {
         return "login";
@@ -119,15 +111,16 @@ public class GuestController {
         return "redirect:/home.html?message=" + SUCCES_MESSAGE;
     }
 
-    // @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    // public String saveNewUser(@Valid User user, BindingResult bResult) {
-    // if (bResult.hasErrors()) {
-    // return "register";
-    // }
-    // // service.saveUser(user);
-    // // return "redirect:/users/user?id=" + user.getId();
-    // return "redirect:/home?message=" + SUCCES_REGISTER;
-    // }
+    // TODO:
+    @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
+    public String saveNewUser(/* @Valid */User user, BindingResult bResult) {
+        if (bResult.hasErrors()) {
+            return "register";
+        }
+        // service.saveUser(user);
+        // return "redirect:/users/user?id=" + user.getId();
+        return "redirect:/home?message=" + SUCCES_REGISTER;
+    }
 
     @RequestMapping(value = { "/", "/index", "/home" }, method = RequestMethod.GET)
     public String showHomePage() {

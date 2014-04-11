@@ -85,4 +85,10 @@ public class Course {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "Course [id=" + this.id + ", type=" + this.type + ", startDate="
+                + this.startDate + ", endDate=" + this.endDate + "]";
+    }
+
 }

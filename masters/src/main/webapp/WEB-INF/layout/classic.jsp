@@ -50,18 +50,30 @@
 							href='<spring:url value="/about.html" />'>About</a></li>
 						<li class="${current == 'contact' ? 'active' : '' }"><a
 							href='<spring:url value="/contact.html" />'>Contact</a></li>
-						<!-- 						may be useful later -->
-						<!-- 						<li class="dropdown"><a href="#" class="dropdown-toggle" -->
-						<!-- 							data-toggle="dropdown">Dropdown <b class="caret"></b></a> -->
+
+						<li class="dropdown ${current == 'course' ? 'active' : '' }"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Course <b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="/course/list.html">List</a></li>
+<!-- 								<li><a href="#">Another action</a></li> -->
+<!-- 								<li><a href="#">Something else here</a></li> -->
+<!-- 								<li class="divider"></li> -->
+<!-- 								<li class="dropdown-header">Nav header</li> -->
+<!-- 								<li><a href="#">Separated link</a></li> -->
+<!-- 								<li><a href="#">One more separated link</a></li> -->
+							</ul></li>
+
+						<!-- 						<div class="btn-group"> -->
+						<!-- 							<button type="button" class="btn btn-default dropdown-toggle" -->
+						<!-- 								data-toggle="dropdown"> -->
+						<!-- 								Dropdown <span class="caret"></span> -->
+						<!-- 							</button> -->
 						<!-- 							<ul class="dropdown-menu"> -->
-						<!-- 								<li><a href="#">Action</a></li> -->
-						<!-- 								<li><a href="#">Another action</a></li> -->
-						<!-- 								<li><a href="#">Something else here</a></li> -->
-						<!-- 								<li class="divider"></li> -->
-						<!-- 								<li class="dropdown-header">Nav header</li> -->
-						<!-- 								<li><a href="#">Separated link</a></li> -->
-						<!-- 								<li><a href="#">One more separated link</a></li> -->
-						<!-- 							</ul></li> -->
+						<!-- 								<li><a href="#">Dropdown link</a></li> -->
+						<!-- 								<li><a href="#">Dropdown link</a></li> -->
+						<!-- 							</ul> -->
+						<!-- 						</div> -->
 					</ul>
 				</div>
 				<!--/.nav-collapse -->

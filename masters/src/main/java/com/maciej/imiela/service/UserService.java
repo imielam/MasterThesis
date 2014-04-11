@@ -21,4 +21,9 @@ public class UserService {
     public User findOne(int id) {
         return this.userRepository.findOne(id);
     }
+
+    public void save(User user) {
+        this.userRepository.save(user);
+
+    }
 }

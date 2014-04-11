@@ -24,22 +24,17 @@ import com.maciej.imiela.service.UserService;
 // @RequestMapping("/admin")
 public class AdminController {
 
-//	private MyService service;
     @Autowired
     private UserService userService;
-    
-	private static final Logger logger = LoggerFactory
-			.getLogger(AdminController.class);
 
-//	public AdminController(MyService service) {
-//		this.service = service;
-//	}
+    private static final Logger logger = LoggerFactory
+            .getLogger(AdminController.class);
 
-	@RequestMapping(value = { "/users" })
-	public String userDetails(Model model) {
-		List<User> u = userService.findAll();
-		model.addAttribute("users", u);
-		logger.info(Arrays.toString(u.toArray()));
-		return "admin/users";
-	}
+    @RequestMapping(value = { "/users" })
+    public String userDetails(Model model) {
+        List<User> u = this.userService.findAll();
+        model.addAttribute("users", u);
+        logger.info(Arrays.toString(u.toArray()));
+        return "admin/users";
+    }
 }
