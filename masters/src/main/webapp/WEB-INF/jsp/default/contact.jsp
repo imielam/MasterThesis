@@ -8,21 +8,28 @@
 <div>
 	<h2>Please write your message bellow:</h2>
 	<form:form method="POST" modelAttribute="contactMessage"
-		class="form-group">
+		class="form-horizontal" role="form">
 		<fieldset>
-			<div class="form-group row-lg-1">
+			<div class="form-group col-sm-12">
 				<form:textarea path="message" rows="10" class="form-control" />
 			</div>
 			<br />
 
 			<form:errors path="message" cssClass="error" />
 			<br /> Please give email address, on which I should answer to:<br />
-			<div class="form-group row-lg-1">
+			<div class="form-group col-sm-12">
 				<form:input path="email" maxlength="40" class="form-control" />
 			</div>
 			<br />
 			<form:errors path="email" cssClass="error" />
-			<br /> <input name="send" type="submit" value="Send" class="btn btn-default" />
+			<br />
+
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input name="send" type="submit" value="Send"
+						class="btn btn-default" />
+				</div>
+			</div>
 		</fieldset>
 	</form:form>
 </div>

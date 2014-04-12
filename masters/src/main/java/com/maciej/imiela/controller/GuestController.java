@@ -4,9 +4,6 @@
  */
 package com.maciej.imiela.controller;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.maciej.imiela.domain.ContactMessage;
-import com.maciej.imiela.entity.Course;
 import com.maciej.imiela.entity.User;
 import com.maciej.imiela.service.CourseService;
 
@@ -62,15 +58,6 @@ public class GuestController {
     @RequestMapping(value = { "/about" }, method = RequestMethod.GET)
     public String displayAbout(Model model) {
         return "about";
-    }
-
-    // TODO:
-    @RequestMapping(value = { "/course/list" })
-    public String displayCoursesList(Model model) {
-        final List<Course> allCourses = this.courseService.findAll();
-        logger.info(Arrays.toString(allCourses.toArray()));
-        model.addAttribute("courses", allCourses);
-        return "course/list";
     }
 
     // TODO:

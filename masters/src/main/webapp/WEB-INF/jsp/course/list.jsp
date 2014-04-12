@@ -15,7 +15,7 @@
 	<tbody>
 		<c:forEach items="${courses}" var="course">
 			<tr>
-				<td><a href='<spring:url value="/course/${course.id}.html" />'>
+				<td><a href='<spring:url value="/course/detail/${course.id}.html" />'>
 						<c:out value="${course.id}" />
 				</a></td>
 				<td><c:out value="${course.type.name}" /></td>
