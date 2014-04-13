@@ -45,7 +45,7 @@
 						<li class="${current == 'index' ? 'active' : '' }"><a
 							href='<spring:url value="/" />'>Home</a></li>
 						<li class="${current == 'users' ? 'active' : '' }"><a
-							href='<spring:url value="/users.html" />'>Users</a></li>
+							href='<spring:url value="/admin/users.html" />'>Users</a></li>
 						<li class="${current == 'about' ? 'active' : '' }"><a
 							href='<spring:url value="/about.html" />'>About</a></li>
 						<li class="${current == 'contact' ? 'active' : '' }"><a

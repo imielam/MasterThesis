@@ -4,7 +4,6 @@
  */
 package com.maciej.imiela.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,7 +34,7 @@ public class AdminController {
     public String userDetails(Model model) {
         List<User> u = this.userService.findAll();
         model.addAttribute("users", u);
-        logger.info(Arrays.toString(u.toArray()));
-        return "admin/users";
+        // logger.info(Arrays.toString(u.toArray()));
+        return "users_list";
     }
 }
