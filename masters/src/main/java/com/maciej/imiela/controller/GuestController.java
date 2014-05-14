@@ -76,8 +76,19 @@ public class GuestController {
         return "error";
     }
 
-    @RequestMapping(value = { "/contact" }, method = RequestMethod.POST)
-    public String saveNewUser(/* @Valid */ContactMessage contactMessage,
+    // TODO:
+    @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
+    public String saveNewUser(/* @Valid */User user, BindingResult bResult) {
+        if (bResult.hasErrors()) {
+            return "register";
+        }
+        // service.saveUser(user);
+        // return "redirect:/users/user?id=" + user.getId();
+        return "redirect:/home?message=" + SUCCES_REGISTER;
+    }
+
+    @RequestMapping(value = { "/contact" }/* , method = RequestMethod.POST */)
+    public String sendMessage(/* @Valid */ContactMessage contactMessage,
             BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "contact";
@@ -93,20 +104,9 @@ public class GuestController {
         } catch (MailException ex) {
             // log it and go on
             logger.error(ex.getMessage());
-            return "redirect:/home.html?message=" + FAIL_MESSAGE;
+            return "redirect:/contact.html?success=false";
         }
-        return "redirect:/home.html?message=" + SUCCES_MESSAGE;
-    }
-
-    // TODO:
-    @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    public String saveNewUser(/* @Valid */User user, BindingResult bResult) {
-        if (bResult.hasErrors()) {
-            return "register";
-        }
-        // service.saveUser(user);
-        // return "redirect:/users/user?id=" + user.getId();
-        return "redirect:/home?message=" + SUCCES_REGISTER;
+        return "redirect:/contact.html?success=true";
     }
 
     @RequestMapping(value = { "/", "/index", "/home" }, method = RequestMethod.GET)

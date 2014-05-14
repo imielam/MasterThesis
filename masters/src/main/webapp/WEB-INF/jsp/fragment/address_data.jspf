@@ -13,8 +13,7 @@
 				${address_p.streetHN}
 				<c:if test="${not empty address_p.streetAN}">/${address_p.streetAN}</c:if>
 			</p>
-		</div>
-		<div class="col-sm-12">
+
 			<p class="form-control-static">${address_p.postalCode},
 				${address_p.city}</p>
 		</div>
@@ -31,8 +30,7 @@
 					${address_r.streetHN}
 					<c:if test="${not empty address_r.streetAN}">/${address_r.streetAN}</c:if>
 				</p>
-			</div>
-			<div class="col-sm-12">
+
 				<p class="form-control-static">${address_r.postalCode},
 					${address_r.city}</p>
 			</div>

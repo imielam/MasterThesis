@@ -86,4 +86,12 @@ public class User {
         this.teachers = teachers;
     }
 
+    @Override
+    public String toString() {
+        return "User [id=" + this.id + ", name=" + this.name
+                + ", permamentAddress=" + this.permamentAddress
+                + ", residenceAddress=" + this.residenceAddress + ", teachers="
+                + this.teachers + ", participants=" + this.participants + "]";
+    }
+
 }

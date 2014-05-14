@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+
+<%@ include file="../../layout/taglib.jsp"%>
+
+<h2>User's data</h2>
+
+<!-- <div class="row"> -->
+<!-- 	<div class="form-group"> -->
+<!-- 		<label class="col-sm-2 control-label">ID:</label> -->
+<!-- 		<div class="col-sm-10"> -->
+<%-- 			<p class="form-control-static">${user.id}</p> --%>
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
+<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">name:</label>
+		<div class="col-sm-6">
+			<form:input path="name" maxlength="40" class="form-control" />
+		</div>
+	</div>
+</div>

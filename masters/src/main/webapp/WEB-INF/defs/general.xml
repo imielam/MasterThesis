@@ -21,10 +21,16 @@
 	</definition>
 
 	<definition name="user/detail" extends="common">
-		<put-attribute name="title" value="User Detail" />
-		<put-attribute name="body" value="/WEB-INF/jsp/user/detail.jsp" />
-		<put-attribute name="current" value="user" />
-	</definition>
+        <put-attribute name="title" value="User Detail" />
+        <put-attribute name="body" value="/WEB-INF/jsp/user/detail.jsp" />
+        <put-attribute name="current" value="users" />
+    </definition>
+    
+    <definition name="user/edit" extends="common">
+        <put-attribute name="title" value="Edit User" />
+        <put-attribute name="body" value="/WEB-INF/jsp/user/edit.jsp" />
+        <put-attribute name="current" value="users" />
+    </definition>
 
 	<definition name="contact" extends="common">
 		<put-attribute name="title" value="Contact" type="string" />

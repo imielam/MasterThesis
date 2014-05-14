@@ -1,66 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-<div>
-	<h2>Create a new user account</h2>
+<%@ include file="../../layout/taglib.jsp"%>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
 
-	<sf:form method="POST" modelAttribute="user">
-		<fieldset>
-			<table cellspacing="0">
-				<%-- <tr>
-         <th><sf:label path="fullName">Full name:</sf:label></th>
-         <td><sf:input path="fullName" size="15" /><br/>
-             <sf:errors path="fullName" cssClass="error" />
-         </td>
-      </tr> --%>
-				<tr>
-					<th><sf:label path="id">ID:</sf:label></th>
-					<td><sf:input path="id" size="4" /><br /> <sf:errors
-							path="id" cssClass="error" /></td>
-				</tr>
-				<tr>
-					<th><sf:label path="username">Username:</sf:label></th>
-					<td><sf:input path="username" size="15" maxlength="15" /> <small
-						id="username_msg">No spaces, please.</small><br /> <sf:errors
-							path="username" cssClass="error" /></td>
-				</tr>
-				<tr>
-					<th><sf:label path="password">Password:</sf:label></th>
-					<td><sf:password path="password" size="30" showPassword="true" />
-						<small>6 characters or more (be tricky!)</small><br /> <sf:errors
-							path="password" cssClass="error" /></td>
-				</tr>
+<c:if test="${param.success eq true }">
+	<div class="alert alert-success">User data saved!</div>
+</c:if>
 
-				<%-- <tr>
-         <th><sf:label path="email">Email Address:</sf:label></th>
+<form:form method="POST" modelAttribute="user" class="form-horizontal"
+	role="form">
+	<fieldset>
+		<%@ include file="../form_fragment/user_data.jspf"%>
 
-         <td><sf:input path="email" size="30"/> 
-             <small>In case you forget something</small><br/>
-             <sf:errors path="email" cssClass="error" />
-            </td>
-      </tr> --%>
-				<!--<start id="image_field"/>-->
-				<!-- <tr>
-        <th><label for="image">Profile image:</label></th>
-        <td><input name="image" type="file"/>
-      </tr> -->
-				<!--<end id="image_field"/>-->
-				<%-- <tr>
-         <th></th>
-         <td>
-            <sf:checkbox path="updateByEmail"/>
-            <sf:label path="updateByEmail" 
-            >Send me email updates!</sf:label>
+		<h2>Permanent address's data</h2>
 
-         </td>
-      </tr> --%>
-				<tr>
-					<th></th>
-					<td><input name="commit" type="submit"
-						value="I accept. Create my account." /></td>
-				</tr>
-			</table>
-		</fieldset>
-	</sf:form>
-</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Street:</label>
+			<div class="col-sm-10">
+				<p class="form-inline ">
+					<form:input path="permamentAddress.street" maxlength="40"
+						class="form-control" />
+					<form:input path="permamentAddress.streetHN" maxlength="40"
+						class="form-control" /> / <form:input path="permamentAddress.streetAN"
+							maxlength="40" class="form-control" />
+				</p>
+				<p class="form-inline ">
+					<form:input path="permamentAddress.postalCode" maxlength="40"
+						class="form-control" />
+					,
+					<form:input path="permamentAddress.city" maxlength="40"
+						class="form-control" />
+				</p>
+			</div>
+		</div>
+
+		
+			<h2>Residential address's data</h2>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Street:</label>
+					<div class="col-sm-10">
+                <p class="form-inline ">
+						<form:input path="residenceAddress.street" maxlength="40"
+							class="form-control" />
+						<form:input path="residenceAddress.streetHN" maxlength="40"
+							class="form-control" /> / <form:input path="residenceAddress.streetAN"
+								maxlength="40" class="form-control" />
+						</p>
+                <p class="form-inline ">
+						<form:input path="residenceAddress.postalCode" maxlength="40"
+							class="form-control" />
+						,
+						<form:input path="residenceAddress.city" maxlength="40"
+							class="form-control" />
+						</p>	
+					</div>
+				</div>
+
+		<div class="form-group">
+            <div class="col-sm-12">
+                <input name="send" type="submit" value="Save"
+                    class="btn btn-default" />
+                <button type="button" class="btn btn-default">
+                    <a href='<spring:url value="/user/${user.id}.html" />'>
+                        Cancel </a>
+                </button>
+            </div>
+        </div>
+	</fieldset>
+</form:form>

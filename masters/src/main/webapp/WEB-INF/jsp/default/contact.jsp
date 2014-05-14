@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	
+<%@ include file="../../layout/taglib.jsp"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 
 <div>
+
+    <c:if test="${param.success eq true }">
+        <div class = "alert alert-success">Message was sent!</div>
+    </c:if>
+    
+
 	<h2>Please write your message bellow:</h2>
-	<form:form method="POST" modelAttribute="contactMessage"
+	<form:form method="POST" modelAttribute="contactMessage" 
 		class="form-horizontal" role="form">
 		<fieldset>
 			<div class="form-group col-sm-12">

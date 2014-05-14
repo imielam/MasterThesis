@@ -58,6 +58,10 @@ public class Address {
         return this.streetHN;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     // public List<User> getUserPermAddress() {
     // return this.userPermAddress;
     // }
@@ -65,10 +69,6 @@ public class Address {
     // public List<User> getUserResAddress() {
     // return this.userResAddress;
     // }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -88,6 +88,14 @@ public class Address {
 
     public void setStreetHN(String streetHN) {
         this.streetHN = streetHN;
+    }
+
+    @Override
+    public String toString() {
+        return "Address [id=" + this.id + ", street=" + this.street
+                + ", streetHN=" + this.streetHN + ", streetAN=" + this.streetAN
+                + ", city=" + this.city + ", postalCode=" + this.postalCode
+                + "]";
     }
 
     // public void setUserPermAddress(List<User> userPermAddress) {
