@@ -6,10 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Login {
@@ -23,21 +22,24 @@ public class Login {
     private String login;
 
     @Column(unique = true, nullable = false)
-    private String emil;
+    private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Transient
+    private String rePassword;
+
+    // @OneToOne
+    // @JoinColumn(name = "user_id", nullable = false)
+    // private User user;
 
     @ManyToMany
     @JoinTable
     private List<Role> roles;
 
-    public String getEmil() {
-        return this.emil;
+    public String getEmail() {
+        return this.email;
     }
 
     public Integer getId() {
@@ -52,17 +54,22 @@ public class Login {
         return this.password;
     }
 
+    public String getRePassword() {
+        return this.rePassword;
+    }
+
     public List<Role> getRoles() {
         return this.roles;
     }
 
-    public User getUser() {
-        return this.user;
+    public void setEmail(String emil) {
+        this.email = emil;
     }
 
-    public void setEmil(String emil) {
-        this.emil = emil;
-    }
+    //
+    // public User getUser() {
+    // return this.user;
+    // }
 
     public void setId(Integer id) {
         this.id = id;
@@ -76,12 +83,35 @@ public class Login {
         this.password = password;
     }
 
+    public void setRePassword(String rePassword) {
+        this.rePassword = rePassword;
+    }
+
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    //
+    // public void setUser(User user) {
+    // this.user = user;
+    // }
+
+    public Login update(Login newLogin) {
+        if (newLogin.getEmail() != null && newLogin.getEmail() != this.email) {
+            this.email = newLogin.getEmail();
+        }
+        if (newLogin.getPassword() != null
+                && newLogin.getPassword() != this.password) {
+            this.password = newLogin.getPassword();
+        }
+        if (newLogin.getRoles() != null
+                && !newLogin.getRoles().equals(this.getRoles())) {
+            this.roles = newLogin.getRoles();
+        }
+        if (newLogin.getLogin() != null && newLogin.getLogin() != this.login) {
+            this.login = newLogin.getLogin();
+        }
+        return this;
     }
 
 }

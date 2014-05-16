@@ -55,12 +55,6 @@ public class InitDBService {
     @Autowired
     private LoginRepository loginRepository;
 
-    // @Autowired
-    // private BlogRepository blogRepository;
-    //
-    // @Autowired
-    // private ItemRepository itemRepository;
-
     @PostConstruct
     public void init() {
         Role roleUser = new Role();
@@ -87,52 +81,55 @@ public class InitDBService {
         a2.setPostalCode("97-400");
         this.addressRepository.save(a2);
 
-        User userAdmin = new User();
-        userAdmin.setName("Maciej Imiela");
-        userAdmin.setPermamentAddress(a1);
-        userAdmin.setResidenceAddress(a2);
-        this.userRepository.save(userAdmin);
-
         Login l1 = new Login();
         l1.setLogin("admin");
         l1.setPassword("admin");
-        l1.setEmil("admin@ma.com");
-        l1.setUser(userAdmin);
+        l1.setEmail("admin@ma.com");
+        // l1.setUser(userAdmin);
         List<Role> lr = new ArrayList<Role>();
         lr.add(roleAdmin);
         l1.setRoles(lr);
         this.loginRepository.save(l1);
 
-        User userTeacher = new User();
-        userTeacher.setName("Nauczyciel1");
-        userTeacher.setPermamentAddress(a1);
-        this.userRepository.save(userTeacher);
+        User userAdmin = new User();
+        userAdmin.setName("Maciej Imiela");
+        userAdmin.setPermamentAddress(a1);
+        userAdmin.setResidenceAddress(a2);
+        userAdmin.setLogin(l1);
+        this.userRepository.save(userAdmin);
 
         Login l2 = new Login();
         l2.setLogin("teacher");
         l2.setPassword("teacher");
-        l2.setEmil("teacher@ma.com");
-        l2.setUser(userTeacher);
+        l2.setEmail("teacher@ma.com");
+        // l2.setUser(userTeacher);
         lr = new ArrayList<Role>();
         lr.add(roleUser);
         l2.setRoles(lr);
         this.loginRepository.save(l2);
 
-        User userKursant = new User();
-        userKursant.setName("Kursant1");
-        userKursant.setPermamentAddress(a2);
-        userKursant.setResidenceAddress(a1);
-        this.userRepository.save(userKursant);
+        User userTeacher = new User();
+        userTeacher.setName("Nauczyciel1");
+        userTeacher.setPermamentAddress(a1);
+        userTeacher.setLogin(l2);
+        this.userRepository.save(userTeacher);
 
         Login l3 = new Login();
         l3.setLogin("participant");
         l3.setPassword("participant");
-        l3.setEmil("participant@ma.com");
-        l3.setUser(userKursant);
+        l3.setEmail("participant@ma.com");
+        // l3.setUser(userKursant);
         lr = new ArrayList<Role>();
         lr.add(roleUser);
         l3.setRoles(lr);
         this.loginRepository.save(l3);
+
+        User userKursant = new User();
+        userKursant.setName("Kursant1");
+        userKursant.setPermamentAddress(a2);
+        userKursant.setResidenceAddress(a1);
+        userKursant.setLogin(l3);
+        this.userRepository.save(userKursant);
 
         Teacher t1 = new Teacher();
         t1.setSalary((double) 2500);

@@ -35,11 +35,16 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Participant> participants;
 
-    // @OneToOne(mappedBy = "user")
-    // private Login login;
+    @OneToOne
+    @JoinColumn(name = "login_id", nullable = false)
+    private Login login;
 
     public Integer getId() {
         return this.id;
+    }
+
+    public Login getLogin() {
+        return this.login;
     }
 
     public String getName() {
@@ -64,6 +69,10 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
     public void setName(String name) {

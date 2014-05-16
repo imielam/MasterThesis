@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.maciej.imiela.entity.Login;
 import com.maciej.imiela.entity.User;
 import com.maciej.imiela.service.AddressService;
+import com.maciej.imiela.service.LoginService;
 import com.maciej.imiela.service.UserService;
 
 @Controller
@@ -22,17 +24,20 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private LoginService loginService;
+
+    @Autowired
     private AddressService addressService;
 
     private static final Logger logger = LoggerFactory
             .getLogger(UserController.class);
 
-    // // TODO:
-    // @RequestMapping(method = RequestMethod.GET, params = "new")
-    // public String createNewUser(Model model) {
-    // model.addAttribute("user", new User());
-    // return "user/edit";
-    // }
+    // TODO:
+    @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
+    public String createNewUser(Model model) {
+        model.addAttribute("user", new User());
+        return "user/edit";
+    }
 
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
     public String detail(Model model, @PathVariable int id) {
@@ -46,6 +51,14 @@ public class UserController {
         return "user/edit";
     }
 
+    @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
+    public String registerUser(User user, BindingResult bResult) {
+        if (bResult.hasErrors()) {
+            return "user/edit";
+        }
+        return this.saveUser(user);
+    }
+
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
     public String save(Model model, @PathVariable int id, User user,
             BindingResult bResult) {
@@ -53,11 +66,14 @@ public class UserController {
             return "user/edit";
         }
         user.setId(id);
-        logger.info(user.toString());
-        this.addressService.save(user.getPermamentAddress());
-        this.addressService.save(user.getResidenceAddress());
-        this.userService.save(user);
-        return "redirect:/user/" + user.getId() + ".html?success=true";
+        return this.saveUser(user);
+    }
+
+    // TODO:
+    @RequestMapping(value = { "" }, method = RequestMethod.GET)
+    public String users(Model model) {
+        model.addAttribute("users", this.userService.findAll());
+        return "user";
     }
 
     // // TODO:
@@ -70,10 +86,27 @@ public class UserController {
     // return "redirect:/user/user.html?id=" + user.getId();
     // }
 
-    // TODO:
-    @RequestMapping(value = { "" }, method = RequestMethod.GET)
-    public String users(Model model) {
-        model.addAttribute("users", this.userService.findAll());
-        return "user";
+    /*
+     * TODO: Add validation for contraint (unique login and email)
+     */
+    private Login saveLogin(User user) {
+        Login newLogin = user.getLogin();
+        Login oldLogin = newLogin;
+        if (user.getId() != null) {
+            User oldUser = this.userService.findOne(user.getId());
+            oldLogin = this.loginService.findOne(oldUser.getLogin().getId());
+            oldLogin.update(newLogin);
+        }
+        this.loginService.save(oldLogin);
+        return oldLogin;
+    }
+
+    private String saveUser(User user) {
+        logger.info(user.toString());
+        this.addressService.save(user.getPermamentAddress());
+        this.addressService.save(user.getResidenceAddress());
+        user.setLogin(this.saveLogin(user));
+        user = this.userService.save(user);
+        return "redirect:/user/" + user.getId() + ".html?success=true";
     }
 }

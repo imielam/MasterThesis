@@ -18,6 +18,13 @@ public class LoginService {
         return this.loginRepository.findAll();
     }
 
+    /*
+     * TODO: Add null check
+     */
+    public Login findByLogin(String login) {
+        return this.loginRepository.findByLogin(login);
+    }
+
     public Login findOne(int id) {
         return this.loginRepository.findOne(id);
     }

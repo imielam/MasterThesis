@@ -5,49 +5,49 @@
 
 <h2>Permanent address's data</h2>
 
-<div class="row">
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Street:</label>
-		<div class="col-sm-10">
+<div class="form-group">
+	<label class="col-sm-2 control-label">Street:</label>
+	<div class="col-sm-10">
+		<p class="form-inline ">
 			<form:input path="permamentAddress.street" maxlength="40"
-				class="form-control" />&nbsp;
+				class="form-control" />
 			<form:input path="permamentAddress.streetHN" maxlength="40"
 				class="form-control" />
-			<c:if test="${not empty permamentAddress.streetAN}">
-            / <form:input path="permamentAddress.streetAN"
-					maxlength="40" class="form-control" />
-			</c:if>
-			<br />
+			/
+			<form:input path="permamentAddress.streetAN" maxlength="40"
+				class="form-control" />
+		</p>
+		<p class="form-inline ">
 			<form:input path="permamentAddress.postalCode" maxlength="40"
-				class="form-control-static" />
+				class="form-control" />
 			,
 			<form:input path="permamentAddress.city" maxlength="40"
-				class="form-control-static" />
-		</div>
+				class="form-control" />
+		</p>
 	</div>
 </div>
-<c:if test="${not empty residenceAddress}">
-	<h2>Residential address's data</h2>
 
-	<div class="row">
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Street:</label>
-			<div class="col-sm-10">
-				<form:input path="residenceAddress.street" maxlength="40"
-					class="form-control" />&nbsp;
-				<form:input path="residenceAddress.streetHN" maxlength="40"
-					class="form-control" />
-				<c:if test="${not empty residenceAddress.streetAN}">
-                    / <form:input path="residenceAddress.streetAN"
-						maxlength="40" class="form-control" />
-				</c:if>
-				<br />
-				<form:input path="residenceAddress.postalCode" maxlength="40"
-					class="form-control-static" />
-				,
-				<form:input path="residenceAddress.city" maxlength="40"
-					class="form-control-static" />
-			</div>
-		</div>
+
+<h2>Residential address's data</h2>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">Street:</label>
+	<div class="col-sm-10">
+		<p class="form-inline ">
+			<form:input path="residenceAddress.street" maxlength="40"
+				class="form-control" />
+			<form:input path="residenceAddress.streetHN" maxlength="40"
+				class="form-control" />
+			/
+			<form:input path="residenceAddress.streetAN" maxlength="40"
+				class="form-control" />
+		</p>
+		<p class="form-inline ">
+			<form:input path="residenceAddress.postalCode" maxlength="40"
+				class="form-control" />
+			,
+			<form:input path="residenceAddress.city" maxlength="40"
+				class="form-control" />
+		</p>
 	</div>
-</c:if>
+</div>
