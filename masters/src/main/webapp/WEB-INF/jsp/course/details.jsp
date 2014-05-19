@@ -15,7 +15,7 @@
 	</div>
 	<div class="row">
 		<div class="form-group">
-			<label class="col-sm-2 control-label">type:</label>
+			<label class="col-sm-2 control-label">Type:</label>
 			<div class="col-sm-10">
 				<p class="form-control-static">${course.type.name}</p>
 			</div>
@@ -23,7 +23,7 @@
 	</div>
 	<div class="row">
 		<div class="form-group">
-			<label class="col-sm-2 control-label">start date:</label>
+			<label class="col-sm-2 control-label">Start date:</label>
 			<div class="col-sm-10">
 				<p class="form-control-static">${course.startDate}</p>
 			</div>
@@ -31,7 +31,7 @@
 	</div>
 	<div class="row">
 		<div class="form-group">
-			<label class="col-sm-2 control-label">end date:</label>
+			<label class="col-sm-2 control-label">End date:</label>
 			<div class="col-sm-10">
 				<p class="form-control-static">${course.endDate}</p>
 			</div>
@@ -39,7 +39,7 @@
 	</div>
 	<div class="row">
 		<div class="form-group">
-			<label class="col-sm-2 control-label">description:</label>
+			<label class="col-sm-2 control-label">Description:</label>
 			<div class="col-sm-10">
 				<p class="form-control-static">${course.type.description}</p>
 			</div>

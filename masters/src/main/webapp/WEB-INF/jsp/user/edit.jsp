@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../../layout/taglib.jsp"%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
 
 <c:if test="${param.success eq true }">
 	<div class="alert alert-success">User data saved!</div>
@@ -26,17 +25,19 @@
 			</div>
 		</div>
 		<div class="form-group">
-            <label class="col-sm-2 control-label">Password:</label>
-            <div class="col-sm-6">
-                <form:password path="login.password" maxlength="40" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Repeat password:</label>
-            <div class="col-sm-6">
-                <form:password path="login.rePassword" maxlength="40" class="form-control" />
-            </div>
-        </div>
+			<label class="col-sm-2 control-label">Password:</label>
+			<div class="col-sm-6">
+				<form:password path="login.password" maxlength="40"
+					class="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Repeat password:</label>
+			<div class="col-sm-6">
+				<form:password path="login.rePassword" maxlength="40"
+					class="form-control" />
+			</div>
+		</div>
 
 		<h2>User's data</h2>
 

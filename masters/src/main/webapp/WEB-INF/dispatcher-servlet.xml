@@ -13,6 +13,8 @@
 				<value>/WEB-INF/defs/general.xml</value>
 			</list>
 		</property>
+		<!--enable CompleteAutoloadTilesContainerFactory -->
+		<!-- <property name="completeAutoload" value="true"></property> -->
 	</bean>
 
 	<bean id="viewResolver"

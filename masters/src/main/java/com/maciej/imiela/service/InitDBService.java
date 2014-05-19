@@ -131,6 +131,8 @@ public class InitDBService {
         userKursant.setLogin(l3);
         this.userRepository.save(userKursant);
 
+        // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         Teacher t1 = new Teacher();
         t1.setSalary((double) 2500);
         t1.setStartDate(new Date());

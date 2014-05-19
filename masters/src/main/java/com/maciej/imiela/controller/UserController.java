@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.maciej.imiela.entity.Login;
 import com.maciej.imiela.entity.User;
 import com.maciej.imiela.service.AddressService;
 import com.maciej.imiela.service.LoginService;
@@ -36,7 +35,7 @@ public class UserController {
     @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
     public String createNewUser(Model model) {
         model.addAttribute("user", new User());
-        return "user/edit";
+        return "user/register";
     }
 
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
@@ -56,7 +55,8 @@ public class UserController {
         if (bResult.hasErrors()) {
             return "user/edit";
         }
-        return this.saveUser(user);
+        user = this.userService.save(user);
+        return "redirect:/user/" + user.getId() + ".html?success=true";
     }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
@@ -66,7 +66,8 @@ public class UserController {
             return "user/edit";
         }
         user.setId(id);
-        return this.saveUser(user);
+        user = this.userService.save(user);
+        return "redirect:/user/" + user.getId() + ".html?success=true";
     }
 
     // TODO:
@@ -86,27 +87,4 @@ public class UserController {
     // return "redirect:/user/user.html?id=" + user.getId();
     // }
 
-    /*
-     * TODO: Add validation for contraint (unique login and email)
-     */
-    private Login saveLogin(User user) {
-        Login newLogin = user.getLogin();
-        Login oldLogin = newLogin;
-        if (user.getId() != null) {
-            User oldUser = this.userService.findOne(user.getId());
-            oldLogin = this.loginService.findOne(oldUser.getLogin().getId());
-            oldLogin.update(newLogin);
-        }
-        this.loginService.save(oldLogin);
-        return oldLogin;
-    }
-
-    private String saveUser(User user) {
-        logger.info(user.toString());
-        this.addressService.save(user.getPermamentAddress());
-        this.addressService.save(user.getResidenceAddress());
-        user.setLogin(this.saveLogin(user));
-        user = this.userService.save(user);
-        return "redirect:/user/" + user.getId() + ".html?success=true";
-    }
 }

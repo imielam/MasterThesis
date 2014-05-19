@@ -38,6 +38,56 @@ public class Login {
     @JoinTable
     private List<Role> roles;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Login other = (Login) obj;
+        if (this.email == null) {
+            if (other.email != null) {
+                return false;
+            }
+        } else if (!this.email.equals(other.email)) {
+            return false;
+        }
+        if (this.id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!this.id.equals(other.id)) {
+            return false;
+        }
+        if (this.login == null) {
+            if (other.login != null) {
+                return false;
+            }
+        } else if (!this.login.equals(other.login)) {
+            return false;
+        }
+        if (this.password == null) {
+            if (other.password != null) {
+                return false;
+            }
+        } else if (!this.password.equals(other.password)) {
+            return false;
+        }
+        if (this.roles == null) {
+            if (other.roles != null) {
+                return false;
+            }
+        } else if (!this.roles.equals(other.roles)) {
+            return false;
+        }
+        return true;
+    }
+
     public String getEmail() {
         return this.email;
     }
@@ -62,14 +112,30 @@ public class Login {
         return this.roles;
     }
 
-    public void setEmail(String emil) {
-        this.email = emil;
-    }
-
     //
     // public User getUser() {
     // return this.user;
     // }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((this.email == null) ? 0 : this.email.hashCode());
+        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+        result = prime * result
+                + ((this.login == null) ? 0 : this.login.hashCode());
+        result = prime * result
+                + ((this.password == null) ? 0 : this.password.hashCode());
+        result = prime * result
+                + ((this.roles == null) ? 0 : this.roles.hashCode());
+        return result;
+    }
+
+    public void setEmail(String emil) {
+        this.email = emil;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -83,6 +149,11 @@ public class Login {
         this.password = password;
     }
 
+    //
+    // public void setUser(User user) {
+    // this.user = user;
+    // }
+
     public void setRePassword(String rePassword) {
         this.rePassword = rePassword;
     }
@@ -91,25 +162,41 @@ public class Login {
         this.roles = roles;
     }
 
-    //
-    // public void setUser(User user) {
-    // this.user = user;
-    // }
-
     public Login update(Login newLogin) {
-        if (newLogin.getEmail() != null && newLogin.getEmail() != this.email) {
-            this.email = newLogin.getEmail();
+        if (newLogin.id != null && !newLogin.id.equals(this.id)) {
+            this.id = newLogin.id;
+        }
+        if (newLogin.email != null && !newLogin.email.equals(this.email)) {
+            this.email = newLogin.email;
         }
         if (newLogin.getPassword() != null
-                && newLogin.getPassword() != this.password) {
-            this.password = newLogin.getPassword();
+                && !newLogin.password.equals(this.password)) {
+            this.password = newLogin.password;
         }
         if (newLogin.getRoles() != null
                 && !newLogin.getRoles().equals(this.getRoles())) {
-            this.roles = newLogin.getRoles();
+            // TODO te¿ nie tak to powinno wygl¹daæ, chyba ...
+            this.roles = newLogin.roles;
         }
-        if (newLogin.getLogin() != null && newLogin.getLogin() != this.login) {
-            this.login = newLogin.getLogin();
+        if (newLogin.login != null && !newLogin.login.equals(this.login)) {
+            this.login = newLogin.login;
+        }
+        return this;
+    }
+
+    public Login updateEssentials(Login newLogin) {
+        if (newLogin.id != null && !newLogin.id.equals(this.id)) {
+            this.id = newLogin.id;
+        }
+        if (newLogin.email != null && !newLogin.email.equals(this.email)) {
+            this.email = newLogin.email;
+        }
+        if (newLogin.getPassword() != null
+                && !newLogin.password.equals(this.password)) {
+            this.password = newLogin.password;
+        }
+        if (newLogin.login != null && !newLogin.login.equals(this.login)) {
+            this.login = newLogin.login;
         }
         return this;
     }

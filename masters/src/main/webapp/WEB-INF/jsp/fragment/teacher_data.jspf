@@ -16,7 +16,7 @@
 <!-- </div> -->
 <div class="row">
 	<div class="form-group">
-		<label class="col-sm-2 control-label">start date:</label>
+		<label class="col-sm-2 control-label">Start date:</label>
 		<div class="col-sm-10">
 			<p class="form-control-static">${teacher.startDate}</p>
 		</div>
@@ -24,7 +24,7 @@
 </div>
 <div class="row">
 	<div class="form-group">
-		<label class="col-sm-2 control-label">end date:</label>
+		<label class="col-sm-2 control-label">End date:</label>
 		<div class="col-sm-10">
 			<p class="form-control-static">${teacher.endDate}</p>
 		</div>
@@ -32,7 +32,7 @@
 </div>
 <div class="row">
 	<div class="form-group">
-		<label class="col-sm-2 control-label">salary:</label>
+		<label class="col-sm-2 control-label">Salary:</label>
 		<div class="col-sm-10">
 			<p class="form-control-static">${teacher.salary}</p>
 		</div>

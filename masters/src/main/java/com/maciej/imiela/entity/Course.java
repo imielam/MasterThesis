@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Course {
 
@@ -25,9 +27,11 @@ public class Course {
     private CourseType type;
 
     @Column(name = "start_date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
     @Column(name = "end_date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
     @OneToMany(mappedBy = "course")
@@ -36,6 +40,63 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacher;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Course other = (Course) obj;
+        if (this.endDate == null) {
+            if (other.endDate != null) {
+                return false;
+            }
+        } else if (!this.endDate.equals(other.endDate)) {
+            return false;
+        }
+        if (this.id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!this.id.equals(other.id)) {
+            return false;
+        }
+        if (this.participants == null) {
+            if (other.participants != null) {
+                return false;
+            }
+        } else if (!this.participants.equals(other.participants)) {
+            return false;
+        }
+        if (this.startDate == null) {
+            if (other.startDate != null) {
+                return false;
+            }
+        } else if (!this.startDate.equals(other.startDate)) {
+            return false;
+        }
+        if (this.teacher == null) {
+            if (other.teacher != null) {
+                return false;
+            }
+        } else if (!this.teacher.equals(other.teacher)) {
+            return false;
+        }
+        if (this.type == null) {
+            if (other.type != null) {
+                return false;
+            }
+        } else if (!this.type.equals(other.type)) {
+            return false;
+        }
+        return true;
+    }
 
     public Date getEndDate() {
         return this.endDate;
@@ -59,6 +120,26 @@ public class Course {
 
     public CourseType getType() {
         return this.type;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((this.endDate == null) ? 0 : this.endDate.hashCode());
+        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+        result = prime
+                * result
+                + ((this.participants == null) ? 0 : this.participants
+                        .hashCode());
+        result = prime * result
+                + ((this.startDate == null) ? 0 : this.startDate.hashCode());
+        result = prime * result
+                + ((this.teacher == null) ? 0 : this.teacher.hashCode());
+        result = prime * result
+                + ((this.type == null) ? 0 : this.type.hashCode());
+        return result;
     }
 
     public void setEndDate(Date endDate) {
@@ -91,4 +172,49 @@ public class Course {
                 + this.startDate + ", endDate=" + this.endDate + "]";
     }
 
+    public Course update(Course newCourse) {
+        if (newCourse.id != null && !newCourse.id.equals(this.id)) {
+            this.id = newCourse.id;
+        }
+        if (newCourse.endDate != null
+                && !newCourse.endDate.equals(this.endDate)) {
+            this.endDate = newCourse.endDate;
+        }
+        // TODO: to trzeba rozwi¹zaæ inaczej
+        if (newCourse.participants != null
+                && !newCourse.endDate.equals(this.participants)) {
+            this.participants = newCourse.participants;
+        }
+        if (newCourse.startDate != null
+                && !newCourse.startDate.equals(this.startDate)) {
+            this.startDate = newCourse.startDate;
+        }
+        // TODO: to trzeba rozwi¹zaæ inaczej
+        if (newCourse.teacher != null
+                && !newCourse.teacher.equals(this.teacher)) {
+            this.teacher = newCourse.teacher;
+        }
+        // TODO: to trzeba rozwi¹zaæ inaczej
+        if (newCourse.type != null && !newCourse.type.equals(this.type)) {
+            this.type = newCourse.type;
+        }
+
+        return this;
+    }
+
+    public Course updateEssentials(Course newCourse) {
+        if (newCourse.id != null && !newCourse.id.equals(this.id)) {
+            this.id = newCourse.id;
+        }
+        if (newCourse.endDate != null
+                && !newCourse.endDate.equals(this.endDate)) {
+            this.endDate = newCourse.endDate;
+        }
+        if (newCourse.startDate != null
+                && !newCourse.startDate.equals(this.startDate)) {
+            this.startDate = newCourse.startDate;
+        }
+
+        return this;
+    }
 }

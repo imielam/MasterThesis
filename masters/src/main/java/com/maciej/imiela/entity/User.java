@@ -39,6 +39,70 @@ public class User {
     @JoinColumn(name = "login_id", nullable = false)
     private Login login;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        User other = (User) obj;
+        if (this.id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!this.id.equals(other.id)) {
+            return false;
+        }
+        if (this.login == null) {
+            if (other.login != null) {
+                return false;
+            }
+        } else if (!this.login.equals(other.login)) {
+            return false;
+        }
+        if (this.name == null) {
+            if (other.name != null) {
+                return false;
+            }
+        } else if (!this.name.equals(other.name)) {
+            return false;
+        }
+        if (this.participants == null) {
+            if (other.participants != null) {
+                return false;
+            }
+        } else if (!this.participants.equals(other.participants)) {
+            return false;
+        }
+        if (this.permamentAddress == null) {
+            if (other.permamentAddress != null) {
+                return false;
+            }
+        } else if (!this.permamentAddress.equals(other.permamentAddress)) {
+            return false;
+        }
+        if (this.residenceAddress == null) {
+            if (other.residenceAddress != null) {
+                return false;
+            }
+        } else if (!this.residenceAddress.equals(other.residenceAddress)) {
+            return false;
+        }
+        if (this.teachers == null) {
+            if (other.teachers != null) {
+                return false;
+            }
+        } else if (!this.teachers.equals(other.teachers)) {
+            return false;
+        }
+        return true;
+    }
+
     public Integer getId() {
         return this.id;
     }
@@ -65,6 +129,32 @@ public class User {
 
     public List<Teacher> getTeachers() {
         return this.teachers;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+        result = prime * result
+                + ((this.login == null) ? 0 : this.login.hashCode());
+        result = prime * result
+                + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime
+                * result
+                + ((this.participants == null) ? 0 : this.participants
+                        .hashCode());
+        result = prime
+                * result
+                + ((this.permamentAddress == null) ? 0 : this.permamentAddress
+                        .hashCode());
+        result = prime
+                * result
+                + ((this.residenceAddress == null) ? 0 : this.residenceAddress
+                        .hashCode());
+        result = prime * result
+                + ((this.teachers == null) ? 0 : this.teachers.hashCode());
+        return result;
     }
 
     public void setId(Integer id) {
@@ -101,6 +191,52 @@ public class User {
                 + ", permamentAddress=" + this.permamentAddress
                 + ", residenceAddress=" + this.residenceAddress + ", teachers="
                 + this.teachers + ", participants=" + this.participants + "]";
+    }
+
+    public User update(User newUser) {
+        if (newUser.id != null && !newUser.id.equals(this.id)) {
+            this.id = newUser.id;
+        }
+        // TODO: to nie tak powinno dzia³aæ
+        if (newUser.login != null && !newUser.login.equals(this.login)) {
+            this.login = newUser.login;
+        }
+        if (newUser.name != null && !newUser.name.equals(this.name)) {
+            this.name = newUser.name;
+        }
+        // TODO: to nie tak powinno dzia³aæ
+        if (newUser.participants != null
+                && !newUser.participants.equals(this.participants)) {
+            this.participants = newUser.participants;
+        }
+        // TODO: to nie tak powinno dzia³aæ
+        if (newUser.permamentAddress != null
+                && !newUser.permamentAddress.equals(this.permamentAddress)) {
+            this.permamentAddress = newUser.permamentAddress;
+        }
+        // TODO: to nie tak powinno dzia³aæ
+        if (newUser.residenceAddress != null
+                && !newUser.residenceAddress.equals(this.residenceAddress)) {
+            this.residenceAddress = newUser.residenceAddress;
+        }
+        // TODO: to nie tak powinno dzia³aæ
+        if (newUser.teachers != null && !newUser.teachers.equals(this.teachers)) {
+            this.teachers = newUser.teachers;
+        }
+
+        return this;
+    }
+
+    public User updateEssentials(User newUser) {
+        if (newUser.id != null && !newUser.id.equals(this.id)) {
+            this.id = newUser.id;
+        }
+
+        if (newUser.name != null && !newUser.name.equals(this.name)) {
+            this.name = newUser.name;
+        }
+
+        return this;
     }
 
 }
