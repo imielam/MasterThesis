@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.maciej.imiela.entity.Course;
 import com.maciej.imiela.entity.Participant;
+import com.maciej.imiela.entity.User;
 
 public interface ParticipantRepository extends
         JpaRepository<Participant, Integer> {
 
     List<Participant> findByCourse(Course course);
+
+    List<Participant> findByUser(User user);
 }

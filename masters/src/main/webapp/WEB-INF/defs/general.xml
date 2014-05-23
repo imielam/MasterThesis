@@ -100,4 +100,9 @@
         <put-attribute name="body" value="/WEB-INF/jsp/course/details.jsp" />
         <put-attribute name="current" value="course" />
     </definition>
+    <definition name="course/edit" extends="common">
+        <put-attribute name="title" value="Edit Course Data" type="string" />
+        <put-attribute name="body" value="/WEB-INF/jsp/course/edit.jsp" />
+        <put-attribute name="current" value="course" />
+    </definition>
 </tiles-definitions>

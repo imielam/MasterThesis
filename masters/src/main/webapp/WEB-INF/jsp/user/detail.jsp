@@ -15,7 +15,50 @@
 <%@ include file="../fragment/user_data.jspf"%>
 <%@ include file="../fragment/address_data.jspf"%>
 <button type="button" class="btn btn-default">
-	<a href='<spring:url value="/user/edit/${user.id}.html" />'>
-        EDIT
-	</a>
+	<a href='<spring:url value="/user/edit/${user.id}.html" />'> EDIT </a>
 </button>
+<c:if test="${not empty user.teachers }">
+
+	<div class="row">
+		<h2>History of employment contract:</h2>
+		<table class="table table-bordered table-hover table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${user.teachers}" var="teachers">
+					<tr>
+						<td><a
+							href='<spring:url value="/teacher/detail/${teachers.id}.html" />'>
+								<c:out value="${teachers.id}" />
+						</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</c:if>
+<c:if test="${not empty user.participants }">
+	<div class="row">
+		<h2>History of participation:</h2>
+		<table class="table table-bordered table-hover table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${user.participants}" var="participant">
+					<tr>
+						<td><a
+							href='<spring:url value="/participant/detail/${participant.id}.html" />'>
+								<c:out value="${participant.id}" />
+						</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</c:if>

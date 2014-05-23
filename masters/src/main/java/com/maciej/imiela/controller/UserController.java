@@ -40,7 +40,8 @@ public class UserController {
 
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
     public String detail(Model model, @PathVariable int id) {
-        model.addAttribute("user", this.userService.findOne(id));
+        model.addAttribute("user",
+                this.userService.findOneWithParticipantAndTeachers(id));
         return "user/detail";
     }
 

@@ -49,15 +49,23 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">teacher:</label>
 			<div class="col-sm-10">
-<!-- 				<p class="form-control-static">placeholder for teacher's name</p> -->
-				<p class="form-control-static"><a href='<spring:url value="/teacher/detail/${course.teacher.id}.html" />'>
-                        <c:out value="${course.teacher.user.name}" />
-                </a></p>
+				<!-- 				<p class="form-control-static">placeholder for teacher's name</p> -->
+				<p class="form-control-static">
+					<a
+						href='<spring:url value="/teacher/detail/${course.teacher.id}.html" />'>
+						<c:out value="${course.teacher.user.name}" />
+					</a>
+				</p>
 			</div>
 		</div>
 	</div>
+	<button type="button" class="btn btn-default">
+		<a href='<spring:url value="/course/edit/${course.id}.html" />'>
+			EDIT </a>
+	</button>
 	<div class="row">
-		<label class="col-sm-12 control-label">List of participants signed for this course:</label>
+		<label class="col-sm-12 control-label">List of participants
+			signed for this course:</label>
 		<table class="table table-bordered table-hover table-striped">
 			<thead>
 				<tr>
@@ -66,13 +74,13 @@
 				</tr>
 			</thead>
 			<tbody>
-<!-- 				<tr> -->
-<!-- 					<td><a -->
-<%-- 						href='<spring:url value="/participant/detail/1.html" />'> --%>
-<!-- 							1 -->
-<!-- 					</a></td> -->
-<!-- 					<td>place holder for participants</td> -->
-<!-- 				</tr> -->
+				<!-- 				<tr> -->
+				<!-- 					<td><a -->
+				<%-- 						href='<spring:url value="/participant/detail/1.html" />'> --%>
+				<!-- 							1 -->
+				<!-- 					</a></td> -->
+				<!-- 					<td>place holder for participants</td> -->
+				<!-- 				</tr> -->
 				<c:forEach items="${course.participants}" var="participant">
 					<tr>
 						<td><a
@@ -85,5 +93,5 @@
 			</tbody>
 		</table>
 	</div>
-</div>
+
 </div>
