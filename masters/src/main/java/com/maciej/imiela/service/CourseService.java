@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,9 @@ public class CourseService {
     @Autowired
     private TeacherRepository teacherRepository;
 
+    private static final Logger logger = LoggerFactory
+            .getLogger(CourseService.class);
+
     public List<Course> findAll() {
         return this.courseRepository.findAll();
     }
@@ -50,26 +55,32 @@ public class CourseService {
 
     public Course save(Course course) {
         Course oldCourse = course;
+        if (course != null) {
+            if (course.getId() != null) {
+                oldCourse = this.findOne(course.getId());
+                oldCourse.updateEssentials(course);
+            }
+        } else {
+            logger.error("course == null");
+            return course;
+        }
         Teacher newTeacher = course.getTeacher();
-        Teacher oldTeacher = newTeacher;
-        CourseType newType = course.getType();
-        CourseType oldType = newType;
+        Teacher oldTeacher = oldCourse.getTeacher();
 
-        if (course.getId() != null) {
-            oldCourse = this.findOne(course.getId());
-            oldCourse.update(course);
-        }
-        if (newTeacher.getId() != null) {
+        if (newTeacher != null && newTeacher.getId() != null) {
             oldTeacher = this.teacherRepository.findOne(newTeacher.getId());
-            oldTeacher.update(newTeacher);
         }
-        this.teacherRepository.save(oldTeacher);
+        // this.teacherRepository.save(oldTeacher);
+        oldCourse.setTeacher(oldTeacher);
 
-        if (newType.getId() != null) {
+        CourseType newType = course.getType();
+        CourseType oldType = oldCourse.getType();
+
+        if (newType != null && newType.getId() != null) {
             oldType = this.courseTypeRepository.findOne(newType.getId());
-            oldType.update(newType);
         }
-        this.courseTypeRepository.save(oldType);
+        // this.courseTypeRepository.save(oldType);
+        oldCourse.setType(oldType);
         return this.courseRepository.save(oldCourse);
     }
 }

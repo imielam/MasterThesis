@@ -31,7 +31,6 @@ public class UserController {
     private static final Logger logger = LoggerFactory
             .getLogger(UserController.class);
 
-    // TODO:
     @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
     public String createNewUser(Model model) {
         model.addAttribute("user", new User());

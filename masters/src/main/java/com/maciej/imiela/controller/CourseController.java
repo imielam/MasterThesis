@@ -50,6 +50,24 @@ public class CourseController {
     private static final Logger logger = LoggerFactory
             .getLogger(CourseController.class);
 
+    @RequestMapping(value = { "/create" }, method = RequestMethod.GET)
+    public String createNewCourse(Model model) {
+        model.addAttribute("course", new Course());
+        Map<Integer, String> mapTeachers = new HashMap<Integer, String>();
+        List<Teacher> teachers = this.teacherService.findAll();
+        for (Teacher t : teachers) {
+            mapTeachers.put(t.getId(), t.getUser().getName());
+        }
+        model.addAttribute("mapTeachers", mapTeachers);
+        Map<Integer, String> mapType = new HashMap<Integer, String>();
+        List<CourseType> types = this.courseTypeService.findAll();
+        for (CourseType t : types) {
+            mapType.put(t.getId(), t.getName());
+        }
+        model.addAttribute("mapType", mapType);
+        return "course/create";
+    }
+
     @RequestMapping(value = { "/detail/{id}" })
     public String detail(Model model, @PathVariable int id) {
         final Course course = this.courseService.findOneWithParticipants(id);
@@ -66,7 +84,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
-    public String edit(Model model, @PathVariable int id) {
+    public String editCourse(Model model, @PathVariable int id) {
         model.addAttribute("course",
                 this.courseService.findOneWithParticipants(id));
         Map<Integer, String> mapTeachers = new HashMap<Integer, String>();
@@ -93,13 +111,23 @@ public class CourseController {
     }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
-    public String save(Model model, @PathVariable int id, Course course,
+    public String saveCourse(Model model, @PathVariable int id, Course course,
             BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "course/edit";
         }
         course.setId(id);
         this.courseService.save(course);
+        return "redirect:/course/detail/" + course.getId()
+                + ".html?success=true";
+    }
+
+    @RequestMapping(value = { "/create" }, method = RequestMethod.POST)
+    public String saveNewCourse(Course course, BindingResult bResult) {
+        if (bResult.hasErrors()) {
+            return "course/edit";
+        }
+        course = this.courseService.save(course);
         return "redirect:/course/detail/" + course.getId()
                 + ".html?success=true";
     }

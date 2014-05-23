@@ -4,13 +4,8 @@
 <%@ include file="../../layout/taglib.jsp"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-
-<c:set var="participants" value="${course.participants}" />
-<c:set var="type" value="${course.type}" />
-
-<%@ include file="../fragment/course_data.jspf"%>
+<%@ include file="../fragment/course_type_data.jspf"%>
 <button type="button" class="btn btn-default">
-    <a href='<spring:url value="/course/edit/${course.id}.html" />'>
+    <a href='<spring:url value="/course_type/edit/${type.id}.html" />'>
         EDIT </a>
 </button>
-<%@ include file="../fragment/lists/participants.jspf"%>

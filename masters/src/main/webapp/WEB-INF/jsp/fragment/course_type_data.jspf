@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+
+<%@ include file="../../layout/taglib.jsp"%>
+
+<h2>Course's type</h2>
+<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Type:</label>
+		<div class="col-sm-10">
+			<p class="form-control-static">${type.name}</p>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Description:</label>
+		<div class="col-sm-10">
+			<p class="form-control-static">${type.description}</p>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Max participant number:</label>
+		<div class="col-sm-10">
+			<p class="form-control-static">${type.maxParticipantNumber}</p>
+		</div>
+	</div>
+</div>

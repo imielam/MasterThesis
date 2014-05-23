@@ -70,6 +70,9 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a href="/course/list.html">List</a></li>
+								<li><a href="/course/create.html">Create course</a></li>
+								<li><a href="/course_type/list.html">Types</a></li>
+								<li><a href="/course_type/create.html">Create course type</a></li>
 								<!-- 								<li><a href="#">Another action</a></li> -->
 								<!-- 								<li><a href="#">Something else here</a></li> -->
 								<!-- 								<li class="divider"></li> -->
