@@ -51,13 +51,6 @@ public class Teacher {
             return false;
         }
         Teacher other = (Teacher) obj;
-        if (this.courses == null) {
-            if (other.courses != null) {
-                return false;
-            }
-        } else if (!this.courses.equals(other.courses)) {
-            return false;
-        }
         if (this.endDate == null) {
             if (other.endDate != null) {
                 return false;
@@ -86,13 +79,7 @@ public class Teacher {
         } else if (!this.startDate.equals(other.startDate)) {
             return false;
         }
-        if (this.user == null) {
-            if (other.user != null) {
-                return false;
-            }
-        } else if (!this.user.equals(other.user)) {
-            return false;
-        }
+
         return true;
     }
 

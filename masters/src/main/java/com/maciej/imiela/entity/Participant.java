@@ -44,13 +44,6 @@ public class Participant {
             return false;
         }
         Participant other = (Participant) obj;
-        if (this.course == null) {
-            if (other.course != null) {
-                return false;
-            }
-        } else if (!this.course.equals(other.course)) {
-            return false;
-        }
         if (this.id == null) {
             if (other.id != null) {
                 return false;
@@ -77,13 +70,6 @@ public class Participant {
                 return false;
             }
         } else if (!this.score.equals(other.score)) {
-            return false;
-        }
-        if (this.user == null) {
-            if (other.user != null) {
-                return false;
-            }
-        } else if (!this.user.equals(other.user)) {
             return false;
         }
         return true;

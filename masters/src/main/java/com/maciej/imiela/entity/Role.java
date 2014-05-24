@@ -49,13 +49,7 @@ public class Role {
         } else if (!this.name.equals(other.name)) {
             return false;
         }
-        if (this.users == null) {
-            if (other.users != null) {
-                return false;
-            }
-        } else if (!this.users.equals(other.users)) {
-            return false;
-        }
+
         return true;
     }
 

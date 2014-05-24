@@ -58,46 +58,11 @@ public class User {
         } else if (!this.id.equals(other.id)) {
             return false;
         }
-        if (this.login == null) {
-            if (other.login != null) {
-                return false;
-            }
-        } else if (!this.login.equals(other.login)) {
-            return false;
-        }
         if (this.name == null) {
             if (other.name != null) {
                 return false;
             }
         } else if (!this.name.equals(other.name)) {
-            return false;
-        }
-        if (this.participants == null) {
-            if (other.participants != null) {
-                return false;
-            }
-        } else if (!this.participants.equals(other.participants)) {
-            return false;
-        }
-        if (this.permamentAddress == null) {
-            if (other.permamentAddress != null) {
-                return false;
-            }
-        } else if (!this.permamentAddress.equals(other.permamentAddress)) {
-            return false;
-        }
-        if (this.residenceAddress == null) {
-            if (other.residenceAddress != null) {
-                return false;
-            }
-        } else if (!this.residenceAddress.equals(other.residenceAddress)) {
-            return false;
-        }
-        if (this.teachers == null) {
-            if (other.teachers != null) {
-                return false;
-            }
-        } else if (!this.teachers.equals(other.teachers)) {
             return false;
         }
         return true;

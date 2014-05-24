@@ -67,13 +67,7 @@ public class Course {
         } else if (!this.id.equals(other.id)) {
             return false;
         }
-        if (this.participants == null) {
-            if (other.participants != null) {
-                return false;
-            }
-        } else if (!this.participants.equals(other.participants)) {
-            return false;
-        }
+
         if (this.startDate == null) {
             if (other.startDate != null) {
                 return false;
@@ -81,20 +75,7 @@ public class Course {
         } else if (!this.startDate.equals(other.startDate)) {
             return false;
         }
-        if (this.teacher == null) {
-            if (other.teacher != null) {
-                return false;
-            }
-        } else if (!this.teacher.equals(other.teacher)) {
-            return false;
-        }
-        if (this.type == null) {
-            if (other.type != null) {
-                return false;
-            }
-        } else if (!this.type.equals(other.type)) {
-            return false;
-        }
+
         return true;
     }
 

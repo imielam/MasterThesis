@@ -78,13 +78,7 @@ public class Login {
         } else if (!this.password.equals(other.password)) {
             return false;
         }
-        if (this.roles == null) {
-            if (other.roles != null) {
-                return false;
-            }
-        } else if (!this.roles.equals(other.roles)) {
-            return false;
-        }
+
         return true;
     }
 
