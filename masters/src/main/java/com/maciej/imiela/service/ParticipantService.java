@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.maciej.imiela.entity.Course;
 import com.maciej.imiela.entity.Participant;
 import com.maciej.imiela.repository.ParticipantRepository;
 
@@ -16,6 +17,10 @@ public class ParticipantService {
 
     public List<Participant> findAll() {
         return this.participantRepository.findAll();
+    }
+
+    public List<Participant> findByCourse(Course course) {
+        return this.participantRepository.findByCourse(course);
     }
 
     public Participant findOne(int id) {

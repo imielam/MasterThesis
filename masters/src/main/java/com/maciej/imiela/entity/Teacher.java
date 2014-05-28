@@ -1,6 +1,7 @@
 package com.maciej.imiela.entity;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -38,6 +39,10 @@ public class Teacher {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public Teacher() {
+        this.courses = new LinkedList<Course>();
+    }
 
     @Override
     public boolean equals(Object obj) {

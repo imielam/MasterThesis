@@ -32,6 +32,15 @@ public class Participant {
     @Column(nullable = true)
     private String note;
 
+    public Participant() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public Participant(Integer id) {
+        super();
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

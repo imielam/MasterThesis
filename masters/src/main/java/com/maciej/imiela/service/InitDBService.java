@@ -152,10 +152,23 @@ public class InitDBService {
         c1.setType(ct1);
         this.courseRepository.save(c1);
 
+        Course c2 = new Course();
+        c2.setStartDate(new Date());
+        c2.setEndDate(new Date());
+        c2.setTeacher(t1);
+        c2.setType(ct1);
+        this.courseRepository.save(c2);
+
         Participant p1 = new Participant();
         p1.setCourse(c1);
         p1.setPassed(false);
         p1.setUser(userKursant);
+        this.participantRepository.save(p1);
+
+        p1 = new Participant();
+        p1.setCourse(c2);
+        p1.setPassed(false);
+        p1.setUser(userAdmin);
         this.participantRepository.save(p1);
 
     }

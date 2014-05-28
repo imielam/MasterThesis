@@ -53,6 +53,15 @@ public class CourseService {
         return course;
     }
 
+    @Transactional
+    public Course findOneWithParticipantsIsNull(int id) {
+        Course course = this.findOne(id);
+        List<Participant> participants = this.participantRepository
+                .findByCourseIsNull();
+        course.setParticipants(participants);
+        return course;
+    }
+
     public Course save(Course course) {
         Course oldCourse = course;
         if (course != null) {
@@ -82,5 +91,30 @@ public class CourseService {
         // this.courseTypeRepository.save(oldType);
         oldCourse.setType(oldType);
         return this.courseRepository.save(oldCourse);
+    }
+
+    public Course saveParticipants(Course course) {
+        Course oldCourse = course;
+        if (course != null) {
+            if (course.getId() != null) {
+                oldCourse = this.findOneWithParticipants(course.getId());
+            } else {
+                logger.error("Forgot to set ID in controller");
+                return course;
+            }
+        } else {
+            logger.error("course == null");
+            return course;
+        }
+        List<Participant> newList = this.participantRepository.findAll(course
+                .getParticipantsID());
+        // List<Participant> oldList = oldCourse.getParticipants();
+        for (Participant p : newList) {
+            p.setCourse(course);
+            this.participantRepository.save(p);
+        }
+        // oldList.addAll(newList);
+        // oldCourse.setParticipants(oldList);
+        return oldCourse;
     }
 }

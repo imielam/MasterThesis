@@ -14,3 +14,9 @@
         EDIT </a>
 </button>
 <%@ include file="../fragment/lists/participants.jspf"%>
+<div class="row">
+<button type="button" class="btn btn-default">
+    <a href='<spring:url value="/course/add/participants/${course.id}.html" />'>
+        ADD </a>
+</button>
+</div>

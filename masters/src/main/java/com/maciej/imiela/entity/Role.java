@@ -1,5 +1,6 @@
 package com.maciej.imiela.entity;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,7 +22,11 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<Login> users;
+    private List<Login> logins;
+
+    public Role() {
+        this.logins = new LinkedList<Login>();
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -57,12 +62,12 @@ public class Role {
         return this.id;
     }
 
-    public String getName() {
-        return this.name;
+    public List<Login> getLogins() {
+        return this.logins;
     }
 
-    public List<Login> getUsers() {
-        return this.users;
+    public String getName() {
+        return this.name;
     }
 
     @Override
@@ -73,7 +78,7 @@ public class Role {
         result = prime * result
                 + ((this.name == null) ? 0 : this.name.hashCode());
         result = prime * result
-                + ((this.users == null) ? 0 : this.users.hashCode());
+                + ((this.logins == null) ? 0 : this.logins.hashCode());
         return result;
     }
 
@@ -81,12 +86,12 @@ public class Role {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogins(List<Login> users) {
+        this.logins = users;
     }
 
-    public void setUsers(List<Login> users) {
-        this.users = users;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Role update(Role newRole) {
@@ -97,8 +102,8 @@ public class Role {
             this.name = newRole.name;
         }
         // TODO: to nie tak powinno dzia³aæ
-        if (newRole.users != null && !newRole.users.equals(this.users)) {
-            this.users = newRole.users;
+        if (newRole.logins != null && !newRole.logins.equals(this.logins)) {
+            this.logins = newRole.logins;
         }
         return this;
     }

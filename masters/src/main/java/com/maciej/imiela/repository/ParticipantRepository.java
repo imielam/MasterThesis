@@ -13,5 +13,7 @@ public interface ParticipantRepository extends
 
     List<Participant> findByCourse(Course course);
 
+    List<Participant> findByCourseIsNull();
+
     List<Participant> findByUser(User user);
 }

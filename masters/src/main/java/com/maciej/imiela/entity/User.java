@@ -1,5 +1,6 @@
 package com.maciej.imiela.entity;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -38,6 +39,11 @@ public class User {
     @OneToOne
     @JoinColumn(name = "login_id", nullable = false)
     private Login login;
+
+    public User() {
+        this.teachers = new LinkedList<Teacher>();
+        this.participants = new LinkedList<Participant>();
+    }
 
     @Override
     public boolean equals(Object obj) {
