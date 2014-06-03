@@ -1,8 +1,6 @@
 package com.maciej.imiela.service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -86,9 +84,10 @@ public class InitDBService {
         l1.setPassword("admin");
         l1.setEmail("admin@ma.com");
         // l1.setUser(userAdmin);
-        List<Role> lr = new ArrayList<Role>();
-        lr.add(roleAdmin);
-        l1.setRoles(lr);
+        // List<Role> lr = new ArrayList<Role>();
+        // lr.add(roleAdmin);
+        // l1.setRoles(lr);
+        l1.setRole(roleAdmin);
         this.loginRepository.save(l1);
 
         User userAdmin = new User();
@@ -103,9 +102,10 @@ public class InitDBService {
         l2.setPassword("teacher");
         l2.setEmail("teacher@ma.com");
         // l2.setUser(userTeacher);
-        lr = new ArrayList<Role>();
-        lr.add(roleUser);
-        l2.setRoles(lr);
+        // lr = new ArrayList<Role>();
+        // lr.add(roleUser);
+        // l2.setRoles(lr);
+        l2.setRole(roleUser);
         this.loginRepository.save(l2);
 
         User userTeacher = new User();
@@ -119,9 +119,10 @@ public class InitDBService {
         l3.setPassword("participant");
         l3.setEmail("participant@ma.com");
         // l3.setUser(userKursant);
-        lr = new ArrayList<Role>();
-        lr.add(roleUser);
-        l3.setRoles(lr);
+        // lr = new ArrayList<Role>();
+        // lr.add(roleUser);
+        // l3.setRoles(lr);
+        l3.setRole(roleUser);
         this.loginRepository.save(l3);
 
         User userKursant = new User();

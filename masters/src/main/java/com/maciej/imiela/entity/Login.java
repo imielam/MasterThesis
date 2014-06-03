@@ -1,13 +1,11 @@
 package com.maciej.imiela.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -30,13 +28,17 @@ public class Login {
     @Transient
     private String rePassword;
 
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
     // @OneToOne
     // @JoinColumn(name = "user_id", nullable = false)
     // private User user;
 
-    @ManyToMany
-    @JoinTable
-    private List<Role> roles;
+    public Login() {
+        this.role = new Role();
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -102,8 +104,8 @@ public class Login {
         return this.rePassword;
     }
 
-    public List<Role> getRoles() {
-        return this.roles;
+    public Role getRole() {
+        return this.role;
     }
 
     //
@@ -123,7 +125,7 @@ public class Login {
         result = prime * result
                 + ((this.password == null) ? 0 : this.password.hashCode());
         result = prime * result
-                + ((this.roles == null) ? 0 : this.roles.hashCode());
+                + ((this.role == null) ? 0 : this.role.hashCode());
         return result;
     }
 
@@ -152,8 +154,8 @@ public class Login {
         this.rePassword = rePassword;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Login update(Login newLogin) {
@@ -167,10 +169,10 @@ public class Login {
                 && !newLogin.password.equals(this.password)) {
             this.password = newLogin.password;
         }
-        if (newLogin.getRoles() != null
-                && !newLogin.getRoles().equals(this.getRoles())) {
+        if (newLogin.getRole() != null
+                && !newLogin.getRole().equals(this.getRole())) {
             // TODO te¿ nie tak to powinno wygl¹daæ, chyba ...
-            this.roles = newLogin.roles;
+            this.role = newLogin.role;
         }
         if (newLogin.login != null && !newLogin.login.equals(this.login)) {
             this.login = newLogin.login;

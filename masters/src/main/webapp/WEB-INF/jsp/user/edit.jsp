@@ -10,6 +10,16 @@
 <form:form method="POST" modelAttribute="user" class="form-horizontal"
 	role="form">
 	<fieldset>
+
+		<h2>Role's data</h2>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Name:</label>
+			<div class="col-sm-6">
+				<form:select path="login.role.id" items="${mapRoles}" maxlength="40"
+					class="form-control" />
+			</div>
+		</div>
 		<h2>Login's data</h2>
 
 		<div class="form-group">

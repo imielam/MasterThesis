@@ -11,6 +11,8 @@
 <c:set var="address_r" value="${user.residenceAddress}" />
 <c:set var="address_p" value="${user.permamentAddress}" />
 <c:set var="login" value="${user.login}" />
+<c:set var="role" value="${user.login.role}" />
+<%@ include file="../fragment/role_data.jspf"%>
 <%@ include file="../fragment/login_data.jspf"%>
 <%@ include file="../fragment/user_data.jspf"%>
 <%@ include file="../fragment/address_data.jspf"%>

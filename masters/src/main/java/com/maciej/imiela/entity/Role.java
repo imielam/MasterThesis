@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Role {
@@ -21,11 +21,13 @@ public class Role {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role")
     private List<Login> logins;
 
     public Role() {
+        super();
         this.logins = new LinkedList<Login>();
+        this.name = "ROLE_GUEST";
     }
 
     @Override

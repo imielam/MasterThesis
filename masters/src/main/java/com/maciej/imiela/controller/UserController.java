@@ -1,5 +1,9 @@
 package com.maciej.imiela.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.maciej.imiela.entity.Role;
 import com.maciej.imiela.entity.User;
 import com.maciej.imiela.service.AddressService;
 import com.maciej.imiela.service.LoginService;
+import com.maciej.imiela.service.RoleService;
 import com.maciej.imiela.service.UserService;
 
 @Controller
@@ -28,12 +34,21 @@ public class UserController {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private RoleService roleService;
+
     private static final Logger logger = LoggerFactory
             .getLogger(UserController.class);
 
     @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
     public String createNewUser(Model model) {
         model.addAttribute("user", new User());
+        Map<Integer, String> mapRoles = new HashMap<Integer, String>();
+        List<Role> roles = this.roleService.findAll();
+        for (Role r : roles) {
+            mapRoles.put(r.getId(), r.getName());
+        }
+        model.addAttribute("mapRoles", mapRoles);
         return "user/register";
     }
 
@@ -47,6 +62,12 @@ public class UserController {
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
     public String edit(Model model, @PathVariable int id) {
         model.addAttribute("user", this.userService.findOne(id));
+        Map<Integer, String> mapRoles = new HashMap<Integer, String>();
+        List<Role> roles = this.roleService.findAll();
+        for (Role r : roles) {
+            mapRoles.put(r.getId(), r.getName());
+        }
+        model.addAttribute("mapRoles", mapRoles);
         return "user/edit";
     }
 

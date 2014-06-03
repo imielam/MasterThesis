@@ -14,6 +14,7 @@ import com.maciej.imiela.entity.User;
 import com.maciej.imiela.repository.AddressRepository;
 import com.maciej.imiela.repository.LoginRepository;
 import com.maciej.imiela.repository.ParticipantRepository;
+import com.maciej.imiela.repository.RoleRepository;
 import com.maciej.imiela.repository.TeacherRepository;
 import com.maciej.imiela.repository.UserRepository;
 
@@ -35,6 +36,9 @@ public class UserService {
     @Autowired
     private TeacherRepository teacherRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     public List<User> findAll() {
         return this.userRepository.findAll();
     }
@@ -53,6 +57,17 @@ public class UserService {
         user.setTeachers(teachers);
         return user;
     }
+
+    // @Transactional
+    // public User findOneWithParticipantAndTeachersAndRoles(int id) {
+    // User user = this.findOne(id);
+    // List<Participant> participants = this.participantRepository
+    // .findByUser(user);
+    // user.setParticipants(participants);
+    // List<Teacher> teachers = this.teacherRepository.findByUser(user);
+    // user.setTeachers(teachers);
+    // return user;
+    // }
 
     // public User save(User user) {
     // return this.userRepository.save(user);
