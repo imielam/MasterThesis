@@ -72,7 +72,8 @@
 								<li><a href="/course/list.html">List</a></li>
 								<li><a href="/course/create.html">Create course</a></li>
 								<li><a href="/course_type/list.html">Types</a></li>
-								<li><a href="/course_type/create.html">Create course type</a></li>
+								<li><a href="/course_type/create.html">Create course
+										type</a></li>
 								<!-- 								<li><a href="#">Another action</a></li> -->
 								<!-- 								<li><a href="#">Something else here</a></li> -->
 								<!-- 								<li class="divider"></li> -->
@@ -80,6 +81,12 @@
 								<!-- 								<li><a href="#">Separated link</a></li> -->
 								<!-- 								<li><a href="#">One more separated link</a></li> -->
 							</ul></li>
+
+						<li class="${current == 'login' ? 'active' : '' }"><a
+							href='<spring:url value="/login.html" />'>Login</a></li>
+							
+							<li class="${current == 'logout' ? 'active' : '' }"><a
+                            href='<spring:url value="/logout.html" />'>Logout</a></li>
 
 						<!-- 						<div class="btn-group"> -->
 						<!-- 							<button type="button" class="btn btn-default dropdown-toggle" -->

@@ -13,6 +13,12 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/default/index.jsp" />
 		<put-attribute name="current" value="index" />
 	</definition>
+	
+	<definition name="login" extends="common">
+        <put-attribute name="title" value="Login" />
+        <put-attribute name="body" value="/WEB-INF/jsp/default/login.jsp" />
+        <put-attribute name="current" value="login" />
+    </definition>
 
 	<definition name="users_list" extends="common">
 		<put-attribute name="title" value="Users" />

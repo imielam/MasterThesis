@@ -8,8 +8,8 @@
 
 	<http>
 		<intercept-url pattern="/admin/**" access="ROLE_USER" />
-		<form-login />
-		<logout />
+		<form-login login-page="/login.html"/>
+		<logout logout-url="/logout.html"/>
 	</http>
 
 	<authentication-manager>

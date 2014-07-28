@@ -71,6 +71,11 @@ public class UserController {
         return "user/edit";
     }
 
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
     public String registerUser(User user, BindingResult bResult) {
         if (bResult.hasErrors()) {
