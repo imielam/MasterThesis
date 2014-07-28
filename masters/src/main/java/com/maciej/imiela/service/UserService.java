@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.maciej.imiela.entity.Login;
@@ -86,6 +87,8 @@ public class UserService {
      */
     private Login saveLogin(User user) {
         Login newLogin = user.getLogin();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        newLogin.setPassword(encoder.encode(newLogin.getPassword()));
         Login oldLogin = newLogin;
         if (user.getId() != null) {
             User oldUser = this.findOne(user.getId());

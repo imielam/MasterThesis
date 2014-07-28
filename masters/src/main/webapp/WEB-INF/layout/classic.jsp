@@ -24,6 +24,9 @@
 
 	<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras"
 		prefix="tilesx"%>
+
+	<%@ taglib uri="http://www.springframework.org/security/tags"
+		prefix="security"%>
 	<tilesx:useAttribute name="current" />
 
 	<div class="container">
@@ -81,12 +84,13 @@
 								<!-- 								<li><a href="#">Separated link</a></li> -->
 								<!-- 								<li><a href="#">One more separated link</a></li> -->
 							</ul></li>
-
-						<li class="${current == 'login' ? 'active' : '' }"><a
-							href='<spring:url value="/login.html" />'>Login</a></li>
-							
-							<li class="${current == 'logout' ? 'active' : '' }"><a
-                            href='<spring:url value="/logout.html" />'>Logout</a></li>
+						<security:authorize access="!isAuthenticated()">
+							<li class="${current == 'login' ? 'active' : '' }"><a
+								href='<spring:url value="/login.html" />'>Login</a></li>
+						</security:authorize>
+						<security:authorize access="isAuthenticated()">
+							<li><a href='<spring:url value="/logout.html" />'>Logout</a></li>
+						</security:authorize>
 
 						<!-- 						<div class="btn-group"> -->
 						<!-- 							<button type="button" class="btn btn-default dropdown-toggle" -->

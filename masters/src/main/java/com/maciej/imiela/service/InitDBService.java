@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.maciej.imiela.entity.Address;
@@ -55,6 +56,7 @@ public class InitDBService {
 
     @PostConstruct
     public void init() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         Role roleUser = new Role();
         roleUser.setName("ROLE_USER");
         this.roleRepository.save(roleUser);
@@ -81,7 +83,7 @@ public class InitDBService {
 
         Login l1 = new Login();
         l1.setLogin("admin");
-        l1.setPassword("admin");
+        l1.setPassword(encoder.encode("admin"));
         l1.setEmail("admin@ma.com");
         // l1.setUser(userAdmin);
         // List<Role> lr = new ArrayList<Role>();
@@ -99,7 +101,7 @@ public class InitDBService {
 
         Login l2 = new Login();
         l2.setLogin("teacher");
-        l2.setPassword("teacher");
+        l2.setPassword(encoder.encode("teacher"));
         l2.setEmail("teacher@ma.com");
         // l2.setUser(userTeacher);
         // lr = new ArrayList<Role>();
@@ -116,7 +118,7 @@ public class InitDBService {
 
         Login l3 = new Login();
         l3.setLogin("participant");
-        l3.setPassword("participant");
+        l3.setPassword(encoder.encode("participant"));
         l3.setEmail("participant@ma.com");
         // l3.setUser(userKursant);
         // lr = new ArrayList<Role>();

@@ -218,6 +218,12 @@
             <version>${org.springframework.security.version}</version>
         </dependency>
 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${org.springframework.security.version}</version>
+		</dependency>
+
 		<!-- Support for testing Spring applications with tools such as JUnit and 
 			TestNG This artifact is generally always defined with a 'test' scope for 
 			the integration testing framework and unit testing stubs -->

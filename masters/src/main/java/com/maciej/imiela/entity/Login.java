@@ -32,6 +32,8 @@ public class Login {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    // TODO Add a verification
+
     // @OneToOne
     // @JoinColumn(name = "user_id", nullable = false)
     // private User user;
