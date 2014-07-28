@@ -46,6 +46,8 @@
 	</bean>
 
 	<jpa:repositories base-package="com.maciej.imiela.repository" />
+	
+	<import resource="security.xml"/>
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host">
