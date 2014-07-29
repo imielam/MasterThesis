@@ -44,6 +44,10 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
+    public User findByLogin(String login) {
+        return this.userRepository.findByLoginLogin(login);
+    }
+
     public User findOne(int id) {
         return this.userRepository.findOne(id);
     }
@@ -51,6 +55,16 @@ public class UserService {
     @Transactional
     public User findOneWithParticipantAndTeachers(int id) {
         User user = this.findOne(id);
+        List<Participant> participants = this.participantRepository
+                .findByUser(user);
+        user.setParticipants(participants);
+        List<Teacher> teachers = this.teacherRepository.findByUser(user);
+        user.setTeachers(teachers);
+        return user;
+    }
+
+    @Transactional
+    public User findOneWithParticipantAndTeachers(User user) {
         List<Participant> participants = this.participantRepository
                 .findByUser(user);
         user.setParticipants(participants);

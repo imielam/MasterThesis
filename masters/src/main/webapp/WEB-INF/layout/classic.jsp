@@ -49,47 +49,59 @@
 							href='<spring:url value="/" />'>Home</a></li>
 						<%-- 						<LI CLASS="${CURRENT == 'USERS' ? 'ACTIVE' : '' }"><A --%>
 						<%-- 							HREF='<SPRING:URL VALUE="/ADMIN/USERS.HTML" />'>USERS</A></LI> --%>
-						<li class="dropdown ${current == 'users' ? 'active' : '' }"><a
-							href="#" class="dropdown-toggle" data-toggle="dropdown">Users
-								<b class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="/admin/users.html">List</a></li>
-								<li><a href="/admin/register.html">Register </a></li>
-								<!--                                <li><a href="#">Something else here</a></li> -->
-								<!--                                <li class="divider"></li> -->
-								<!--                                <li class="dropdown-header">Nav header</li> -->
-								<!--                                <li><a href="#">Separated link</a></li> -->
-								<!--                                <li><a href="#">One more separated link</a></li> -->
-							</ul></li>
+						<security:authorize access="isAuthenticated()">
+							<li class="dropdown ${current == 'users' ? 'active' : '' }"><a
+								href="#" class="dropdown-toggle" data-toggle="dropdown">Users
+									<b class="caret"></b>
+							</a>
+								<ul class="dropdown-menu">
+									<security:authorize access="hasRole('ROLE_ADMIN')">
+										<li><a href="/admin/users.html">List</a></li>
+										<li><a href="/admin/register.html">Register </a></li>
+									</security:authorize>
+									<!--                                <li><a href="#">Something else here</a></li> -->
+									<!--                                <li class="divider"></li> -->
+									<!--                                <li class="dropdown-header">Nav header</li> -->
+									<!--                                <li><a href="#">Separated link</a></li> -->
+									<!--                                <li><a href="#">One more separated link</a></li> -->
+								</ul></li>
+						</security:authorize>
 						<li class="${current == 'about' ? 'active' : '' }"><a
 							href='<spring:url value="/about.html" />'>About</a></li>
 						<li class="${current == 'contact' ? 'active' : '' }"><a
 							href='<spring:url value="/contact.html" />'>Contact</a></li>
-
-						<li class="dropdown ${current == 'course' ? 'active' : '' }"><a
-							href="#" class="dropdown-toggle" data-toggle="dropdown">Course
-								<b class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="/course/list.html">List</a></li>
-								<li><a href="/course/create.html">Create course</a></li>
-								<li><a href="/course_type/list.html">Types</a></li>
-								<li><a href="/course_type/create.html">Create course
-										type</a></li>
-								<!-- 								<li><a href="#">Another action</a></li> -->
-								<!-- 								<li><a href="#">Something else here</a></li> -->
-								<!-- 								<li class="divider"></li> -->
-								<!-- 								<li class="dropdown-header">Nav header</li> -->
-								<!-- 								<li><a href="#">Separated link</a></li> -->
-								<!-- 								<li><a href="#">One more separated link</a></li> -->
-							</ul></li>
+						<security:authorize access="isAuthenticated()">
+							<li class="dropdown ${current == 'course' ? 'active' : '' }"><a
+								href="#" class="dropdown-toggle" data-toggle="dropdown">Course
+									<b class="caret"></b>
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="/course/list.html">List</a></li>
+									<li><a href="/course/create.html">Create course</a></li>
+									<li><a href="/course_type/list.html">Types</a></li>
+									<li><a href="/course_type/create.html">Create course
+											type</a></li>
+									<!-- 								<li><a href="#">Another action</a></li> -->
+									<!-- 								<li><a href="#">Something else here</a></li> -->
+									<!-- 								<li class="divider"></li> -->
+									<!-- 								<li class="dropdown-header">Nav header</li> -->
+									<!-- 								<li><a href="#">Separated link</a></li> -->
+									<!-- 								<li><a href="#">One more separated link</a></li> -->
+								</ul></li>
+						</security:authorize>
 						<security:authorize access="!isAuthenticated()">
 							<li class="${current == 'login' ? 'active' : '' }"><a
 								href='<spring:url value="/login.html" />'>Login</a></li>
 						</security:authorize>
 						<security:authorize access="isAuthenticated()">
-							<li><a href='<spring:url value="/logout.html" />'>Logout</a></li>
+							<li class="dropdown ${current == 'account' ? 'active' : '' }"><a
+								href="#" class="dropdown-toggle" data-toggle="dropdown">My Account
+									<b class="caret"></b>
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="/user/detail.html">Details </a></li>
+									<li><a href='<spring:url value="/logout.html" />'>Logout</a></li>
+								</ul></li>
 						</security:authorize>
 
 						<!-- 						<div class="btn-group"> -->

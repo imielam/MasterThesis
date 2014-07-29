@@ -1,5 +1,6 @@
 package com.maciej.imiela.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,16 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory
             .getLogger(UserController.class);
+
+    @RequestMapping(value = { "/detail" }, method = RequestMethod.GET)
+    public String account(Model model, Principal principal) {
+        String login = principal.getName();
+        User user = this.userService.findByLogin(login);
+
+        model.addAttribute("user",
+                this.userService.findOneWithParticipantAndTeachers(user));
+        return "user/detail";
+    }
 
     @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
     public String createNewUser(Model model) {

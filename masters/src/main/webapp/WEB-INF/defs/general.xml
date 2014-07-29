@@ -29,7 +29,7 @@
 	<definition name="user/detail" extends="common">
 		<put-attribute name="title" value="User Detail" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user/detail.jsp" />
-		<put-attribute name="current" value="users" />
+		<put-attribute name="current" value="account" />
 	</definition>
 
 	<definition name="teacher/detail" extends="common">
