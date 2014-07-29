@@ -9,7 +9,9 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Type:</label>
 		<div class="col-sm-10">
-			<p class="form-control-static">${type.name}</p>
+			<p class="form-control-static">
+				<c:out value="${type.name}" />
+			</p>
 		</div>
 	</div>
 </div>
@@ -17,7 +19,9 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Description:</label>
 		<div class="col-sm-10">
-			<p class="form-control-static">${type.description}</p>
+			<p class="form-control-static">
+				<c:out value="${type.description}" />
+			</p>
 		</div>
 	</div>
 </div>
@@ -25,7 +29,9 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Max participant number:</label>
 		<div class="col-sm-10">
-			<p class="form-control-static">${type.maxParticipantNumber}</p>
+			<p class="form-control-static">
+				<c:out value="${type.maxParticipantNumber}" />
+			</p>
 		</div>
 	</div>
 </div>

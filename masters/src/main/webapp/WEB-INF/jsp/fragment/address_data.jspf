@@ -9,13 +9,19 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Street:</label>
 		<div class="col-sm-10">
-			<p class="form-control-static">${address_p.street}
-				${address_p.streetHN}
-				<c:if test="${not empty address_p.streetAN}">/${address_p.streetAN}</c:if>
+			<p class="form-control-static">
+				<c:out value="${address_p.street}" />
+				<c:out value="${address_p.streetHN}" />
+				<c:if test="${not empty address_p.streetAN}">/<c:out
+						value="${address_p.streetAN}" />
+				</c:if>
 			</p>
 
-			<p class="form-control-static">${address_p.postalCode},
-				${address_p.city}</p>
+			<p class="form-control-static">
+				<c:out value="${address_p.postalCode}" />
+				,
+				<c:out value="${address_p.city}" />
+			</p>
 		</div>
 	</div>
 </div>
@@ -26,13 +32,19 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Street:</label>
 			<div class="col-sm-10">
-				<p class="form-control-static">${address_r.street}
-					${address_r.streetHN}
-					<c:if test="${not empty address_r.streetAN}">/${address_r.streetAN}</c:if>
+				<p class="form-control-static">
+					<c:out value="${address_r.street}" />
+					<c:out value="${address_r.streetHN}" />
+					<c:if test="${not empty address_r.streetAN}">/<c:out
+							value="${address_r.streetAN}" />
+					</c:if>
 				</p>
 
-				<p class="form-control-static">${address_r.postalCode},
-					${address_r.city}</p>
+				<p class="form-control-static">
+					<c:out value="${address_r.postalCode}" />
+					,
+					<c:out value="${address_r.city}" />
+				</p>
 			</div>
 		</div>
 	</div>
