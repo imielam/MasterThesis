@@ -7,6 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 public class Login {
@@ -16,15 +20,21 @@ public class Login {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @Size(min = 3, message = "Must have at least 3 characters!")
     @Column(unique = true, nullable = false)
     private String login;
 
+    @Email
+    @NotNull
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Size(min = 8, message = "Must have at least 8 characters!")
     @Column(nullable = false)
     private String password;
 
+    @Size(min = 8, message = "Must have at least 8 characters!")
+    // TODO: add validator for checking if rePassword equals password
     @Transient
     private String rePassword;
 

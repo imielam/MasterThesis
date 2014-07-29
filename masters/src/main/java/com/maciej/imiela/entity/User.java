@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User {
@@ -19,6 +20,7 @@ public class User {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @Size(min = 3, message = "Must have at least 3 characters!")
     @Column(nullable = false)
     private String name;
 

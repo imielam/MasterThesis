@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class CourseType {
@@ -13,9 +16,12 @@ public class CourseType {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @Size(min = 3, message = "Must have at least 3 characters!")
     @Column(unique = true, nullable = false)
     private String name;
 
+    @NotNull
+    @Max(30)
     @Column(nullable = false)
     private Integer maxParticipantNumber;
 
