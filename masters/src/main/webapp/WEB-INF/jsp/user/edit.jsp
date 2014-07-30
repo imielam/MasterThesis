@@ -7,8 +7,8 @@
 	<div class="alert alert-success">User data saved!</div>
 </c:if>
 
-<form:form method="POST" modelAttribute="user" class="form-horizontal"
-	role="form">
+<form:form method="POST" modelAttribute="user"
+	class="form-horizontal mainForm" role="form">
 	<fieldset>
 
 		<h2>Role's data</h2>
@@ -60,7 +60,7 @@
 
 		<h2>Permanent address's data</h2>
 
-		<div class="form-group">
+		<div class="form-group permAddressForm">
 			<label class="col-sm-2 control-label">Street:</label>
 			<div class="col-sm-10">
 				<p class="form-inline ">
@@ -81,11 +81,45 @@
 				</p>
 			</div>
 		</div>
+		<script type="text/javascript">
+			var permAddressForm = function() {
+				$(".mainForm").validate(
+						{
+							rules : {
+								"permamentAddress.street" : {
+									required : true
+								},
+								"permamentAddress.streetHN" : {
+									required : true
+								},
+								"permamentAddress.streetAN" : {
+									required : false
+								},
+								"permamentAddress.postalCode" : {
+									required : true,
+									minlength : 6,
+									maxlength : 6
+								},
+								"permamentAddress.city" : {
+									required : true
+								},
+							},
+// 							highlight : function(element) {
+// 								$(element).closest('.form-group').removeClass(
+// 										'has-success').addClass('has-error');
+// 							},
+// 							unhighlight : function(element) {
+// 								$(element).closest('.form-group').removeClass(
+// 										'has-error').addClass('has-success');
+// 							},
+						});
+			};
+		</script>
 
 
 		<h2>Residential address's data</h2>
 
-		<div class="form-group">
+		<div class="form-group resAddressForm">
 			<label class="col-sm-2 control-label">Street:</label>
 			<div class="col-sm-10">
 				<p class="form-inline ">
@@ -107,6 +141,42 @@
 			</div>
 		</div>
 
+		<script type="text/javascript">
+			var resAddressForm = function() {
+				$(".mainForm").validate(
+						{
+							rules : {
+								"residenceAddress.street" : {
+									required : true
+								},
+								"residenceAddress.streetHN" : {
+									required : true
+								},
+								"residenceAddress.streetAN" : {
+									required : false
+								},
+								"residenceAddress.postalCode" : {
+									required : true,
+									minlength : 6,
+									maxlength : 6
+								},
+								"residenceAddress.city" : {
+									required : true
+								},
+							},
+// 							highlight : function(element) {
+// 								$(element).closest('.form-group').removeClass(
+// 										'has-success').addClass('has-error');
+// 							},
+// 							unhighlight : function(element) {
+// 								$(element).closest('.form-group').removeClass(
+// 										'has-error').addClass('has-success');
+// 							},
+						});
+			};
+		</script>
+
+
 		<div class="form-group">
 			<div class="col-sm-12">
 				<input name="send" type="submit" value="Save"
@@ -119,3 +189,10 @@
 		</div>
 	</fieldset>
 </form:form>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		permAddressForm();
+		resAddressForm();
+	});
+</script>

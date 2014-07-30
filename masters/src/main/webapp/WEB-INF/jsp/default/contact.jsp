@@ -15,7 +15,7 @@
 
 	<h2>Please write your message bellow:</h2>
 	<form:form method="POST" modelAttribute="contactMessage"
-		class="form-horizontal contactForm" role="form">
+		class="form-horizontal mainForm" role="form">
 		<fieldset>
 			<div class="form-group col-sm-12">
 				<form:textarea path="message" rows="10" class="form-control" />
@@ -44,7 +44,7 @@
 <script type="text/javascript">
 	$(document).ready(
 			function() {
-				$(".contactForm").validate(
+				$(".mainForm").validate(
 						{
 							rules : {
 								message : {
@@ -56,14 +56,14 @@
 									email : true
 								}
 							},
-							highlight : function(element) {
-								$(element).closest('.form-group').removeClass(
-										'has-success').addClass('has-error');
-							},
-							unhighlight : function(element) {
-								$(element).closest('.form-group').removeClass(
-										'has-error').addClass('has-success');
-							},
+// 							highlight : function(element) {
+// 								$(element).closest('.form-group').removeClass(
+// 										'has-success').addClass('has-error');
+// 							},
+// 							unhighlight : function(element) {
+// 								$(element).closest('.form-group').removeClass(
+// 										'has-error').addClass('has-success');
+// 							},
 						});
 			});
 </script>
