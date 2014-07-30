@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <%@ include file="../../layout/taglib.jsp"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -8,14 +8,14 @@
 
 <div>
 
-    <c:if test="${param.success eq true }">
-        <div class = "alert alert-success">Message was sent!</div>
-    </c:if>
-    
+	<c:if test="${param.success eq true }">
+		<div class="alert alert-success">Message was sent!</div>
+	</c:if>
+
 
 	<h2>Please write your message bellow:</h2>
-	<form:form method="POST" modelAttribute="contactMessage" 
-		class="form-horizontal" role="form">
+	<form:form method="POST" modelAttribute="contactMessage"
+		class="form-horizontal contactForm" role="form">
 		<fieldset>
 			<div class="form-group col-sm-12">
 				<form:textarea path="message" rows="10" class="form-control" />
@@ -40,3 +40,34 @@
 		</fieldset>
 	</form:form>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$(".contactForm").validate(
+						{
+							rules : {
+								message : {
+									required : true,
+									minlength : 15
+								},
+								email : {
+									required : true,
+									email : true
+								}
+							},
+							highlight : function(element) {
+								$(element).closest('.form-group').removeClass(
+										'has-success').addClass('has-error');
+							},
+							unhighlight : function(element) {
+								$(element).closest('.form-group').removeClass(
+										'has-error').addClass('has-success');
+							},
+						});
+			});
+</script>
+
+
+
+
