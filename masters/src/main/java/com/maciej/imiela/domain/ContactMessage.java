@@ -1,8 +1,14 @@
 package com.maciej.imiela.domain;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+
 public class ContactMessage extends Message {
 
-    protected String email = "";
+    @Email
+    @NotNull
+    protected String email;
 
     public ContactMessage() {
         super();

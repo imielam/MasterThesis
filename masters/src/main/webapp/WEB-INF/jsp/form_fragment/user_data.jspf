@@ -10,7 +10,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">name:</label>
 		<div class="col-sm-6">
-			<form:input path="name" maxlength="40" class="form-control" />
+			<form:input path="name" maxlength="40" class="form-control" /><form:errors path="name" />
 		</div>
 	</div>
 </div>

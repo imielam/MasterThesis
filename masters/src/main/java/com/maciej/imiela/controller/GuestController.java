@@ -4,6 +4,8 @@
  */
 package com.maciej.imiela.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,6 @@ public class GuestController {
         return "contact";
     }
 
-    // TODO:
     @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
     public String createNewUser(Model model) {
         model.addAttribute("user", new User());
@@ -60,7 +61,6 @@ public class GuestController {
         return "about";
     }
 
-    // TODO:
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public String displayLogInForm(Model model) {
         return "login";
@@ -76,9 +76,9 @@ public class GuestController {
         return "error";
     }
 
-    // TODO:
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    public String saveNewUser(/* @Valid */User user, BindingResult bResult) {
+    public String saveNewUser(Model model, @Valid User user,
+            BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "register";
         }
@@ -87,9 +87,10 @@ public class GuestController {
         return "redirect:/home?message=" + SUCCES_REGISTER;
     }
 
+    // TODO: check why in this case, validation is not working
     @RequestMapping(value = { "/contact" }/* , method = RequestMethod.POST */)
-    public String sendMessage(/* @Valid */ContactMessage contactMessage,
-            BindingResult bResult) {
+    public String sendMessage(Model model,
+            @Valid ContactMessage contactMessage, BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "contact";
         }
@@ -100,7 +101,7 @@ public class GuestController {
         msg.setSubject("Please contact me, as soon as you can: "
                 + contactMessage.getEmail());
         try {
-            this.mailSender.send(msg);
+            // this.mailSender.send(msg);
         } catch (MailException ex) {
             // log it and go on
             logger.error(ex.getMessage());

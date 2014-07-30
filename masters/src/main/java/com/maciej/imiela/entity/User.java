@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -21,6 +22,7 @@ public class User {
     private Integer id;
 
     @Size(min = 3, message = "Must have at least 3 characters!")
+    @NotNull
     @Column(nullable = false)
     private String name;
 

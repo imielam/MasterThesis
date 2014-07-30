@@ -6,6 +6,8 @@ package com.maciej.imiela.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,18 +43,18 @@ public class CourseTypeController {
 
     @RequestMapping(value = { "/create" }, method = RequestMethod.GET)
     public String create(Model model) {
-        model.addAttribute("type", new CourseType());
+        model.addAttribute("courseType", new CourseType());
         return "course_type/edit";
     }
 
-    @RequestMapping(value = { "/detail/{id}" })
+    @RequestMapping(value = { "/detail/{id}" }, method = RequestMethod.GET)
     public String detail(Model model, @PathVariable int id) {
         final CourseType courseType = this.courseTypeService.findOne(id);
-        model.addAttribute("type", courseType);
+        model.addAttribute("courseType", courseType);
         return "course_type/details";
     }
 
-    @RequestMapping(value = { "/list" })
+    @RequestMapping(value = { "/list" }, method = RequestMethod.GET)
     public String displayCoursesList(Model model) {
         final List<CourseType> allTypes = this.courseTypeService.findAll();
         // logger.info(Arrays.toString(allCourses.toArray()));
@@ -70,13 +72,13 @@ public class CourseTypeController {
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
     public String edit(Model model, @PathVariable int id) {
-        model.addAttribute("type", this.courseTypeService.findOne(id));
+        model.addAttribute("courseType", this.courseTypeService.findOne(id));
         return "course_type/edit";
     }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
     public String save(Model model, @PathVariable int id,
-            CourseType courseType, BindingResult bResult) {
+            @Valid CourseType courseType, BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "course_type/edit";
         }
@@ -87,7 +89,7 @@ public class CourseTypeController {
     }
 
     @RequestMapping(value = { "/create" }, method = RequestMethod.POST)
-    public String saveNew(Model model, CourseType courseType,
+    public String saveNew(Model model, @Valid CourseType courseType,
             BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "course_type/edit";

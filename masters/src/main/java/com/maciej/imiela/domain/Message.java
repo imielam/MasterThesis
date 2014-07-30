@@ -1,8 +1,11 @@
 package com.maciej.imiela.domain;
 
+import javax.validation.constraints.NotNull;
+
 public class Message {
 
-    protected String message = "";
+    @NotNull
+    protected String message;
 
     public Message() {
         super();

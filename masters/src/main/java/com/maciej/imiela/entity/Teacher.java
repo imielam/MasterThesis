@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,6 +25,8 @@ public class Teacher {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @NotNull
+    @Past
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
@@ -30,6 +35,8 @@ public class Teacher {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
+    @NotNull
+    @Digits(fraction = 3, integer = 20)
     @Column(nullable = false)
     private Double salary;
 

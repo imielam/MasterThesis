@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Address {
@@ -13,18 +16,24 @@ public class Address {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @NotNull
     @Column(nullable = false)
     private String street;
 
+    @Pattern(regexp = "\\d+\\w?", message = "Field can have at least one number and one or zero character (at the end only)")
     @Column(name = "street_hn", nullable = false)
     private String streetHN;
 
+    @Pattern(regexp = "\\d+\\w?", message = "Field can have at least one number and one or zero character (at the end only)")
     @Column(name = "street_an", nullable = true)
     private String streetAN;
 
+    @Size(min = 3, message = "Must have at least 3 characters!")
     @Column(nullable = false)
     private String city;
 
+    @Pattern(regexp = "\\d\\d-\\d\\d\\d", message = "Field must support pattern: XX-XXX")
+    @NotNull
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
 

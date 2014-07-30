@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Participant {
@@ -23,9 +26,16 @@ public class Participant {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    // @Pattern(regexp = "(true)|(false)", message =
+    // "field can only be true or false")
+    @NotNull
     @Column(nullable = false)
     private Boolean passed;
 
+    // @Pattern(regexp = "[1-5]", message =
+    // "value of the field must be between numbers 1 and 5")
+    @DecimalMax(value = "5")
+    @DecimalMin(value = "1")
     @Column(nullable = true)
     private Integer score;
 

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Role {
@@ -18,6 +20,8 @@ public class Role {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @Pattern(regexp = "ROLE_[A-Z]+", message = "Field must correspondt to the pattern: ROLE_XXXX")
+    @NotNull
     @Column(unique = true, nullable = false)
     private String name;
 

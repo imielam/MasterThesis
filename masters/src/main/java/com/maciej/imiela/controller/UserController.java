@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,8 +89,9 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    public String registerUser(User user, BindingResult bResult) {
+    // TODO: correct this to work
+    // @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
+    public String registerUser(@Valid User user, BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "user/edit";
         }
@@ -97,7 +100,7 @@ public class UserController {
     }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
-    public String save(Model model, @PathVariable int id, User user,
+    public String save(Model model, @PathVariable int id, @Valid User user,
             BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "user/edit";
@@ -107,7 +110,6 @@ public class UserController {
         return "redirect:/user/" + user.getId() + ".html?success=true";
     }
 
-    // TODO:
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
     public String users(Model model) {
         model.addAttribute("users", this.userService.findAll());

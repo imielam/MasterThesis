@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,14 +89,14 @@ public class CourseController {
         return "course/create";
     }
 
-    @RequestMapping(value = { "/detail/{id}" })
+    @RequestMapping(value = { "/detail/{id}" }, method = RequestMethod.GET)
     public String detail(Model model, @PathVariable int id) {
         final Course course = this.courseService.findOneWithParticipants(id);
         model.addAttribute("course", course);
         return "course/details";
     }
 
-    @RequestMapping(value = { "/list" })
+    @RequestMapping(value = { "/list" }, method = RequestMethod.GET)
     public String displayCoursesList(Model model) {
         final List<Course> allCourses = this.courseService.findAll();
         // logger.info(Arrays.toString(allCourses.toArray()));
@@ -168,7 +170,7 @@ public class CourseController {
 
     @RequestMapping(value = { "/add/participants/{id}" }, method = RequestMethod.POST)
     public String saveAddedParticipants(Model model, @PathVariable int id,
-            Course course, BindingResult bResult) {
+            @Valid Course course, BindingResult bResult) {
         // Course oldCourse = this.courseService.findOneWithParticipants(id);
         // List<Participant> oldListParticipants = oldCourse.getParticipants();
         if (bResult.hasErrors()) {
@@ -181,8 +183,8 @@ public class CourseController {
     }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
-    public String saveCourse(Model model, @PathVariable int id, Course course,
-            BindingResult bResult) {
+    public String saveCourse(Model model, @PathVariable int id,
+            @Valid Course course, BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "course/edit";
         }
@@ -193,7 +195,8 @@ public class CourseController {
     }
 
     @RequestMapping(value = { "/create" }, method = RequestMethod.POST)
-    public String saveNewCourse(Course course, BindingResult bResult) {
+    public String saveNewCourse(Model model, @Valid Course course,
+            BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "course/edit";
         }
@@ -204,7 +207,7 @@ public class CourseController {
 
     @RequestMapping(value = { "/edit/participants/{id}" }, method = RequestMethod.POST)
     public String saveParticipants(Model model, @PathVariable int id,
-            Course course, BindingResult bResult) {
+            @Valid Course course, BindingResult bResult) {
         // Course course = this.courseService.findOneWithParticipants(id);
         if (bResult.hasErrors()) {
             logger.error(bResult.toString());

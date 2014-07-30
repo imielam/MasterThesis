@@ -35,6 +35,7 @@ public class Login {
 
     @Size(min = 8, message = "Must have at least 8 characters!")
     // TODO: add validator for checking if rePassword equals password
+    // customValidator probably
     @Transient
     private String rePassword;
 

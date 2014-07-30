@@ -8,7 +8,7 @@
 </c:if>
 <c:set var="participants" value="${course.participants}" />
 <c:set var="type" value="${course.type}" />
-<form:form method="POST" modelAttribute="type" class="form-horizontal"
+<form:form method="POST" modelAttribute="courseType" class="form-horizontal"
 	role="form">
 	<fieldset>
 		<%@ include file="../form_fragment/course_type_data.jspf"%>

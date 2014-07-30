@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maciej.imiela.entity.User;
@@ -31,12 +32,12 @@ public class AdminController {
     private static final Logger logger = LoggerFactory
             .getLogger(AdminController.class);
 
-    @RequestMapping(value = { "/register" })
+    @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
     public ModelAndView registerUser(Model model) {
         return new ModelAndView("forward:/user/register.html");
     }
 
-    @RequestMapping(value = { "/users" })
+    @RequestMapping(value = { "/users" }, method = RequestMethod.GET)
     public String userDetails(Model model) {
         List<User> u = this.userService.findAll();
         model.addAttribute("users", u);

@@ -9,6 +9,6 @@
 <div class="form-group">
     <div class="col-sm-10">
         <form:select multiple="true" path="roles" items="${mapRoles}"
-            class="form-control" />
+            class="form-control" /><form:errors path="roles" />
     </div>
 </div>

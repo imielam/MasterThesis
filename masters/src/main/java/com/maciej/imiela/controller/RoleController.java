@@ -1,5 +1,7 @@
 package com.maciej.imiela.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,7 @@ public class RoleController {
     }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
-    public String save(Model model, @PathVariable int id, Role role,
+    public String save(Model model, @PathVariable int id, @Valid Role role,
             BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "role/edit";
