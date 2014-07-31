@@ -89,8 +89,8 @@ public class UserController {
         return "login";
     }
 
-    // TODO: correct this to work
-    // @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
+    // TODO: add validation not only user but all objects inside
+    @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
     public String registerUser(@Valid User user, BindingResult bResult) {
         if (bResult.hasErrors()) {
             return "user/edit";

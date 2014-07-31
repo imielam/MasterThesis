@@ -7,17 +7,19 @@
 <h2>Course's data</h2>
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">Type:</label>
-    <div class="col-sm-6">
-        <form:select path="type.id" items="${mapType}" maxlength="40"
-            class="form-control" /><form:errors path="type.id" />
-    </div>
+	<label class="col-sm-2 control-label">Type:</label>
+	<div class="col-sm-6">
+		<form:select path="type.id" items="${mapType}" maxlength="40"
+			class="form-control" />
+		<form:errors path="type.id" />
+	</div>
 </div>
 <div class="form-group">
 	<label class="col-sm-2 control-label">Start date:</label>
 	<div class="col-sm-6">
 		<form:input type="date" path="startDate" maxlength="40"
-			class="form-control" /><form:errors path="startDate" />
+			class="form-control" />
+		<form:errors path="startDate" />
 	</div>
 </div>
 
@@ -25,13 +27,46 @@
 	<label class="col-sm-2 control-label">End date:</label>
 	<div class="col-sm-6">
 		<form:input type="date" path="endDate" maxlength="40"
-			class="form-control" /><form:errors path="endDate" />
+			class="form-control" />
+		<form:errors path="endDate" />
 	</div>
 </div>
 <div class="form-group">
 	<label class="col-sm-2 control-label">Teacher:</label>
 	<div class="col-sm-6">
 		<form:select path="teacher.id" items="${mapTeachers}" maxlength="40"
-			class="form-control" /><form:errors path="teacher.id" />
+			class="form-control" />
+		<form:errors path="teacher.id" />
 	</div>
 </div>
+
+<script type="text/javascript">
+	var courseForm = function() {
+		$(".mainForm").validate({
+			rules : {
+				"type.id" : {
+					required : true
+				},
+				"startDate" : {
+					required : true,
+					dateISO : true,
+				},
+				"endDate" : {
+					required : false,
+                    dateISO : true,
+				},
+				"teacher.id" : {
+					required : true
+				},
+			},
+		//                          highlight : function(element) {
+		//                              $(element).closest('.form-group').removeClass(
+		//                                      'has-success').addClass('has-error');
+		//                          },
+		//                          unhighlight : function(element) {
+		//                              $(element).closest('.form-group').removeClass(
+		//                                      'has-error').addClass('has-success');
+		//                          },
+		});
+	};
+</script>

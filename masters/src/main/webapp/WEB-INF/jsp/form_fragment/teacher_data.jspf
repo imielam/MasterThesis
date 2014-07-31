@@ -28,3 +28,33 @@
 		<form:input path="salary" maxlength="40" class="form-control" /><form:errors path="salary" />
 	</div>
 </div>
+
+
+<script type="text/javascript">
+    var teacherForm = function() {
+        $(".mainForm").validate({
+            rules : {
+                "startDate" : {
+                    required : true,
+                    dateISO : true
+                },
+                "endDate" : {
+                    required : true,
+                    dateISO : true
+                },
+                "salary" : {
+                    required : true,
+                    number : true
+                },
+            },
+        //                          highlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-success').addClass('has-error');
+        //                          },
+        //                          unhighlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-error').addClass('has-success');
+        //                          },
+        });
+    };
+</script>

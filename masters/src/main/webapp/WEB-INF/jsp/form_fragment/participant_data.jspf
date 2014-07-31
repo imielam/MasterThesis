@@ -25,3 +25,30 @@
 		<form:input path="note" maxlength="40" class="form-control" /><form:errors path="note" />
 	</div>
 </div>
+
+<script type="text/javascript">
+    var participantForm = function() {
+        $(".mainForm").validate({
+            rules : {
+                "passed" : {
+                    required : true
+                },
+                "score" : {
+                    required : true,
+                    range : [1-5]
+                },
+                "note" : {
+                    required : false
+                },
+            },
+        //                          highlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-success').addClass('has-error');
+        //                          },
+        //                          unhighlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-error').addClass('has-success');
+        //                          },
+        });
+    };
+</script>

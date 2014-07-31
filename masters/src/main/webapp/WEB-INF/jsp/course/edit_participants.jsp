@@ -8,7 +8,7 @@
 </c:if>
 <c:set var="participants" value="${course.participants}" />
 <c:set var="type" value="${course.type}" />
-<form:form method="POST" modelAttribute="course" class="form-horizontal"
+<form:form method="POST" modelAttribute="course" class="form-horizontal mainForm"
 	role="form">
 	<fieldset>
 		<%@ include file="../form_fragment/lists/participants.jspf"%>
@@ -26,3 +26,11 @@
 	</fieldset>
 </form:form>
 
+<!-- TODO: dodać walidację, bo narazie nie ma-->
+
+<!-- <script type="text/javascript"> -->
+//     $(document).ready(function() {
+//         permAddressForm();
+//         resAddressForm();
+//     });
+<!-- </script> -->

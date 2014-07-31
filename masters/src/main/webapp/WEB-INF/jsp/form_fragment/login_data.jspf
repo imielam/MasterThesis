@@ -18,3 +18,28 @@
 		<form:input path="login.email" maxlength="40" class="form-control" /><form:errors path="login.email" />
 	</div>
 </div>
+
+
+<script type="text/javascript">
+    var loginForm = function() {
+        $(".mainForm").validate({
+            rules : {
+                "login.login" : {
+                    required : true
+                },
+                "login.email" : {
+                    required : true,
+                    email: true
+                },
+            },
+        //                          highlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-success').addClass('has-error');
+        //                          },
+        //                          unhighlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-error').addClass('has-success');
+        //                          },
+        });
+    };
+</script>

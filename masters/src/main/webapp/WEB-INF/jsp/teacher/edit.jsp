@@ -7,7 +7,7 @@
 	<div class="alert alert-success">Participant data saved!</div>
 </c:if>
 
-<form:form method="POST" modelAttribute="teacher" class="form-horizontal"
+<form:form method="POST" modelAttribute="teacher" class="form-horizontal mainForm"
 	role="form">
 	<fieldset>
 		<%@include file="../form_fragment/teacher_data.jspf" %>
@@ -24,3 +24,9 @@
 		</div>
 	</fieldset>
 </form:form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        teacherForm();
+    });
+</script>

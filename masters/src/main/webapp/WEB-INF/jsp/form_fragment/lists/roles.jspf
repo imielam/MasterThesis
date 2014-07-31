@@ -7,8 +7,30 @@
 <h2>List of Roles</h2>
 
 <div class="form-group">
-    <div class="col-sm-10">
-        <form:select multiple="true" path="roles" items="${mapRoles}"
-            class="form-control" /><form:errors path="roles" />
-    </div>
+	<label class="col-sm-2 control-label">Name:</label>
+	<div class="col-sm-6">
+		<form:select path="login.role.id" items="${mapRoles}" maxlength="40"
+			class="form-control" />
+		<form:errors path="login.role.id" />
+	</div>
 </div>
+
+<!--        <script type="text/javascript"> 
+//          var roleForm = function() {
+//              $(".mainForm").validate({
+//                  rules : {
+//                      "login.role.id" : {
+//                          required : true
+//                      },
+//                  },
+//              //                          highlight : function(element) {
+//              //                              $(element).closest('.form-group').removeClass(
+//              //                                      'has-success').addClass('has-error');
+//              //                          },
+//              //                          unhighlight : function(element) {
+//              //                              $(element).closest('.form-group').removeClass(
+//              //                                      'has-error').addClass('has-success');
+//              //                          },
+//              });
+//          };
+        </script> -->

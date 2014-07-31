@@ -33,3 +33,30 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+    var courseTypeForm = function() {
+        $(".mainForm").validate({
+            rules : {
+                "name" : {
+                    required : true
+                },
+                "description" : {
+                    required : true
+                },
+                "maxParticipantNumber" : {
+                    required : true,
+                    range : [1,30]
+                },
+            },
+        //                          highlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-success').addClass('has-error');
+        //                          },
+        //                          unhighlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-error').addClass('has-success');
+        //                          },
+        });
+    };
+</script>

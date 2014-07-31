@@ -32,7 +32,7 @@ public class AdminController {
     private static final Logger logger = LoggerFactory
             .getLogger(AdminController.class);
 
-    @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/register" }/* , method = RequestMethod.GET */)
     public ModelAndView registerUser(Model model) {
         return new ModelAndView("forward:/user/register.html");
     }

@@ -14,3 +14,24 @@
 		</div>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+    var userForm = function() {
+        $(".mainForm").validate({
+            rules : {
+                "name" : {
+                    required : true
+                },
+            },
+        //                          highlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-success').addClass('has-error');
+        //                          },
+        //                          unhighlight : function(element) {
+        //                              $(element).closest('.form-group').removeClass(
+        //                                      'has-error').addClass('has-success');
+        //                          },
+        });
+    };
+</script>
