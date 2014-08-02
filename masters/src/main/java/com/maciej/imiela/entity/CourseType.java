@@ -8,6 +8,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.maciej.imiela.annotation.UniqueCourseTypeName;
+
 @Entity
 public class CourseType {
 
@@ -18,6 +20,7 @@ public class CourseType {
 
     @Size(min = 3, message = "Must have at least 3 characters!")
     @NotNull
+    @UniqueCourseTypeName(message = "Course type with such name already exists!")
     @Column(unique = true, nullable = false)
     private String name;
 
@@ -132,7 +135,7 @@ public class CourseType {
         }
         if (newType.maxParticipantNumber != null
                 && !newType.maxParticipantNumber
-                        .equals(this.maxParticipantNumber)) {
+                .equals(this.maxParticipantNumber)) {
             this.maxParticipantNumber = newType.maxParticipantNumber;
         }
         if (newType.name != null && !newType.name.equals(this.name)) {

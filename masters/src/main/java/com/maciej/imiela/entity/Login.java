@@ -12,6 +12,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.maciej.imiela.annotation.UniqueLoginEmail;
+import com.maciej.imiela.annotation.UniqueLoginLogin;
+
 @Entity
 public class Login {
 
@@ -22,11 +25,13 @@ public class Login {
 
     @NotNull
     @Size(min = 3, message = "Must have at least 3 characters!")
+    @UniqueLoginLogin(message = "Login is occupied!")
     @Column(unique = true, nullable = false)
     private String login;
 
     @Email
     @NotNull
+    @UniqueLoginEmail(message = "Email is occupied!")
     @Column(unique = true, nullable = false)
     private String email;
 

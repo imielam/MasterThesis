@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.maciej.imiela.annotation.UniqueRoleName;
+
 @Entity
 public class Role {
 
@@ -22,6 +24,7 @@ public class Role {
 
     @Pattern(regexp = "ROLE_[A-Z]+", message = "Field must correspondt to the pattern: ROLE_XXXX")
     @NotNull
+    @UniqueRoleName(message = "Such Role already exists!")
     @Column(unique = true, nullable = false)
     private String name;
 

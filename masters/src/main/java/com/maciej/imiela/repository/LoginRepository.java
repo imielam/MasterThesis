@@ -9,6 +9,8 @@ import com.maciej.imiela.entity.Role;
 
 public interface LoginRepository extends JpaRepository<Login, Integer> {
 
+    Login findByEmail(String email);
+
     Login findByLogin(String login);
 
     List<Login> findByRole(Role role);
