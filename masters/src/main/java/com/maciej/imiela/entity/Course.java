@@ -43,6 +43,7 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Participant> participants;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacher;

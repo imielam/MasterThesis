@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,10 +27,12 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @Valid
     @OneToOne
     @JoinColumn(name = "address_per", nullable = false)
     private Address permamentAddress;
 
+    @Valid
     @OneToOne(optional = true)
     @JoinColumn(name = "address_res", nullable = true)
     private Address residenceAddress;
@@ -40,6 +43,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Participant> participants;
 
+    @Valid
     @OneToOne
     @JoinColumn(name = "login_id", nullable = false)
     private Login login;

@@ -20,6 +20,7 @@ public class Login {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @NotNull
     @Size(min = 3, message = "Must have at least 3 characters!")
     @Column(unique = true, nullable = false)
     private String login;
@@ -29,6 +30,7 @@ public class Login {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @NotNull
     @Size(min = 8, message = "Must have at least 8 characters!")
     @Column(nullable = false)
     private String password;
@@ -39,6 +41,7 @@ public class Login {
     @Transient
     private String rePassword;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;

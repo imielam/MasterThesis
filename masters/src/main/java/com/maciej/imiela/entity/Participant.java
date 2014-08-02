@@ -18,10 +18,12 @@ public class Participant {
     @GeneratedValue(generator = "hilo-strategy")
     private Integer id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
