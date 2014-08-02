@@ -41,7 +41,7 @@ public class Participant {
     @Column(nullable = true)
     private Integer score;
 
-    @Column(nullable = true)
+    @Column(nullable = true, columnDefinition = "text")
     private String note;
 
     public Participant() {

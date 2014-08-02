@@ -29,7 +29,7 @@ public class CourseType {
     @Column(nullable = false)
     private Integer maxParticipantNumber;
 
-    @Column(nullable = true)
+    @Column(nullable = true, columnDefinition = "text")
     private String description;
 
     @Override
@@ -135,7 +135,7 @@ public class CourseType {
         }
         if (newType.maxParticipantNumber != null
                 && !newType.maxParticipantNumber
-                .equals(this.maxParticipantNumber)) {
+                        .equals(this.maxParticipantNumber)) {
             this.maxParticipantNumber = newType.maxParticipantNumber;
         }
         if (newType.name != null && !newType.name.equals(this.name)) {
