@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -20,8 +21,10 @@ import javax.validation.constraints.Size;
 public class User {
 
     @Id
-    @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy", strategy = "hilo")
-    @GeneratedValue(generator = "hilo-strategy")
+    // @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy",
+    // strategy = "hilo")
+    // @GeneratedValue(generator = "hilo-strategy")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Size(min = 3, message = "Must have at least 3 characters!")

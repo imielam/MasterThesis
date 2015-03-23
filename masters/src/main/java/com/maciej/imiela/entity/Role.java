@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -18,8 +19,10 @@ public class Role {
 
     @Id
     // @GeneratedValue(strategy = GenerationType.AUTO)
-    @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy", strategy = "hilo")
-    @GeneratedValue(generator = "hilo-strategy")
+    // @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy",
+    // strategy = "hilo")
+    // @GeneratedValue(generator = "hilo-strategy")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Pattern(regexp = "ROLE_[A-Z]+", message = "Field must correspondt to the pattern: ROLE_XXXX")

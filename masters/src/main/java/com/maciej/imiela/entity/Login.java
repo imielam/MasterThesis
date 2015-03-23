@@ -3,6 +3,7 @@ package com.maciej.imiela.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,8 +20,10 @@ import com.maciej.imiela.annotation.UniqueLoginLogin;
 public class Login {
 
     @Id
-    @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy", strategy = "hilo")
-    @GeneratedValue(generator = "hilo-strategy")
+    // @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy",
+    // strategy = "hilo")
+    // @GeneratedValue(generator = "hilo-strategy")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @NotNull

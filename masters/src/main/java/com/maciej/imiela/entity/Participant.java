@@ -3,6 +3,7 @@ package com.maciej.imiela.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,8 +15,10 @@ import javax.validation.constraints.NotNull;
 public class Participant {
 
     @Id
-    @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy", strategy = "hilo")
-    @GeneratedValue(generator = "hilo-strategy")
+    // @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy",
+    // strategy = "hilo")
+    // @GeneratedValue(generator = "hilo-strategy")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @NotNull
@@ -41,7 +44,7 @@ public class Participant {
     @Column(nullable = true)
     private Integer score;
 
-    @Column(nullable = true, columnDefinition = "text")
+    @Column(nullable = true, length = 10000)
     private String note;
 
     public Participant() {

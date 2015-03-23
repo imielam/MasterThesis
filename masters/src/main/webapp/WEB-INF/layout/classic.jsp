@@ -52,7 +52,7 @@
 							href='<spring:url value="/" />'>Home</a></li>
 						<%-- 						<LI CLASS="${CURRENT == 'USERS' ? 'ACTIVE' : '' }"><A --%>
 						<%-- 							HREF='<SPRING:URL VALUE="/ADMIN/USERS.HTML" />'>USERS</A></LI> --%>
-						<security:authorize access="isAuthenticated()">
+						<security:authorize access="hasRole('ROLE_ADMIN')">
 							<li class="dropdown ${current == 'users' ? 'active' : '' }"><a
 								href="#" class="dropdown-toggle" data-toggle="dropdown">Users
 									<b class="caret"></b>
@@ -79,11 +79,22 @@
 									<b class="caret"></b>
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="/course/list.html">List</a></li>
-									<li><a href="/course/create.html">Create course</a></li>
-									<li><a href="/course_type/list.html">Types</a></li>
-									<li><a href="/course_type/create.html">Create course
-											type</a></li>
+									<security:authorize access="hasRole('ROLE_ADMIN')">
+										<li><a href="/course/list.html">List</a></li>
+										<li><a href="/course/create.html">Create course</a></li>
+										<li><a href="/course_type/list.html">Types</a></li>
+										<li><a href="/course_type/create.html">Create course
+												type</a></li>
+									</security:authorize>
+									<security:authorize
+										access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+										<li><a href="/course/list_future.html">List of
+												courses that will be conducted</a></li>
+									</security:authorize>
+									<security:authorize
+										access="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')">
+										<li><a href="/course/list_my.html">List of my courses</a></li>
+									</security:authorize>
 									<!-- 								<li><a href="#">Another action</a></li> -->
 									<!-- 								<li><a href="#">Something else here</a></li> -->
 									<!-- 								<li class="divider"></li> -->

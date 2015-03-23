@@ -3,6 +3,7 @@ package com.maciej.imiela.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
@@ -14,8 +15,10 @@ import com.maciej.imiela.annotation.UniqueCourseTypeName;
 public class CourseType {
 
     @Id
-    @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy", strategy = "hilo")
-    @GeneratedValue(generator = "hilo-strategy")
+    // @org.hibernate.annotations.GenericGenerator(name = "hilo-strategy",
+    // strategy = "hilo")
+    // @GeneratedValue(generator = "hilo-strategy")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Size(min = 3, message = "Must have at least 3 characters!")
@@ -29,7 +32,7 @@ public class CourseType {
     @Column(nullable = false)
     private Integer maxParticipantNumber;
 
-    @Column(nullable = true, columnDefinition = "text")
+    @Column(nullable = true, length = 10000)
     private String description;
 
     @Override

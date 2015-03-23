@@ -1,6 +1,10 @@
 package com.maciej.imiela.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -66,6 +70,10 @@ public class InitDBService {
             roleAdmin.setName("ROLE_ADMIN");
             this.roleRepository.save(roleAdmin);
 
+            Role roleTeacher = new Role();
+            roleAdmin.setName("ROLE_TEACHER");
+            this.roleRepository.save(roleTeacher);
+
             Address a1 = new Address();
             a1.setStreet("Pozarowa");
             a1.setStreetHN("3B");
@@ -108,7 +116,7 @@ public class InitDBService {
             // lr = new ArrayList<Role>();
             // lr.add(roleUser);
             // l2.setRoles(lr);
-            l2.setRole(roleUser);
+            l2.setRole(roleTeacher);
             this.loginRepository.save(l2);
 
             User userTeacher = new User();
@@ -135,7 +143,7 @@ public class InitDBService {
             userKursant.setLogin(l3);
             this.userRepository.save(userKursant);
 
-            // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
             Teacher t1 = new Teacher();
             t1.setSalary((double) 2500);
@@ -150,15 +158,23 @@ public class InitDBService {
             this.courseTypeRepository.save(ct1);
 
             Course c1 = new Course();
-            c1.setStartDate(new Date());
-            c1.setEndDate(new Date());
+            try {
+                c1.setStartDate(sdf.parse("2001-01-01"));
+                c1.setEndDate(sdf.parse("2014-01-01"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             c1.setTeacher(t1);
             c1.setType(ct1);
             this.courseRepository.save(c1);
 
             Course c2 = new Course();
-            c2.setStartDate(new Date());
-            c2.setEndDate(new Date());
+            try {
+                c2.setStartDate(sdf.parse("2010-01-10"));
+                c2.setEndDate(sdf.parse("2015-01-15"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             c2.setTeacher(t1);
             c2.setType(ct1);
             this.courseRepository.save(c2);

@@ -6,11 +6,6 @@
 
 	<jdbc:embedded-database type="HSQL" id="dataSource" />
 
-	<!-- <bean id="dataSource" -->
-	<!-- class="org.apache.commons.dbcp.BasicDataSource" -->
-	<!-- p:driverClassName="org.postgresql.Driver" p:url="jdbc:postgresql://192.168.0.21:5432/Test" -->
-	<!-- p:username="admin" p:password="password123" /> -->
-
 	<bean
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
 		id="emf">

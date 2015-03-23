@@ -16,7 +16,7 @@ import com.maciej.imiela.entity.Role;
 import com.maciej.imiela.service.RoleService;
 
 /**
- *
+ * 
  * @author Maciej
  */
 @Controller
