@@ -71,8 +71,12 @@ public class InitDBService {
             this.roleRepository.save(roleAdmin);
 
             Role roleTeacher = new Role();
-            roleAdmin.setName("ROLE_TEACHER");
+            roleTeacher.setName("ROLE_TEACHER");
             this.roleRepository.save(roleTeacher);
+
+            Role roleParticipant = new Role();
+            roleParticipant.setName("ROLE_PARTICIPANT");
+            this.roleRepository.save(roleParticipant);
 
             Address a1 = new Address();
             a1.setStreet("Pozarowa");
@@ -133,7 +137,7 @@ public class InitDBService {
             // lr = new ArrayList<Role>();
             // lr.add(roleUser);
             // l3.setRoles(lr);
-            l3.setRole(roleUser);
+            l3.setRole(roleParticipant);
             this.loginRepository.save(l3);
 
             User userKursant = new User();
@@ -142,6 +146,24 @@ public class InitDBService {
             userKursant.setResidenceAddress(a1);
             userKursant.setLogin(l3);
             this.userRepository.save(userKursant);
+
+            Login l4 = new Login();
+            l4.setLogin("user");
+            l4.setPassword(encoder.encode("user"));
+            l4.setEmail("user@ma.com");
+            // l3.setUser(userKursant);
+            // lr = new ArrayList<Role>();
+            // lr.add(roleUser);
+            // l3.setRoles(lr);
+            l4.setRole(roleUser);
+            this.loginRepository.save(l4);
+
+            User userUzytkownik = new User();
+            userUzytkownik.setName("Uzytkownik");
+            userUzytkownik.setPermamentAddress(a2);
+            userUzytkownik.setResidenceAddress(a1);
+            userUzytkownik.setLogin(l4);
+            this.userRepository.save(userUzytkownik);
 
             DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 

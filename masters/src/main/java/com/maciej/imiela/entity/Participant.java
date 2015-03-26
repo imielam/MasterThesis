@@ -28,14 +28,14 @@ public class Participant {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     // @Pattern(regexp = "(true)|(false)", message =
     // "field can only be true or false")
     @NotNull
     @Column(nullable = false)
-    private Boolean passed;
+    private Boolean passed = false;
 
     // @Pattern(regexp = "[1-5]", message =
     // "value of the field must be between numbers 1 and 5")
@@ -75,27 +75,6 @@ public class Participant {
         } else if (!this.id.equals(other.id)) {
             return false;
         }
-        if (this.note == null) {
-            if (other.note != null) {
-                return false;
-            }
-        } else if (!this.note.equals(other.note)) {
-            return false;
-        }
-        if (this.passed == null) {
-            if (other.passed != null) {
-                return false;
-            }
-        } else if (!this.passed.equals(other.passed)) {
-            return false;
-        }
-        if (this.score == null) {
-            if (other.score != null) {
-                return false;
-            }
-        } else if (!this.score.equals(other.score)) {
-            return false;
-        }
         return true;
     }
 
@@ -127,17 +106,7 @@ public class Participant {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result
-                + ((this.course == null) ? 0 : this.course.hashCode());
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result
-                + ((this.note == null) ? 0 : this.note.hashCode());
-        result = prime * result
-                + ((this.passed == null) ? 0 : this.passed.hashCode());
-        result = prime * result
-                + ((this.score == null) ? 0 : this.score.hashCode());
-        result = prime * result
-                + ((this.user == null) ? 0 : this.user.hashCode());
         return result;
     }
 

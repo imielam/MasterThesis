@@ -17,6 +17,7 @@ import com.maciej.imiela.repository.CourseRepository;
 import com.maciej.imiela.repository.CourseTypeRepository;
 import com.maciej.imiela.repository.ParticipantRepository;
 import com.maciej.imiela.repository.TeacherRepository;
+import com.maciej.imiela.repository.UserRepository;
 
 @Service
 public class CourseService {
@@ -32,6 +33,9 @@ public class CourseService {
 
     @Autowired
     private TeacherRepository teacherRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private static final Logger logger = LoggerFactory
             .getLogger(CourseService.class);
@@ -96,9 +100,9 @@ public class CourseService {
     public Course saveParticipants(Course course) {
         Course oldCourse = course;
         if (course != null) {
-            if (course.getId() != null) {
-                oldCourse = this.findOneWithParticipants(course.getId());
-            } else {
+            if (course.getId() == null) {
+                // oldCourse = this.findOneWithParticipants(course.getId());
+                // } else {
                 logger.error("Forgot to set ID in controller");
                 return course;
             }
@@ -106,15 +110,16 @@ public class CourseService {
             logger.error("course == null");
             return course;
         }
-        List<Participant> newList = this.participantRepository.findAll(course
-                .getParticipantsID());
+        // List<Participant> newList = this.participantRepository.findAll(course
+        // .getParticipantsID());
         // List<Participant> oldList = oldCourse.getParticipants();
-        for (Participant p : newList) {
+        for (Participant p : oldCourse.getParticipants()) {
+            p.setUser(this.userRepository.findOne(p.getUser().getId()));
             p.setCourse(course);
             this.participantRepository.save(p);
         }
         // oldList.addAll(newList);
         // oldCourse.setParticipants(oldList);
-        return oldCourse;
+        return this.findOneWithParticipants(course.getId());
     }
 }

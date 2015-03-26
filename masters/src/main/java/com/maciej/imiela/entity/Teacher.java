@@ -67,13 +67,6 @@ public class Teacher {
             return false;
         }
         Teacher other = (Teacher) obj;
-        if (this.endDate == null) {
-            if (other.endDate != null) {
-                return false;
-            }
-        } else if (!this.endDate.equals(other.endDate)) {
-            return false;
-        }
         if (this.id == null) {
             if (other.id != null) {
                 return false;
@@ -81,21 +74,6 @@ public class Teacher {
         } else if (!this.id.equals(other.id)) {
             return false;
         }
-        if (this.salary == null) {
-            if (other.salary != null) {
-                return false;
-            }
-        } else if (!this.salary.equals(other.salary)) {
-            return false;
-        }
-        if (this.startDate == null) {
-            if (other.startDate != null) {
-                return false;
-            }
-        } else if (!this.startDate.equals(other.startDate)) {
-            return false;
-        }
-
         return true;
     }
 
@@ -127,17 +105,7 @@ public class Teacher {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result
-                + ((this.courses == null) ? 0 : this.courses.hashCode());
-        result = prime * result
-                + ((this.endDate == null) ? 0 : this.endDate.hashCode());
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result
-                + ((this.salary == null) ? 0 : this.salary.hashCode());
-        result = prime * result
-                + ((this.startDate == null) ? 0 : this.startDate.hashCode());
-        result = prime * result
-                + ((this.user == null) ? 0 : this.user.hashCode());
         return result;
     }
 

@@ -50,8 +50,6 @@
 					<ul class="nav navbar-nav">
 						<li class="${current == 'index' ? 'active' : '' }"><a
 							href='<spring:url value="/" />'>Home</a></li>
-						<%-- 						<LI CLASS="${CURRENT == 'USERS' ? 'ACTIVE' : '' }"><A --%>
-						<%-- 							HREF='<SPRING:URL VALUE="/ADMIN/USERS.HTML" />'>USERS</A></LI> --%>
 						<security:authorize access="hasRole('ROLE_ADMIN')">
 							<li class="dropdown ${current == 'users' ? 'active' : '' }"><a
 								href="#" class="dropdown-toggle" data-toggle="dropdown">Users
@@ -73,36 +71,43 @@
 							href='<spring:url value="/about.html" />'>About</a></li>
 						<li class="${current == 'contact' ? 'active' : '' }"><a
 							href='<spring:url value="/contact.html" />'>Contact</a></li>
-						<security:authorize access="isAuthenticated()">
-							<li class="dropdown ${current == 'course' ? 'active' : '' }"><a
-								href="#" class="dropdown-toggle" data-toggle="dropdown">Course
-									<b class="caret"></b>
-							</a>
-								<ul class="dropdown-menu">
-									<security:authorize access="hasRole('ROLE_ADMIN')">
-										<li><a href="/course/list.html">List</a></li>
-										<li><a href="/course/create.html">Create course</a></li>
-										<li><a href="/course_type/list.html">Types</a></li>
-										<li><a href="/course_type/create.html">Create course
-												type</a></li>
-									</security:authorize>
-									<security:authorize
-										access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-										<li><a href="/course/list_future.html">List of
-												courses that will be conducted</a></li>
-									</security:authorize>
-									<security:authorize
-										access="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')">
-										<li><a href="/course/list_my.html">List of my courses</a></li>
-									</security:authorize>
-									<!-- 								<li><a href="#">Another action</a></li> -->
-									<!-- 								<li><a href="#">Something else here</a></li> -->
-									<!-- 								<li class="divider"></li> -->
-									<!-- 								<li class="dropdown-header">Nav header</li> -->
-									<!-- 								<li><a href="#">Separated link</a></li> -->
-									<!-- 								<li><a href="#">One more separated link</a></li> -->
-								</ul></li>
-						</security:authorize>
+						<li class="dropdown ${current == 'course' ? 'active' : '' }">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Course
+								<b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="/course_type/list.html">Types</a></li>
+								<security:authorize access="isAuthenticated()">
+									<li><a href="/course/list_future.html">List of
+											available courses</a></li>
+									<li><a href="/course/list_my.html">List of my courses</a></li>
+								</security:authorize>
+								<security:authorize access="hasRole('ROLE_ADMIN')">
+									<li><a href="/course/list.html">All courses</a></li>
+									<li><a href="/course/create.html">Create new course</a></li>
+									<li><a href="/course_type/create.html">Create new
+											course type</a></li>
+								</security:authorize>
+								<!-- 								<li><a href="#">Another action</a></li> -->
+								<!-- 								<li><a href="#">Something else here</a></li> -->
+								<!-- 								<li class="divider"></li> -->
+								<!-- 								<li class="dropdown-header">Nav header</li> -->
+								<!-- 								<li><a href="#">Separated link</a></li> -->
+								<!-- 								<li><a href="#">One more separated link</a></li> -->
+							</ul>
+						</li>
+						<li class="dropdown ${current == 'material' ? 'active' : '' }">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Materials
+								<b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="/materials/example.html">Example materials</a></li>
+								<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_PARTICIPANT')">
+								<li><a href="/materials/full.html">Learning materials</a></li>
+								</security:authorize>
+							</ul>
+						</li>
+
 						<security:authorize access="!isAuthenticated()">
 							<li class="${current == 'login' ? 'active' : '' }"><a
 								href='<spring:url value="/login.html" />'>Login</a></li>
@@ -116,6 +121,10 @@
 									<li><a href="/user/detail.html">Details </a></li>
 									<li><a href='<spring:url value="/logout.html" />'>Logout</a></li>
 								</ul></li>
+						</security:authorize>
+						<security:authorize access="!isAuthenticated()">
+							<li class="${current == 'register' ? 'active' : '' }"><a
+								href="/admin/register.html">Register </a></li>
 						</security:authorize>
 
 						<!-- 						<div class="btn-group"> -->

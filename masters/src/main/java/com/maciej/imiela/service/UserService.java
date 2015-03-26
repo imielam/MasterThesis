@@ -73,6 +73,16 @@ public class UserService {
         return user;
     }
 
+    public List<User> findUsersAvailableToAddToCourse(int id) {
+        List<User> allUsers = this.userRepository
+                .findByLoginRoleNameOrLoginRoleName("ROLE_PARTICIPANT",
+                        "ROLE_USER");
+        List<User> signedUsers = this.userRepository
+                .findByParticipantsCourseId(id);
+        allUsers.removeAll(signedUsers);
+        return allUsers;
+    }
+
     // @Transactional
     // public User findOneWithParticipantAndTeachersAndRoles(int id) {
     // User user = this.findOne(id);

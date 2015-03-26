@@ -28,9 +28,9 @@
 
 <!-- TODO: dodać walidację, bo narazie nie ma-->
 
-<!-- <script type="text/javascript"> -->
+<!-- <script type="text/javascript">
 //     $(document).ready(function() {
 //         permAddressForm();
 //         resAddressForm();
 //     });
-<!-- </script> -->
+</script> -->

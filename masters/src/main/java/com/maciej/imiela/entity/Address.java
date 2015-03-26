@@ -52,46 +52,11 @@ public class Address {
             return false;
         }
         Address other = (Address) obj;
-        if (this.city == null) {
-            if (other.city != null) {
-                return false;
-            }
-        } else if (!this.city.equals(other.city)) {
-            return false;
-        }
         if (this.id == null) {
             if (other.id != null) {
                 return false;
             }
         } else if (!this.id.equals(other.id)) {
-            return false;
-        }
-        if (this.postalCode == null) {
-            if (other.postalCode != null) {
-                return false;
-            }
-        } else if (!this.postalCode.equals(other.postalCode)) {
-            return false;
-        }
-        if (this.street == null) {
-            if (other.street != null) {
-                return false;
-            }
-        } else if (!this.street.equals(other.street)) {
-            return false;
-        }
-        if (this.streetAN == null) {
-            if (other.streetAN != null) {
-                return false;
-            }
-        } else if (!this.streetAN.equals(other.streetAN)) {
-            return false;
-        }
-        if (this.streetHN == null) {
-            if (other.streetHN != null) {
-                return false;
-            }
-        } else if (!this.streetHN.equals(other.streetHN)) {
             return false;
         }
         return true;
@@ -125,17 +90,7 @@ public class Address {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result
-                + ((this.city == null) ? 0 : this.city.hashCode());
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result
-                + ((this.postalCode == null) ? 0 : this.postalCode.hashCode());
-        result = prime * result
-                + ((this.street == null) ? 0 : this.street.hashCode());
-        result = prime * result
-                + ((this.streetAN == null) ? 0 : this.streetAN.hashCode());
-        result = prime * result
-                + ((this.streetHN == null) ? 0 : this.streetHN.hashCode());
         return result;
     }
 

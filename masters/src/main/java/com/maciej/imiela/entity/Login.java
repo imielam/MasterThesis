@@ -76,13 +76,6 @@ public class Login {
             return false;
         }
         Login other = (Login) obj;
-        if (this.email == null) {
-            if (other.email != null) {
-                return false;
-            }
-        } else if (!this.email.equals(other.email)) {
-            return false;
-        }
         if (this.id == null) {
             if (other.id != null) {
                 return false;
@@ -90,21 +83,6 @@ public class Login {
         } else if (!this.id.equals(other.id)) {
             return false;
         }
-        if (this.login == null) {
-            if (other.login != null) {
-                return false;
-            }
-        } else if (!this.login.equals(other.login)) {
-            return false;
-        }
-        if (this.password == null) {
-            if (other.password != null) {
-                return false;
-            }
-        } else if (!this.password.equals(other.password)) {
-            return false;
-        }
-
         return true;
     }
 
@@ -128,28 +106,20 @@ public class Login {
         return this.rePassword;
     }
 
-    public Role getRole() {
-        return this.role;
-    }
-
     //
     // public User getUser() {
     // return this.user;
     // }
 
+    public Role getRole() {
+        return this.role;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result
-                + ((this.email == null) ? 0 : this.email.hashCode());
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result
-                + ((this.login == null) ? 0 : this.login.hashCode());
-        result = prime * result
-                + ((this.password == null) ? 0 : this.password.hashCode());
-        result = prime * result
-                + ((this.role == null) ? 0 : this.role.hashCode());
         return result;
     }
 

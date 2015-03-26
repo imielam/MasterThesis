@@ -58,6 +58,11 @@ public class User {
         this.participants = new LinkedList<Participant>();
     }
 
+    public User(Integer id) {
+        this();
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -75,13 +80,6 @@ public class User {
                 return false;
             }
         } else if (!this.id.equals(other.id)) {
-            return false;
-        }
-        if (this.name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!this.name.equals(other.name)) {
             return false;
         }
         return true;
@@ -120,24 +118,6 @@ public class User {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result
-                + ((this.login == null) ? 0 : this.login.hashCode());
-        result = prime * result
-                + ((this.name == null) ? 0 : this.name.hashCode());
-        result = prime
-                * result
-                + ((this.participants == null) ? 0 : this.participants
-                        .hashCode());
-        result = prime
-                * result
-                + ((this.permamentAddress == null) ? 0 : this.permamentAddress
-                        .hashCode());
-        result = prime
-                * result
-                + ((this.residenceAddress == null) ? 0 : this.residenceAddress
-                        .hashCode());
-        result = prime * result
-                + ((this.teachers == null) ? 0 : this.teachers.hashCode());
         return result;
     }
 

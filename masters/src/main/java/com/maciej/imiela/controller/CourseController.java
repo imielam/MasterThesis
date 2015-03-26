@@ -28,15 +28,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.maciej.imiela.entity.Course;
 import com.maciej.imiela.entity.CourseType;
+import com.maciej.imiela.entity.Login;
 import com.maciej.imiela.entity.Participant;
+import com.maciej.imiela.entity.Role;
 import com.maciej.imiela.entity.Teacher;
+import com.maciej.imiela.entity.User;
 import com.maciej.imiela.service.CourseService;
 import com.maciej.imiela.service.CourseTypeService;
+import com.maciej.imiela.service.LoginService;
 import com.maciej.imiela.service.ParticipantService;
+import com.maciej.imiela.service.RoleService;
 import com.maciej.imiela.service.TeacherService;
+import com.maciej.imiela.service.UserService;
 
 /**
- *
+ * 
  * @author Maciej
  */
 @Controller
@@ -55,19 +61,29 @@ public class CourseController {
     @Autowired
     private ParticipantService participantService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private LoginService loginService;
+
     private static final Logger logger = LoggerFactory
             .getLogger(CourseController.class);
 
     @RequestMapping(value = { "/add/participants/{id}" }, method = RequestMethod.GET)
     public String addParticipants(Model model, @PathVariable int id) {
         Course course = this.courseService.findOneWithParticipantsIsNull(id);
-        List<Participant> participants = course.getParticipants();
+        // List<Participant> participants = course.getParticipants();
+        List<User> users = this.userService.findUsersAvailableToAddToCourse(id);
         model.addAttribute("course", course);
-        Map<Integer, String> mapParticipants = new HashMap<Integer, String>();
-        for (Participant p : participants) {
-            mapParticipants.put(p.getId(), p.getUser().getName());
+        Map<Integer, String> mapUsers = new HashMap<Integer, String>();
+        for (User p : users) {
+            mapUsers.put(p.getId(), p.getName());
         }
-        model.addAttribute("mapParticipants", mapParticipants);
+        model.addAttribute("mapParticipants", mapUsers);
         return "course/edit/participants";
     }
 
@@ -104,6 +120,21 @@ public class CourseController {
         return "course/list";
     }
 
+    // @RequestMapping(value = { "/edit/participants/{id}" }, method =
+    // RequestMethod.GET)
+    // public String editParticipants(Model model, @PathVariable int id) {
+    // Course course = this.courseService.findOneWithParticipants(id);
+    // course.getParticipants();
+    // model.addAttribute("course", course);
+    // Map<Integer, String> mapParticipants = new HashMap<Integer, String>();
+    // List<Participant> participants = this.participantService.findAll();
+    // for (Participant p : participants) {
+    // mapParticipants.put(p.getId(), p.getUser().getName());
+    // }
+    // model.addAttribute("mapParticipants", mapParticipants);
+    // return "course/edit/participants";
+    // }
+
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
     public String editCourse(Model model, @PathVariable int id) {
         model.addAttribute("course",
@@ -122,21 +153,6 @@ public class CourseController {
         model.addAttribute("mapType", mapType);
         return "course/edit";
     }
-
-    // @RequestMapping(value = { "/edit/participants/{id}" }, method =
-    // RequestMethod.GET)
-    // public String editParticipants(Model model, @PathVariable int id) {
-    // Course course = this.courseService.findOneWithParticipants(id);
-    // course.getParticipants();
-    // model.addAttribute("course", course);
-    // Map<Integer, String> mapParticipants = new HashMap<Integer, String>();
-    // List<Participant> participants = this.participantService.findAll();
-    // for (Participant p : participants) {
-    // mapParticipants.put(p.getId(), p.getUser().getName());
-    // }
-    // model.addAttribute("mapParticipants", mapParticipants);
-    // return "course/edit/participants";
-    // }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -162,23 +178,31 @@ public class CourseController {
                     // From the database 'element' will be a Long
                     id = (Integer) element;
                 }
+                if (id != null) {
+                    Participant p = new Participant();
+                    p.setUser(new User(id));
+                    return p;
+                } else {
+                    return null;
+                }
 
-                return id != null ? new Participant(id) : null;
             }
         });
     }
 
     @RequestMapping(value = { "/add/participants/{id}" }, method = RequestMethod.POST)
     public String saveAddedParticipants(Model model, @PathVariable int id,
-            @Valid Course course, BindingResult bResult) {
+            Course course) {
         // Course oldCourse = this.courseService.findOneWithParticipants(id);
         // List<Participant> oldListParticipants = oldCourse.getParticipants();
-        if (bResult.hasErrors()) {
-            logger.error(bResult.toString());
-            return "course/edit/participants";
-        }
         course.setId(id);
-        this.courseService.saveParticipants(course);
+        course = this.courseService.saveParticipants(course);
+        Role roleParticipant = this.roleService.findByName("ROLE_PARTICIPANT");
+        for (Participant p : course.getParticipants()) {
+            Login l = this.userService.findOne(p.getUser().getId()).getLogin();
+            l.setRole(roleParticipant);
+            this.loginService.save(l);
+        }
         return "redirect:/course/detail/" + id + ".html?success=true";
     }
 
