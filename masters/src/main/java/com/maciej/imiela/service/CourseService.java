@@ -126,6 +126,12 @@ public class CourseService {
         for (Participant p : oldCourse.getParticipants()) {
             p.setUser(this.userRepository.findOne(p.getUser().getId()));
             p.setCourse(course);
+            Participant oldParticipant = this.participantRepository
+                    .findByCourseAndUser(course, p.getUser());
+            if (oldParticipant != null) {
+                // oldParticipant.setAccepted(true);
+                p = oldParticipant;
+            }
             p.setAccepted(true);
             this.participantRepository.save(p);
         }

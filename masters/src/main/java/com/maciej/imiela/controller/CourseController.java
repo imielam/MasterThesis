@@ -199,7 +199,6 @@ public class CourseController {
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(
                 dateFormat, false));
-        // TODO: nie dzia³a trzeba wróciæ do poprzedniej wersji
         binder.registerCustomEditor(List.class, new CustomCollectionEditor(
                 List.class) {
 
@@ -234,8 +233,6 @@ public class CourseController {
     @RequestMapping(value = { "/add/participants/{id}" }, method = RequestMethod.POST)
     public String saveAddedParticipants(Model model, @PathVariable int id,
             Course course) {
-        // Course oldCourse = this.courseService.findOneWithParticipants(id);
-        // List<Participant> oldListParticipants = oldCourse.getParticipants();
         course.setId(id);
         course = this.courseService.saveParticipants(course);
         Role roleParticipant = this.roleService.findByName("ROLE_PARTICIPANT");
