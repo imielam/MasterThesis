@@ -79,7 +79,7 @@
 	<entity>
 		<entity-name>com.maciej.imiela.entity.Participant</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>206</entity-height>
+		<entity-height>226</entity-height>
 		<entity-X-Coordinate>28</entity-X-Coordinate>
 		<entity-Y-Coordinate>306</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>

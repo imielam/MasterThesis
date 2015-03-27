@@ -47,6 +47,9 @@ public class Participant {
     @Column(nullable = true, length = 10000)
     private String note;
 
+    @Column(nullable = false)
+    private Boolean accepted = false;
+
     public Participant() {
         // TODO Auto-generated constructor stub
     }
@@ -76,6 +79,10 @@ public class Participant {
             return false;
         }
         return true;
+    }
+
+    public Boolean getAccepted() {
+        return this.accepted;
     }
 
     public Course getCourse() {
@@ -108,6 +115,10 @@ public class Participant {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         return result;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
     }
 
     public void setCourse(Course course) {

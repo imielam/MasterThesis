@@ -192,8 +192,8 @@ public class InitDBService {
 
             Course c2 = new Course();
             try {
-                c2.setStartDate(sdf.parse("2010-01-10"));
-                c2.setEndDate(sdf.parse("2015-01-15"));
+                c2.setStartDate(sdf.parse("2016-01-10"));
+                c2.setEndDate(sdf.parse("2017-01-15"));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

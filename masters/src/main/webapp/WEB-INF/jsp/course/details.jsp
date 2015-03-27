@@ -19,4 +19,9 @@
     <a href='<spring:url value="/course/add/participants/${course.id}.html" />'>
         ADD </a>
 </button>
+
+<button type="button" class="btn btn-default">
+    <a href='<spring:url value="/course/sign/${course.id}.html" />'>
+        SIGN </a>
+</button>
 </div>

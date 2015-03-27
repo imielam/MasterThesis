@@ -127,4 +127,11 @@ public class CourseService {
         // oldCourse.setParticipants(oldList);
         return this.findOneWithParticipants(course.getId());
     }
+
+    @Transactional
+    public Course signNewParticipant(Participant p) {
+        p.setCourse(this.courseRepository.findOne(p.getCourse().getId()));
+        this.participantRepository.save(p);
+        return this.courseRepository.findOne(p.getCourse().getId());
+    }
 }

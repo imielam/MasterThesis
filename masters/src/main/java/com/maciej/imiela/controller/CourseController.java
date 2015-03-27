@@ -4,6 +4,7 @@
  */
 package com.maciej.imiela.controller;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -256,5 +257,17 @@ public class CourseController {
         }
         model.addAttribute("mapParticipants", mapParticipants);
         return "course/edit/participants";
+    }
+
+    @RequestMapping(value = { "/sign/{id}" }, method = RequestMethod.GET)
+    public String signUserForCourse(Model model, @PathVariable int id,
+            Course course, Principal principal) {
+        course.setId(id);
+        User user = this.userService.findByLogin(principal.getName());
+        Participant p = new Participant();
+        p.setUser(user);
+        p.setCourse(course);
+        course = this.courseService.signNewParticipant(p);
+        return "redirect:/course/detail/" + id + ".html?signed=true";
     }
 }
