@@ -41,6 +41,10 @@ public class CourseService {
     private static final Logger logger = LoggerFactory
             .getLogger(CourseService.class);
 
+    public Course acceptNewParticipants() {
+        return null;
+    }
+
     public List<Course> findAll() {
         return this.courseRepository.findAll();
     }
@@ -102,6 +106,7 @@ public class CourseService {
         return this.courseRepository.save(oldCourse);
     }
 
+    @Transactional
     public Course saveParticipants(Course course) {
         Course oldCourse = course;
         if (course != null) {
@@ -121,6 +126,7 @@ public class CourseService {
         for (Participant p : oldCourse.getParticipants()) {
             p.setUser(this.userRepository.findOne(p.getUser().getId()));
             p.setCourse(course);
+            p.setAccepted(true);
             this.participantRepository.save(p);
         }
         // oldList.addAll(newList);

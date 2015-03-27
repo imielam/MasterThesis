@@ -23,6 +23,15 @@ public class ParticipantService {
         return this.participantRepository.findByCourse(course);
     }
 
+    public List<Participant> findByCourseWithEnrolledParticipant(Course course) {
+        return this.participantRepository.findByCourseAndAccepted(course, true);
+    }
+
+    public List<Participant> findByCourseWithWaitingParticipant(Course course) {
+        return this.participantRepository
+                .findByCourseAndAccepted(course, false);
+    }
+
     public Participant findOne(int id) {
         return this.participantRepository.findOne(id);
     }

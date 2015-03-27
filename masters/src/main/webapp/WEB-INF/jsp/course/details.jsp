@@ -10,18 +10,31 @@
 
 <%@ include file="../fragment/course_data.jspf"%>
 <button type="button" class="btn btn-default">
-    <a href='<spring:url value="/course/edit/${course.id}.html" />'>
-        EDIT </a>
+	<a href='<spring:url value="/course/edit/${course.id}.html" />'>
+		EDIT </a>
 </button>
-<%@ include file="../fragment/lists/participants.jspf"%>
+<security:authorize access="hasRole('ROLE_ADMIN')">
+	<%@ include file="../fragment/lists/enrolled_participants.jspf"%><button
+		type="button" class="btn btn-default">
+		<a
+			href='<spring:url value="/course/add/participants/${course.id}.html" />'>
+			ADD </a>
+	</button>
+</security:authorize>
+<%@ include file="../fragment/lists/waiting_participants.jspf"%>
+<security:authorize access="hasAnyRole('ROLE_USER', 'ROLE_PARTICIPANT')">
+	<div class="row">
+		<button type="button" class="btn btn-default">
+			<a href='<spring:url value="/course/sign/${course.id}.html" />'>
+				SIGN </a>
+		</button>
+	</div>
+</security:authorize>
+<security:authorize access="hasRole('ROLE_ADMIN')">
 <div class="row">
-<button type="button" class="btn btn-default">
-    <a href='<spring:url value="/course/add/participants/${course.id}.html" />'>
-        ADD </a>
-</button>
-
-<button type="button" class="btn btn-default">
-    <a href='<spring:url value="/course/sign/${course.id}.html" />'>
-        SIGN </a>
-</button>
-</div>
+        <button type="button" class="btn btn-default">
+            <a href='<spring:url value="/course/accept/${course.id}.html" />'>
+                ACCEPT </a>
+        </button>
+    </div>
+</security:authorize>

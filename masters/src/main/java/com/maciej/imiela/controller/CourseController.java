@@ -108,8 +108,14 @@ public class CourseController {
 
     @RequestMapping(value = { "/detail/{id}" }, method = RequestMethod.GET)
     public String detail(Model model, @PathVariable int id) {
-        final Course course = this.courseService.findOneWithParticipants(id);
+        final Course course = this.courseService.findOne(id);
+        List<Participant> enrolledUsers = this.participantService
+                .findByCourseWithEnrolledParticipant(course);
+        List<Participant> waitingUsers = this.participantService
+                .findByCourseWithWaitingParticipant(course);
         model.addAttribute("course", course);
+        model.addAttribute("enrolledUsers", enrolledUsers);
+        model.addAttribute("waitingUsers", waitingUsers);
         return "course/details";
     }
 
@@ -130,20 +136,22 @@ public class CourseController {
         return "course/list";
     }
 
-    // @RequestMapping(value = { "/edit/participants/{id}" }, method =
-    // RequestMethod.GET)
-    // public String editParticipants(Model model, @PathVariable int id) {
-    // Course course = this.courseService.findOneWithParticipants(id);
-    // course.getParticipants();
-    // model.addAttribute("course", course);
-    // Map<Integer, String> mapParticipants = new HashMap<Integer, String>();
-    // List<Participant> participants = this.participantService.findAll();
-    // for (Participant p : participants) {
-    // mapParticipants.put(p.getId(), p.getUser().getName());
-    // }
-    // model.addAttribute("mapParticipants", mapParticipants);
-    // return "course/edit/participants";
-    // }
+    @RequestMapping(value = { "/accept/{id}" }, method = RequestMethod.GET)
+    public String displayParticipantsToAccept(Model model, @PathVariable int id) {
+        Course course = this.courseService.findOne(id);
+        List<Participant> participants = this.participantService
+                .findByCourseWithWaitingParticipant(course);
+        // List<User> users =
+        // this.userService.findUsersAvailableToAddToCourse(id);
+        course.setParticipants(participants);
+        model.addAttribute("course", course);
+        Map<Integer, String> mapUsers = new HashMap<Integer, String>();
+        for (Participant p : participants) {
+            mapUsers.put(p.getUser().getId(), p.getUser().getName());
+        }
+        model.addAttribute("mapParticipants", mapUsers);
+        return "course/accept/participants";
+    }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
     public String editCourse(Model model, @PathVariable int id) {
@@ -164,12 +172,34 @@ public class CourseController {
         return "course/edit";
     }
 
+    // @RequestMapping(value = { "/edit/participants/{id}" }, method =
+    // RequestMethod.GET)
+    // public String editParticipants(Model model, @PathVariable int id) {
+    // Course course = this.courseService.findOneWithParticipants(id);
+    // course.getParticipants();
+    // model.addAttribute("course", course);
+    // Map<Integer, String> mapParticipants = new HashMap<Integer, String>();
+    // List<Participant> participants = this.participantService.findAll();
+    // for (Participant p : participants) {
+    // mapParticipants.put(p.getId(), p.getUser().getName());
+    // }
+    // model.addAttribute("mapParticipants", mapParticipants);
+    // return "course/edit/participants";
+    // }
+
+    @RequestMapping(value = { "/accept/{id}" }, method = RequestMethod.POST)
+    public String enrollParticipants(Model model, @PathVariable int id,
+            Course course) {
+        return this.saveAddedParticipants(model, id, course);
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(
                 dateFormat, false));
+        // TODO: nie dzia³a trzeba wróciæ do poprzedniej wersji
         binder.registerCustomEditor(List.class, new CustomCollectionEditor(
                 List.class) {
 
@@ -190,6 +220,7 @@ public class CourseController {
                 }
                 if (id != null) {
                     Participant p = new Participant();
+                    p.setAccepted(true);
                     p.setUser(new User(id));
                     return p;
                 } else {
