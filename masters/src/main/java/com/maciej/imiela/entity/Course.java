@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,12 +33,12 @@ public class Course {
     private CourseType type;
 
     @NotNull
-    @Past
     @Column(name = "start_date", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
     @NotNull
+    // @Future
     @Column(name = "end_date", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
@@ -193,5 +193,10 @@ public class Course {
         }
 
         return this;
+    }
+
+    @AssertTrue(message = "startDate must be set before endDate!")
+    private boolean isValid() {
+        return this.startDate.before(this.endDate);
     }
 }

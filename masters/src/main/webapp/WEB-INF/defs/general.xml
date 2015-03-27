@@ -121,6 +121,13 @@
         <put-attribute name="current" value="course" />
     </definition>
     
+    <definition name="course/available" extends="common">
+        <put-attribute name="title" value="List of available courses"
+            type="string" />
+        <put-attribute name="body" value="/WEB-INF/jsp/course/list_available.jsp" />
+        <put-attribute name="current" value="course" />
+    </definition>
+    
     <definition name="course/edit/participants" extends="common">
         <put-attribute name="title" value="Edit list of participants"
             type="string" />

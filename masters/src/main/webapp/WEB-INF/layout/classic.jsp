@@ -78,9 +78,9 @@
 							<ul class="dropdown-menu">
 								<li><a href="/course_type/list.html">Types</a></li>
 								<security:authorize access="isAuthenticated()">
-									<li><a href="/course/list_future.html">List of
+									<li><a href="/course/available.html">List of
 											available courses</a></li>
-									<li><a href="/course/list_my.html">List of my courses</a></li>
+									<li><a href="/course/my.html">List of my courses</a></li>
 								</security:authorize>
 								<security:authorize access="hasRole('ROLE_ADMIN')">
 									<li><a href="/course/list.html">All courses</a></li>

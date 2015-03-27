@@ -1,5 +1,6 @@
 package com.maciej.imiela.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -64,6 +65,10 @@ public class CourseService {
                 .findByCourseIsNull();
         course.setParticipants(participants);
         return course;
+    }
+
+    public List<Course> findWithStartDateLaterThen(Date date) {
+        return this.courseRepository.findByStartDateAfter(date);
     }
 
     public Course save(Course course) {

@@ -44,11 +44,11 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.maciej.imiela.entity.Role</entity-name>
+		<entity-name>com.maciej.imiela.entity.Address</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>146</entity-height>
-		<entity-X-Coordinate>350</entity-X-Coordinate>
-		<entity-Y-Coordinate>40</entity-Y-Coordinate>
+		<entity-height>188</entity-height>
+		<entity-X-Coordinate>720</entity-X-Coordinate>
+		<entity-Y-Coordinate>244</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -66,11 +66,11 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.maciej.imiela.entity.Address</entity-name>
+		<entity-name>com.maciej.imiela.entity.Role</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>188</entity-height>
-		<entity-X-Coordinate>720</entity-X-Coordinate>
-		<entity-Y-Coordinate>244</entity-Y-Coordinate>
+		<entity-height>146</entity-height>
+		<entity-X-Coordinate>350</entity-X-Coordinate>
+		<entity-Y-Coordinate>40</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

@@ -112,6 +112,15 @@ public class CourseController {
         return "course/details";
     }
 
+    @RequestMapping(value = { "/available" }, method = RequestMethod.GET)
+    public String displayAvailableCoursesList(Model model) {
+        final List<Course> availableCourses = this.courseService
+                .findWithStartDateLaterThen(new Date());
+        // logger.info(Arrays.toString(allCourses.toArray()));
+        model.addAttribute("courses", availableCourses);
+        return "course/list";
+    }
+
     @RequestMapping(value = { "/list" }, method = RequestMethod.GET)
     public String displayCoursesList(Model model) {
         final List<Course> allCourses = this.courseService.findAll();
@@ -222,6 +231,7 @@ public class CourseController {
     public String saveNewCourse(Model model, @Valid Course course,
             BindingResult bResult) {
         if (bResult.hasErrors()) {
+            logger.error(bResult.toString());
             return "course/edit";
         }
         course = this.courseService.save(course);
