@@ -14,6 +14,7 @@ import com.maciej.imiela.entity.Course;
 import com.maciej.imiela.entity.CourseType;
 import com.maciej.imiela.entity.Participant;
 import com.maciej.imiela.entity.Teacher;
+import com.maciej.imiela.entity.User;
 import com.maciej.imiela.repository.CourseRepository;
 import com.maciej.imiela.repository.CourseTypeRepository;
 import com.maciej.imiela.repository.ParticipantRepository;
@@ -47,6 +48,20 @@ public class CourseService {
 
     public List<Course> findAll() {
         return this.courseRepository.findAll();
+    }
+
+    public List<Course> findCoursesWithAcceptedUser(int id) {
+        return this.courseRepository
+                .findByParticipantsUserIdAndParticipantsAccepted(id, true);
+    }
+
+    public List<Course> findCoursesWithTeacher(User user) {
+        return this.courseRepository.findByTeacherUser(user);
+    }
+
+    public List<Course> findCoursesWithWaitingUser(int id) {
+        return this.courseRepository
+                .findByParticipantsUserIdAndParticipantsAccepted(id, false);
     }
 
     public Course findOne(int id) {

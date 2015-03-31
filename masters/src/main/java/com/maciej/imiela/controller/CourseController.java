@@ -136,6 +136,22 @@ public class CourseController {
         return "course/list";
     }
 
+    @RequestMapping(value = { "/my" }, method = RequestMethod.GET)
+    public String displayMyCoursesList(Model model, Principal principal) {
+        User user = this.userService.findByLogin(principal.getName());
+        List<Course> myCourses = this.courseService
+                .findCoursesWithAcceptedUser(user.getId());
+        List<Course> teacherCourses = this.courseService
+                .findCoursesWithTeacher(user);
+        List<Course> waitingCourses = this.courseService
+                .findCoursesWithWaitingUser(user.getId());
+        // logger.info(Arrays.toString(allCourses.toArray()));
+        model.addAttribute("myCourses", myCourses);
+        model.addAttribute("waitingCourses", waitingCourses);
+        model.addAttribute("teacherCourses", teacherCourses);
+        return "course/my";
+    }
+
     @RequestMapping(value = { "/accept/{id}" }, method = RequestMethod.GET)
     public String displayParticipantsToAccept(Model model, @PathVariable int id) {
         Course course = this.courseService.findOne(id);
