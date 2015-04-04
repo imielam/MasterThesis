@@ -11,6 +11,8 @@
 	<http use-expressions="true">
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<!-- <intercept-url pattern="/course/**" access="hasRole('ROLE_ADMIN')" /> -->
+        <intercept-url pattern="/materials/full**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_PARTICIPANT')" />
+		<intercept-url pattern="/materials/example" access="permitAll" />
 		<intercept-url pattern="/course_type/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/course/available.html" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_PARTICIPANT')" />
         <intercept-url pattern="/course/my.html" access="isAuthenticated()" />

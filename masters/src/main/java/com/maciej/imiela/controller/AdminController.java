@@ -19,7 +19,7 @@ import com.maciej.imiela.entity.User;
 import com.maciej.imiela.service.UserService;
 
 /**
- *
+ * 
  * @author Maciej
  */
 @Controller
@@ -42,6 +42,6 @@ public class AdminController {
         List<User> u = this.userService.findAll();
         model.addAttribute("users", u);
         // logger.info(Arrays.toString(u.toArray()));
-        return "users_list";
+        return "admin/users";
     }
 }

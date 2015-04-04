@@ -20,11 +20,23 @@
         <put-attribute name="current" value="login" />
     </definition>
 
-	<definition name="users_list" extends="common">
+	<definition name="admin/users" extends="common">
 		<put-attribute name="title" value="Users" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user/list.jsp" />
 		<put-attribute name="current" value="users" />
 	</definition>
+	
+	<definition name="materials/full" extends="common">
+        <put-attribute name="title" value="Full courses material" />
+        <put-attribute name="body" value="/WEB-INF/jsp/materials/full.jsp" />
+        <put-attribute name="current" value="material" />
+    </definition>
+    
+    <definition name="materials/example" extends="common">
+        <put-attribute name="title" value="Example courses material" />
+        <put-attribute name="body" value="/WEB-INF/jsp/materials/example.jsp" />
+        <put-attribute name="current" value="material" />
+    </definition>
 
 	<definition name="user/detail" extends="common">
 		<put-attribute name="title" value="User Detail" />
