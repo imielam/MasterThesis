@@ -124,7 +124,7 @@
 						</security:authorize>
 						<security:authorize access="!isAuthenticated()">
 							<li class="${current == 'register' ? 'active' : '' }"><a
-								href="/admin/register.html">Register </a></li>
+								href="/register.html">Register </a></li>
 						</security:authorize>
 
 						<!-- 						<div class="btn-group"> -->

@@ -34,7 +34,7 @@ public class AdminController {
 
     @RequestMapping(value = { "/register" }/* , method = RequestMethod.GET */)
     public ModelAndView registerUser(Model model) {
-        return new ModelAndView("forward:/user/register.html");
+        return new ModelAndView("forward:/register.html");
     }
 
     @RequestMapping(value = { "/users" }, method = RequestMethod.GET)

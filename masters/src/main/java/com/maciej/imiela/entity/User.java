@@ -33,13 +33,15 @@ public class User {
     private String name;
 
     @Valid
+    @NotNull
     @OneToOne
     @JoinColumn(name = "address_per", nullable = false)
     private Address permamentAddress;
 
     @Valid
+    @NotNull
     @OneToOne(optional = true)
-    @JoinColumn(name = "address_res", nullable = true)
+    @JoinColumn(name = "address_res", nullable = false)
     private Address residenceAddress;
 
     @OneToMany(mappedBy = "user")

@@ -4,6 +4,10 @@
  */
 package com.maciej.imiela.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -19,11 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.maciej.imiela.domain.ContactMessage;
+import com.maciej.imiela.entity.Role;
 import com.maciej.imiela.entity.User;
 import com.maciej.imiela.service.CourseService;
+import com.maciej.imiela.service.RoleService;
+import com.maciej.imiela.service.UserService;
 
 /**
- *
+ * 
  * @author Maciej
  */
 @Controller
@@ -41,6 +48,12 @@ public class GuestController {
     @Autowired
     private MailSender mailSender;
 
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private UserService userService;
+
     private static final Logger logger = LoggerFactory
             .getLogger(GuestController.class);
 
@@ -53,7 +66,8 @@ public class GuestController {
     @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
     public String createNewUser(Model model) {
         model.addAttribute("user", new User());
-        return "register";
+        model.addAttribute("mapRoles", this.prepareRoleAttr());
+        return "user/register";
     }
 
     @RequestMapping(value = { "/about" }, method = RequestMethod.GET)
@@ -77,14 +91,14 @@ public class GuestController {
     }
 
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    public String saveNewUser(Model model, @Valid User user,
+    public String registerUser(Model model, @Valid User user,
             BindingResult bResult) {
         if (bResult.hasErrors()) {
-            return "register";
+            model.addAttribute("mapRoles", this.prepareRoleAttr());
+            return "redirect:/register.html?success=false";
         }
-        // service.saveUser(user);
-        // return "redirect:/users/user?id=" + user.getId();
-        return "redirect:/home?message=" + SUCCES_REGISTER;
+        user = this.userService.save(user);
+        return "redirect:/home.html?success=true";
     }
 
     // TODO: check why in this case, validation is not working
@@ -110,11 +124,31 @@ public class GuestController {
         return "redirect:/contact.html?success=true";
     }
 
+    // @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
+    // public String saveNewUser(Model model, @Valid User user,
+    // BindingResult bResult) {
+    // if (bResult.hasErrors()) {
+    // return "register";
+    // }
+    // // service.saveUser(user);
+    // // return "redirect:/users/user?id=" + user.getId();
+    // return "redirect:/home?message=" + SUCCES_REGISTER;
+    // }
+
     @RequestMapping(value = { "/", "/index", "/home" }, method = RequestMethod.GET)
     public String showHomePage() {
         // User u = service.getUser(1);
         // model.addAttribute("user", u);
         // logger.info("{}.", u);
         return "index";
+    }
+
+    private Map<Integer, String> prepareRoleAttr() {
+        Map<Integer, String> mapRoles = new HashMap<Integer, String>();
+        List<Role> roles = this.roleService.findAll();
+        for (Role r : roles) {
+            mapRoles.put(r.getId(), r.getName());
+        }
+        return mapRoles;
     }
 }

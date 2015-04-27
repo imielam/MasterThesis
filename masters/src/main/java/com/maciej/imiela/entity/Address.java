@@ -94,8 +94,20 @@ public class Address {
         return result;
     }
 
+    public boolean isEmpty() {
+        if (this.equals(new Address())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void setCity(String city) {
-        this.city = city;
+        if (city.isEmpty()) {
+            this.city = null;
+        } else {
+            this.city = city;
+        }
     }
 
     public void setId(Integer id) {
@@ -103,19 +115,35 @@ public class Address {
     }
 
     public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
+        if (postalCode.isEmpty()) {
+            this.postalCode = null;
+        } else {
+            this.postalCode = postalCode;
+        }
     }
 
     public void setStreet(String street) {
-        this.street = street;
+        if (street.isEmpty()) {
+            this.street = null;
+        } else {
+            this.street = street;
+        }
     }
 
     public void setStreetAN(String streetAN) {
-        this.streetAN = streetAN;
+        if (streetAN.isEmpty()) {
+            this.streetAN = null;
+        } else {
+            this.streetAN = streetAN;
+        }
     }
 
     public void setStreetHN(String streetHN) {
-        this.streetHN = streetHN;
+        if (streetHN.isEmpty()) {
+            this.streetHN = null;
+        } else {
+            this.streetHN = streetHN;
+        }
     }
 
     @Override

@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.maciej.imiela.entity.Role;
 import com.maciej.imiela.entity.User;
@@ -54,15 +55,8 @@ public class UserController {
     }
 
     @RequestMapping(value = { "/register" }, method = RequestMethod.GET)
-    public String createNewUser(Model model) {
-        model.addAttribute("user", new User());
-        Map<Integer, String> mapRoles = new HashMap<Integer, String>();
-        List<Role> roles = this.roleService.findAll();
-        for (Role r : roles) {
-            mapRoles.put(r.getId(), r.getName());
-        }
-        model.addAttribute("mapRoles", mapRoles);
-        return "user/register";
+    public ModelAndView createNewUser(Model model) {
+        return new ModelAndView("forward:register.html");
     }
 
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
@@ -89,15 +83,16 @@ public class UserController {
         return "login";
     }
 
-    // TODO: add validation not only user but all objects inside
-    @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    public String registerUser(@Valid User user, BindingResult bResult) {
-        if (bResult.hasErrors()) {
-            return "user/edit";
-        }
-        user = this.userService.save(user);
-        return "redirect:/user/" + user.getId() + ".html?success=true";
-    }
+    //
+    // // TODO: add validation not only user but all objects inside
+    // @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
+    // public String registerUser(@Valid User user, BindingResult bResult) {
+    // if (bResult.hasErrors()) {
+    // return "user/edit";
+    // }
+    // user = this.userService.save(user);
+    // return "redirect:/user/" + user.getId() + ".html?success=true";
+    // }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
     public String save(Model model, @PathVariable int id, @Valid User user,

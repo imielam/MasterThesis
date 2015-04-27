@@ -126,6 +126,7 @@ public class InitDBService {
             User userTeacher = new User();
             userTeacher.setName("Nauczyciel1");
             userTeacher.setPermamentAddress(a1);
+            userTeacher.setResidenceAddress(a1);
             userTeacher.setLogin(l2);
             this.userRepository.save(userTeacher);
 

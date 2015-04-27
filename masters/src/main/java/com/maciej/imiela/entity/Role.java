@@ -29,7 +29,7 @@ public class Role {
     @NotNull
     @UniqueRoleName(message = "Such Role already exists!")
     @Column(unique = true, nullable = false)
-    private String name;
+    private String name = "ROLE_USER";
 
     @OneToMany(mappedBy = "role")
     private List<Login> logins;

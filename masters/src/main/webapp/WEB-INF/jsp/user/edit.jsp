@@ -10,8 +10,9 @@
 <form:form method="POST" modelAttribute="user"
 	class="form-horizontal mainForm" role="form">
 	<fieldset>
-
-		<%@ include file="../form_fragment/lists/roles.jspf"%>
+		<security:authorize access="hasRole('ROLE_ADMIN')">
+			<%@ include file="../form_fragment/lists/roles.jspf"%>
+		</security:authorize>
 		<%@ include file="../form_fragment/login_data.jspf"%>
 		<%@ include file="../form_fragment/user_data.jspf"%>
 		<%@ include file="../form_fragment/address_data.jspf"%>
@@ -20,10 +21,10 @@
 			<div class="col-sm-12">
 				<input name="send" type="submit" value="Save"
 					class="btn btn-default" />
-				<button type="button" class="btn btn-default">
-					<a href='<spring:url value="/user/${user.id}.html" />'> Cancel
-					</a>
-				</button>
+					<button type="button" class="btn btn-default">
+						<a href='<spring:url value="/home.html" />'> Cancel
+						</a>
+					</button>
 			</div>
 		</div>
 
@@ -31,12 +32,12 @@
 </form:form>
 
 <script type="text/javascript">
-		$(document).ready(function() {
-			//TODO: add role validation
-			// 		roleForm();
-			loginForm();
-			userForm();
-			permAddressForm();
-			resAddressForm();
-		});
+	$(document).ready(function() {
+		//TODO: add role validation
+		// 		roleForm();
+		loginForm();
+		userForm();
+		permAddressForm();
+		resAddressForm();
+	});
 </script>
