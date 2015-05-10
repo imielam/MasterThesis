@@ -12,9 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.maciej.imiela.domain.CaptchaMessage;
 
 @Entity
 @Table(name = "app_user")
@@ -55,6 +58,9 @@ public class User {
     @JoinColumn(name = "login_id", nullable = false)
     private Login login;
 
+    @Transient
+    private CaptchaMessage captcha;
+
     public User() {
         this.teachers = new LinkedList<Teacher>();
         this.participants = new LinkedList<Participant>();
@@ -85,6 +91,10 @@ public class User {
             return false;
         }
         return true;
+    }
+
+    public CaptchaMessage getCaptcha() {
+        return this.captcha;
     }
 
     public Integer getId() {
@@ -121,6 +131,10 @@ public class User {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         return result;
+    }
+
+    public void setCaptcha(CaptchaMessage captchaMessage) {
+        this.captcha = captchaMessage;
     }
 
     public void setId(Integer id) {

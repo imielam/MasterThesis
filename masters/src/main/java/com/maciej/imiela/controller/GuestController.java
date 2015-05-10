@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -28,6 +29,8 @@ import com.maciej.imiela.entity.User;
 import com.maciej.imiela.service.CourseService;
 import com.maciej.imiela.service.RoleService;
 import com.maciej.imiela.service.UserService;
+import com.octo.captcha.service.CaptchaService;
+import com.octo.captcha.service.CaptchaServiceException;
 
 /**
  * 
@@ -39,6 +42,8 @@ public class GuestController {
     public static final String SUCCES_REGISTER = "Your account has been created!";
 
     public static final String SUCCES_MESSAGE = "Message was sent!";
+
+    public static final String FAIL_CAPTCHA = "Wrong Captcha! Try again!";
 
     public static final String FAIL_MESSAGE = "Message wasn't sent due to unexpected error, please try again!";
 
@@ -53,6 +58,9 @@ public class GuestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CaptchaService captchaService;
 
     private static final Logger logger = LoggerFactory
             .getLogger(GuestController.class);
@@ -91,9 +99,22 @@ public class GuestController {
     }
 
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    public String registerUser(Model model, @Valid User user,
-            BindingResult bResult) {
-        if (bResult.hasErrors()) {
+    public String registerUser(HttpServletRequest request, Model model,
+            @Valid User user, BindingResult bResult) {
+        Boolean isResponseCorrect = false;
+
+        String sessionId = request.getSession().getId();
+
+        try {
+            isResponseCorrect = this.captchaService.validateResponseForID(
+                    sessionId, user.getCaptcha().getMessage());
+        } catch (CaptchaServiceException ex) {
+            // should not happen, may be thrown if the id is not valid
+            logger.warn("Session Id " + sessionId + " Not valid", ex);
+        }
+
+        if (!isResponseCorrect || bResult.hasErrors()) {
+            model.addAttribute("user", user);
             model.addAttribute("mapRoles", this.prepareRoleAttr());
             return "redirect:/register.html?success=false";
         }
@@ -102,11 +123,24 @@ public class GuestController {
     }
 
     // TODO: check why in this case, validation is not working
-    @RequestMapping(value = { "/contact" }/* , method = RequestMethod.POST */)
-    public String sendMessage(Model model,
+    @RequestMapping(value = { "/contact" }, method = RequestMethod.POST)
+    public String sendMessage(Model model, HttpServletRequest request,
             @Valid ContactMessage contactMessage, BindingResult bResult) {
-        if (bResult.hasErrors()) {
-            return "contact";
+
+        Boolean isResponseCorrect = false;
+        String sessionId = request.getSession().getId();
+
+        try {
+            isResponseCorrect = this.captchaService.validateResponseForID(
+                    sessionId, contactMessage.getCaptcha().getMessage());
+        } catch (CaptchaServiceException ex) {
+            // should not happen, may be thrown if the id is not valid
+            logger.warn("Session Id " + sessionId + " Not valid", ex);
+        }
+
+        if (!isResponseCorrect || bResult.hasErrors()) {
+            model.addAttribute("contactMessage", contactMessage);
+            return "redirect:/contact.html?success=false";
         }
 
         SimpleMailMessage msg = new SimpleMailMessage();

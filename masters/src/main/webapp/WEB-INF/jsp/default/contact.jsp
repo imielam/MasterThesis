@@ -12,6 +12,11 @@
 		<div class="alert alert-success">Message was sent!</div>
 	</c:if>
 
+	<c:if test="${param.success eq false }">
+		<div class="alert alert-error">Please correct form!</div>
+	</c:if>
+
+
 
 	<h2>Please write your message bellow:</h2>
 	<form:form method="POST" modelAttribute="contactMessage"
@@ -33,39 +38,51 @@
 
 			<div class="form-group">
 				<div class="col-sm-12">
+					<img alt="It is not working Captcha :("
+						src='<spring:url value="/captcha/captcha.html" />' /> <br />Please
+					rewrite text displayed on Captcha above.
+					<form:input path="captcha.message" maxlength="40"
+						class="form-control" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-12">
 					<input name="send" type="submit" value="Send"
 						class="btn btn-default" />
 				</div>
 			</div>
+
 		</fieldset>
 	</form:form>
 </div>
 
 <script type="text/javascript">
-	$(document).ready(
-			function() {
-				$(".mainForm").validate(
-						{
-							rules : {
-								message : {
-									required : true,
-									minlength : 15
-								},
-								email : {
-									required : true,
-									email : true
-								}
-							},
-// 							highlight : function(element) {
-// 								$(element).closest('.form-group').removeClass(
-// 										'has-success').addClass('has-error');
-// 							},
-// 							unhighlight : function(element) {
-// 								$(element).closest('.form-group').removeClass(
-// 										'has-error').addClass('has-success');
-// 							},
-						});
-			});
+	$(document).ready(function() {
+		$(".mainForm").validate({
+			rules : {
+				message : {
+					required : true,
+					minlength : 15
+				},
+				email : {
+					required : true,
+					email : true
+				},
+			/* "captcha//.message" : {
+				required : true,
+			} */
+			},
+		// 							highlight : function(element) {
+		// 								$(element).closest('.form-group').removeClass(
+		// 										'has-success').addClass('has-error');
+		// 							},
+		// 							unhighlight : function(element) {
+		// 								$(element).closest('.form-group').removeClass(
+		// 										'has-error').addClass('has-success');
+		// 							},
+		});
+	});
 </script>
 
 

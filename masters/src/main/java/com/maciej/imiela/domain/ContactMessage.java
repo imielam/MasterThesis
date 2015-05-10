@@ -10,6 +10,8 @@ public class ContactMessage extends Message {
     @NotNull
     protected String email;
 
+    private CaptchaMessage captcha;
+
     public ContactMessage() {
         super();
     }
@@ -19,8 +21,16 @@ public class ContactMessage extends Message {
         this.setEmail(email);
     }
 
+    public CaptchaMessage getCaptcha() {
+        return this.captcha;
+    }
+
     public String getEmail() {
         return this.email;
+    }
+
+    public void setCaptcha(CaptchaMessage captcha) {
+        this.captcha = captcha;
     }
 
     public void setEmail(String email) {

@@ -13,6 +13,7 @@
 		<%@include file="../form_fragment/participant_data.jspf" %>
 
 		<div class="form-group">
+		
 			<div class="col-sm-12">
 				<input name="send" type="submit" value="Save"
 					class="btn btn-default" />
