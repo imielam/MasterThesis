@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,10 +23,11 @@ import com.maciej.imiela.entity.CourseType;
 import com.maciej.imiela.service.CourseTypeService;
 
 /**
- *
+ * 
  * @author Maciej
  */
 @Controller
+@Scope("session")
 @RequestMapping("/course_type")
 public class CourseTypeController {
 
@@ -84,7 +86,7 @@ public class CourseTypeController {
         }
         courseType.setId(id);
         this.courseTypeService.save(courseType);
-        return "redirect:/course_type/detail/" + courseType.getId()
+        return "redirect:course_type/detail/" + courseType.getId()
                 + ".html?success=true";
     }
 
@@ -95,7 +97,7 @@ public class CourseTypeController {
             return "course_type/edit";
         }
         this.courseTypeService.save(courseType);
-        return "redirect:/course_type/detail/" + courseType.getId()
+        return "redirect:course_type/detail/" + courseType.getId()
                 + ".html?success=true";
     }
 }

@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,6 +48,7 @@ import com.maciej.imiela.service.UserService;
  * @author Maciej
  */
 @Controller
+@Scope("session")
 @RequestMapping("/course")
 public class CourseController {
 
@@ -257,7 +259,7 @@ public class CourseController {
             l.setRole(roleParticipant);
             this.loginService.save(l);
         }
-        return "redirect:/course/detail/" + id + ".html?success=true";
+        return "redirect:course/detail/" + id + ".html?success=true";
     }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
@@ -268,7 +270,7 @@ public class CourseController {
         }
         course.setId(id);
         this.courseService.save(course);
-        return "redirect:/course/detail/" + course.getId()
+        return "redirect:course/detail/" + course.getId()
                 + ".html?success=true";
     }
 
@@ -280,7 +282,7 @@ public class CourseController {
             return "course/edit";
         }
         course = this.courseService.save(course);
-        return "redirect:/course/detail/" + course.getId()
+        return "redirect:course/detail/" + course.getId()
                 + ".html?success=true";
     }
 
@@ -312,6 +314,6 @@ public class CourseController {
         p.setUser(user);
         p.setCourse(course);
         course = this.courseService.signNewParticipant(p);
-        return "redirect:/course/detail/" + id + ".html?signed=true";
+        return "redirect:course/detail/" + id + ".html?signed=true";
     }
 }

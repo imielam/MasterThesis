@@ -78,8 +78,8 @@
 							<ul class="dropdown-menu">
 								<li><a href="/course_type/list.html">Types</a></li>
 								<security:authorize access="isAuthenticated()">
-									<li><a href="/course/available.html">List of
-											available courses</a></li>
+									<li><a href="/course/available.html">List of available
+											courses</a></li>
 									<li><a href="/course/my.html">List of my courses</a></li>
 								</security:authorize>
 								<security:authorize access="hasRole('ROLE_ADMIN')">
@@ -102,8 +102,9 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a href="/materials/example.html">Example materials</a></li>
-								<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_PARTICIPANT')">
-								<li><a href="/materials/full.html">Learning materials</a></li>
+								<security:authorize
+									access="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_PARTICIPANT')">
+									<li><a href="/materials/full.html">Learning materials</a></li>
 								</security:authorize>
 							</ul>
 						</li>
@@ -119,7 +120,11 @@
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="/user/detail.html">Details </a></li>
-									<li><a href='<spring:url value="/logout.html" />'>Logout</a></li>
+									<li><form method="post">
+											<button formaction='<spring:url value="/logout.html" />'
+												type="submit" name="${_csrf.parameterName}"
+												value="${_csrf.token}">Logout</button>
+										</form></li>
 								</ul></li>
 						</security:authorize>
 						<security:authorize access="!isAuthenticated()">

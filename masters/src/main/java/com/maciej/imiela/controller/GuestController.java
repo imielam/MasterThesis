@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -37,6 +38,7 @@ import com.octo.captcha.service.CaptchaServiceException;
  * @author Maciej
  */
 @Controller
+@Scope("session")
 public class GuestController {
 
     public static final String SUCCES_REGISTER = "Your account has been created!";
@@ -88,6 +90,11 @@ public class GuestController {
         return "login";
     }
 
+    @RequestMapping(value = { "/invalidate" }, method = RequestMethod.GET)
+    public String loggedOutPage(Model model) {
+        return "invalidate";
+    }
+
     @RequestMapping(value = { "/error/404" }, method = RequestMethod.GET)
     public String pageNotFound(Model model) {
         return "error/404";
@@ -116,10 +123,10 @@ public class GuestController {
         if (!isResponseCorrect || bResult.hasErrors()) {
             model.addAttribute("user", user);
             model.addAttribute("mapRoles", this.prepareRoleAttr());
-            return "redirect:/register.html?success=false";
+            return "redirect:register.html?success=false";
         }
         user = this.userService.save(user);
-        return "redirect:/home.html?success=true";
+        return "redirect:home.html?success=true";
     }
 
     // TODO: check why in this case, validation is not working
@@ -140,7 +147,7 @@ public class GuestController {
 
         if (!isResponseCorrect || bResult.hasErrors()) {
             model.addAttribute("contactMessage", contactMessage);
-            return "redirect:/contact.html?success=false";
+            return "redirect:contact.html?success=false";
         }
 
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -153,9 +160,9 @@ public class GuestController {
         } catch (MailException ex) {
             // log it and go on
             logger.error(ex.getMessage());
-            return "redirect:/contact.html?success=false";
+            return "redirect:contact.html?success=false";
         }
-        return "redirect:/contact.html?success=true";
+        return "redirect:contact.html?success=true";
     }
 
     // @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
@@ -165,8 +172,8 @@ public class GuestController {
     // return "register";
     // }
     // // service.saveUser(user);
-    // // return "redirect:/users/user?id=" + user.getId();
-    // return "redirect:/home?message=" + SUCCES_REGISTER;
+    // // return "redirect:users/user?id=" + user.getId();
+    // return "redirect:home?message=" + SUCCES_REGISTER;
     // }
 
     @RequestMapping(value = { "/", "/index", "/home" }, method = RequestMethod.GET)

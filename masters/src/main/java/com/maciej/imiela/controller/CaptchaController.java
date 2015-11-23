@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.image.ImageCaptchaService;
 
 @Controller
+@Scope("session")
 @RequestMapping("/captcha/*")
 public class CaptchaController {
 

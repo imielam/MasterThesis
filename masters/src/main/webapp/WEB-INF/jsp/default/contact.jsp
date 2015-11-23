@@ -69,9 +69,9 @@
 					required : true,
 					email : true
 				},
-			/* "captcha//.message" : {
-				required : true,
-			} */
+				"captcha.message" : {
+					required : true,
+				} 
 			},
 		// 							highlight : function(element) {
 		// 								$(element).closest('.form-group').removeClass(

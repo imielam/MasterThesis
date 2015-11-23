@@ -6,6 +6,7 @@ package com.maciej.imiela.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import com.maciej.imiela.entity.User;
  * @author Maciej
  */
 @Controller
+@Scope("session")
 @RequestMapping("/materials")
 public class MaterialController {
 

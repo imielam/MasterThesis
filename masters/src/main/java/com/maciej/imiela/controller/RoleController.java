@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ import com.maciej.imiela.service.RoleService;
  * @author Maciej
  */
 @Controller
+@Scope("session")
 @RequestMapping("/role")
 public class RoleController {
 
@@ -49,7 +51,7 @@ public class RoleController {
         }
         role.setId(id);
         this.roleService.save(role);
-        return "redirect:/role/detail/" + role.getId() + ".html?success=true";
+        return "redirect:role/detail/" + role.getId() + ".html?success=true";
     }
 
 }

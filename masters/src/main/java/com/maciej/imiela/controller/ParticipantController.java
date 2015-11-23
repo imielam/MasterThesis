@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +17,11 @@ import com.maciej.imiela.entity.Participant;
 import com.maciej.imiela.service.ParticipantService;
 
 /**
- *
+ * 
  * @author Maciej
  */
 @Controller
+@Scope("session")
 @RequestMapping("/participant")
 public class ParticipantController {
 
@@ -49,7 +51,7 @@ public class ParticipantController {
         }
         participant.setId(id);
         this.participantService.save(participant);
-        return "redirect:/participant/detail/" + participant.getId()
+        return "redirect:participant/detail/" + participant.getId()
                 + ".html?success=true";
     }
 

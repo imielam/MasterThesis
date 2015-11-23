@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,7 @@ import com.maciej.imiela.service.RoleService;
 import com.maciej.imiela.service.UserService;
 
 @Controller
+@Scope("session")
 @RequestMapping("/user")
 public class UserController {
 
@@ -91,7 +93,7 @@ public class UserController {
     // return "user/edit";
     // }
     // user = this.userService.save(user);
-    // return "redirect:/user/" + user.getId() + ".html?success=true";
+    // return "redirect:user/" + user.getId() + ".html?success=true";
     // }
 
     @RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
@@ -102,7 +104,7 @@ public class UserController {
         }
         user.setId(id);
         user = this.userService.save(user);
-        return "redirect:/user/" + user.getId() + ".html?success=true";
+        return "redirect:user/" + user.getId() + ".html?success=true";
     }
 
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
@@ -118,7 +120,7 @@ public class UserController {
     // return "user/edit";
     // }
     // this.userService.save(user);
-    // return "redirect:/user/user.html?id=" + user.getId();
+    // return "redirect:user/user.html?id=" + user.getId();
     // }
 
 }

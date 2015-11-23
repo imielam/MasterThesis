@@ -7,7 +7,6 @@
 <%@ include file="../../layout/taglib.jsp"%>
 
 <style>
-
 .form-signin {
 	max-width: 330px;
 	padding: 15px;
@@ -56,11 +55,14 @@
 	<input type="text" class="form-control" name='j_username'
 		placeholder="Name" required autofocus> <input type="password"
 		name='j_password' class="form-control" placeholder="Password" required>
-	<div class="checkbox">
+	<!-- <div class="checkbox">
 		<label> <input type="checkbox" value="remember-me">
 			Remember me
 		</label>
-	</div>
+	</div> -->
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
+
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
 		in</button>
 </form>
